@@ -1,6 +1,6 @@
 ---
 categories: ["python"]
-tags: python, snippets
+tags: ["python", "snippets"]
 date: 2010/12/29 11:53:00
 title: City and state lookup from zipcode
 ---

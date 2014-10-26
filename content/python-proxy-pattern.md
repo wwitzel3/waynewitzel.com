@@ -3,7 +3,7 @@ categories: ["python", "community", "patterns"]
 date: 2008/11/03 17:23:35
 guid: http://pieceofpy.com/?p=203
 permalink: http://pieceofpy.com/2008/11/03/blog-a-day-or-something-proxy-pattern/
-tags: python patterns community
+tags: ["python", "patterns", "community"]
 title: Blog a day or something... Proxy Pattern!
 ---
 Been reading around and I guess November is the official blog entry a day writers month or something. I'll make a go again. In October, I tried the one post a day run for my blog. I did well, but fell short in the end. Though I've already missed the first two days in November, I'll call that the margin of error.

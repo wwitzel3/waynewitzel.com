@@ -3,7 +3,7 @@ categories: ["tools", "python", "tdd"]
 date: 2009/01/06 20:03:03
 guid: http://pieceofpy.com/?p=224
 permalink: http://pieceofpy.com/2009/01/06/sucker-for-the-green-python-gui-green-bar/
-tags: python, testing, greenbar
+tags: ["python", "testing"]
 title: Sucker for the green. Python GUI Green-Bar?
 ---
 I get made fun of on a daily basis for this but I am addicted to GUI Green-Bar testing. When I say that I literally mean a simple little Green/Red progress bar that shows me my pass/fail tests. I am addicted to it. I need it. Eclipse C++ and CUTE had spoiled me and now I desire the same thing for Python. Don't get me wrong, I don't practice "<a href="http://www.adam-bien.com/roller/abien/entry/quality_assurance_driven_development_and">metrics driven development</a>", but for me personally, it is a motivator, an easy and clearly defined goal in my test driven approach, make that bar go full green.

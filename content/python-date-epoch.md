@@ -1,6 +1,6 @@
 ---
 categories: ["python"]
-tags: python, snippets
+tags: ["python", "snippets"]
 date: 2010/12/29 12:45:00
 title: Response - convert date to epoch
 permalink: /2010/12/29/response-convert-date-to-epoch

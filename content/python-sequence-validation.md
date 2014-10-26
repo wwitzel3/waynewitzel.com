@@ -1,7 +1,7 @@
 ---
 categories: ["python"]
 date: 2011/01/24 19:56:00
-tags: python, snippets
+tags: ["python", "snippets"]
 title: Validate All Items in a Sequence
 ---
 

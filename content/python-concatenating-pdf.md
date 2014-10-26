@@ -3,7 +3,7 @@ categories: ["python", "code"]
 date: 2009/03/05 14:33:07
 guid: http://pieceofpy.com/?p=229
 permalink: http://pieceofpy.com/2009/03/05/concatenating-pdf-with-python/
-tags: python, pdf, concatenate
+tags: ["python", "pdf", "code"]
 title: Concatenating PDF with Python
 ---
 I need to concatenate a set of PDFs, I will take you through my standard issue Python development approach when doing something I've never done before in Python.
