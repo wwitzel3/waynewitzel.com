@@ -1,9 +1,9 @@
 ---
 categories: ["python", "code"]
+tags: ["python", "code"]
 date: 2008/08/19 16:41:51
 guid: http://pieceofpy.com/?p=61
 permalink: http://pieceofpy.com/2008/08/19/code-buffer-cgi-file-uploads-in-windows/
-tags: python, code
 title: 'Code: Buffer CGI file uploads in Windows'
 ---
 Note to self, when handling CGI file uploads on a Windows machine, you need the following boiler plate to properly handler binary files.

@@ -3,7 +3,7 @@ categories: ["python"]
 date: 2008/10/02 13:24:34
 guid: http://pieceofpy.com:81/?p=40
 permalink: http://pieceofpy.com/2008/10/02/python-26-released/
-tags: python
+tags: ["python"]
 title: Python 2.6 Released
 ---
 Python 2.6 was release yesterday. I've had a chance to run most of my code through this latest version and haven't run in to any issues. Looking over the features list I did notice a couple things you might be interested to know.

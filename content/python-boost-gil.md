@@ -1,9 +1,9 @@
 ---
 categories: ["python", "c++"]
+tags: ["python", "c++", "boost", "boost-python"]
 date: 2010/02/26 11:00:57
 guid: http://pieceofpy.com/?p=357
 permalink: http://pieceofpy.com/2010/02/26/boost-python-threads-and-releasing-the-gil/
-tags: python, c++, boost, boost-python
 title: Boost Python, Threads, and Releasing the GIL
 ---
 <p>

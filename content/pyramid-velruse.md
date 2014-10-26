@@ -1,7 +1,7 @@
 ---
 categories: ["python", "pyramid"]
 date: 2011/07/24 12:00:00
-tags: python, pyramid
+tags: ["python", "pyramid"]
 title: Pyramid and velruse for Google authentication
 ---
 

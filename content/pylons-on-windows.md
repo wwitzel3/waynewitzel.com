@@ -3,7 +3,6 @@ categories: ["python", "pylons", "deploy"]
 date: 2008/10/07 14:00:36
 guid: http://pieceofpy.com/?p=160
 permalink: http://pieceofpy.com/2008/10/07/how-to-python-pylons-and-windows/
-tags: python, pylons, windows, deploy
 title: 'How-To: Python, Pylons, and Windows'
 ---
 A friend having issues installing Pylons on Windows XP with Python 2.6 gave me the idea to do this quick write up. So here it is, the 6 step method for running Pylons on Windows XP.

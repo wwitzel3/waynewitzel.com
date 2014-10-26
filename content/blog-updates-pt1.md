@@ -1,9 +1,9 @@
 ---
 categories: ["brainstorm", "sourcecontrol"]
+tags: ["brainstorm", "sourcecontrol"]
 date: 2008/10/11 18:57:22
 guid: http://pieceofpy.com/?p=174
 permalink: http://pieceofpy.com/2008/10/11/blog-themes-and-scm/
-tags: brainstorm, sourcecontrol
 title: Blog themes and SCM.
 ---
 We have a new theme? You like? If not, blame commenter rholmes, it is his fault. Seriously though. In a previous post he brought up a very good point, the site looked like hell if you were browsing with images off. Well this new theme looks better with images off and overall it isn't too horribly bad. So, if you don't like it, suggest one, just make sure it looks good with images turned off.

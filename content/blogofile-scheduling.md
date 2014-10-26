@@ -1,7 +1,7 @@
 ---
 categories: ["python"]
 date: 2011/08/28 18:30:00
-tags: python, blogofile
+tags: ["python", "blogofile"]
 title: Scheduling Posts with Blogofile
 ---
 <p>

@@ -1,9 +1,9 @@
 ---
 categories: ["python", "community"]
+tags: ["python", "community"]
 date: 2008/12/04 20:26:32
 guid: http://pieceofpy.com/?p=218
 permalink: http://pieceofpy.com/2008/12/04/python-30-final-release/
-tags: python, community
 title: Python 3.0 (final) release.
 ---
 As I am sure most of you have heard <a href="http://www.python.org/download/releases/3.0/">Python 3.0 (final)</a> has been released. For me, this means some nights getting some continuing development projects updated for the language changes and freezing some projects in maintence mode with their own copy of Python 2.6 (or in some cases 2.4).

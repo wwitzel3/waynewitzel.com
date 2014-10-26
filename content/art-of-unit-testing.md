@@ -3,7 +3,7 @@ categories: ["books", "tdd"]
 date: 2008/08/28 08:32:52
 guid: http://pieceofpy.com/?p=94
 permalink: http://pieceofpy.com/2008/08/28/book-the-art-of-unit-testing/
-tags: book, tdd
+tags: ["book", "tdd"]
 title: 'Book: The Art of Unit Testing'
 ---
 This is a short review of the first chapter of<a class="ext-link" href="http://www.manning.com/osherove/"><span class="icon">The Art of Unit Testing</span></a>. Which is available for free.

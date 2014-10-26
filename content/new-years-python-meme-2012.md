@@ -1,8 +1,8 @@
 ---
 categories: ["python"]
+tags: ["python", "new year"]
 date: 2012/12/29 11:00:00
 permalink: http://pieceofpy.com/2012/12/29/new-years-python-meme-2012
-tags: python
 title: New Year's Python Meme 2012
 ---
 
