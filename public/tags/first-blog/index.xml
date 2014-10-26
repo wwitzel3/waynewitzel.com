@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+      <title>First Blog on occasional posts about technology </title>
+      <generator uri="https://gohugo.io">Hugo</generator>
+    <link>http://localhost:1313/tags/first-blog/index.xml</link>
+    <language>en-us</language>
+    
+    
+    <updated>Mon, 01 Jan 0001 00:00:00 UTC</updated>
+    
+    <item>
+      <title>First!</title>
+      <link>http://localhost:1313/first/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 UTC</pubDate>
+      
+      <guid>http://localhost:1313/first/</guid>
+      <description>&lt;p&gt;The traditional first post.&lt;/p&gt;
+
+&lt;p&gt;Should it have content? Should it just say welcome to my blog I plan to only update for the next 2 weeks, then try to revive it after a couple months without an update by doing some posting foo and slamming out 10 updates in 1 week. Then after burning myself out in the revival week, I end up closing the blog after 3 more months without an update and try starting another one. We&amp;rsquo;ll see if this one will be any different.&lt;/p&gt;
+</description>
+    </item>
+    
+  </channel>
+</rss>

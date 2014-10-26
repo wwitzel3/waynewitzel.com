@@ -1,0 +1,325 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+      <title>Personal on occasional posts about technology </title>
+      <generator uri="https://gohugo.io">Hugo</generator>
+    <link>http://localhost:1313/categories/personal/index.xml</link>
+    <language>en-us</language>
+    
+    
+    <updated>Mon, 01 Jan 0001 00:00:00 UTC</updated>
+    
+    <item>
+      <title>Another try at a blog a day?</title>
+      <link>http://localhost:1313/blog-a-day-redux/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 UTC</pubDate>
+      
+      <guid>http://localhost:1313/blog-a-day-redux/</guid>
+      <description>&lt;p&gt;This month is a little calmer for me. No Iceland trip, no Thanksgiving trip, basically no nothing except work and side projects. So I figure I&amp;rsquo;ll have another go at this blog a day thing, minus the 1st and 2nd of this month because I had food poisoning.&lt;/p&gt;
+
+&lt;p&gt;November I made it deep in to the first day before my blogging stopped. Hopefully December will be better for me.&lt;/p&gt;
+
+&lt;p&gt;Unrelated note, get the book &lt;a href=&#34;http://www.amazon.com/American-Lion-Andrew-Jackson-White/dp/1400063256&#34;&gt;American Lion&lt;/a&gt;. Excellent book about Andrew Jackson.&lt;/p&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>Exercise even a programmer can do.</title>
+      <link>http://localhost:1313/programmers-exercise/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 UTC</pubDate>
+      
+      <guid>http://localhost:1313/programmers-exercise/</guid>
+      <description>&lt;p&gt;So I&amp;rsquo;ve been exercising lately. The last visit to the Dr. was a wake up call. 300 lb .. WHAT?! So, taking an iterative approach to exercise, I&amp;rsquo;ve manged to work up to 6-day a week cardio routine and a 3-day a week strength training routine and have gone from just over 300 lb. to 270 lb. in a couple months. Couple friends asked how I started and what I do, so I figure I&amp;rsquo;d break it down here.&lt;/p&gt;
+
+&lt;p&gt;I started by walking. 3 times a week for a couple weeks. Then after reading a Lifehacker post about a morning routine and matabolism, I added my very fast morning routine and actually eating breakfast to my day. Made it a whole week Monday-Friday. Then I bumped up the walking to Monday through Saturday. Did the morning routine and the walking for another week, then I bumped up the walking to targeted cardio 3 out of the 6 days and did that for another week. Added strength training 1 out of the 6 days and did that for another week. Switched from walking to cardio on all 6 days and + 1 more week. Then strength training 3 days out of the week. And slowly over about 3 months, I built up to this routine.&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;Every morning&lt;/strong&gt;
+&lt;i&gt;I do this right after eating breakfast&lt;/i&gt;
+2 sets, push-ups, 30 sec OR failure
+2 sets, scissor kicks, 1 minute OR failure&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;Monday through Saturday&lt;/strong&gt;
+2 minute warm up
+20 minutes of cardio (140-160 heart rate, check with your Dr.)
+2 minute cool down&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;Strength training&lt;/strong&gt;
+&lt;i&gt;This adds another 20 minutes to my workout, so schedule for that&lt;/i&gt;
+Monday - Push (chest, triceps)
+Wednesday - Pull (bicep, shoulders)
+Friday - Legs (legs and stomach)&lt;/p&gt;
+
+&lt;p&gt;Now, it is just habit. Also, I am sure there is some study somewhere to prove or disprove this, but I find it makes my mind much sharper. I am more alert through out the day and I sleep much better at night. Not to mention clothes fitting better and just feeling better. My personal goal is 250.&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;Python tip&lt;/strong&gt;
+Prefer xrange to range when you need an arbitrary number of iterations as range actually generates a list for you, this will consume memory and be more costly than xrange.&lt;/p&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>Holidays and New Server</title>
+      <link>http://localhost:1313/holidays-new-server/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 UTC</pubDate>
+      
+      <guid>http://localhost:1313/holidays-new-server/</guid>
+      <description>&lt;p&gt;I&amp;rsquo;ve been a little behind on my posts what with the holidays here and me doing all sorts of traveling and migrating to the new server for pieceofpy.com I haven&amp;rsquo;t really had time to make any new useful posts. So just taking the time to let everyone know I am not dead and wishing everyone happy holidays and a good winter.&lt;/p&gt;
+
+&lt;p&gt;Oh and the new server is lovely. The specs are below and so far I couldn&amp;rsquo;t be happier.
+&lt;ul&gt;
+    &lt;li&gt;3.2GHz P4 Core Duo2&lt;/li&gt;
+    &lt;li&gt;2GB Memory&lt;/li&gt;
+    &lt;li&gt;36GB 15k SCSI (Mirrored)&lt;/li&gt;
+    &lt;li&gt;500GB monthly transfer&lt;/li&gt;
+&lt;/ul&gt;&lt;/p&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>I Need a New Theme</title>
+      <link>http://localhost:1313/blog-need-theme/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 UTC</pubDate>
+      
+      <guid>http://localhost:1313/blog-need-theme/</guid>
+      <description>&lt;p&gt;I want a new theme for my blog. This site runs Wordpress 2.7. So please link your recommendations in the comments. I&amp;rsquo;d like something simple and clean but a little more pleasing to the eye than this current theme.&lt;/p&gt;
+
+&lt;p&gt;I&amp;rsquo;ve been flipping through the different ones on the Wordpress site, but there is so many and I have no zero skills when it comes to what looks good and what doesn&amp;rsquo;t; I like Christmas colors if that tells you anything.&lt;/p&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>I didn&#39;t want those changes anyway.</title>
+      <link>http://localhost:1313/scm-hg-mistake/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 UTC</pubDate>
+      
+      <guid>http://localhost:1313/scm-hg-mistake/</guid>
+      <description>
+
+&lt;p&gt;I use hg (&lt;a href=&#34;http://www.selenic.com/mercurial/wiki/&#34;&gt;Mercurial&lt;/a&gt;) for version control. Since switching to hg I have adopted the following process. I also do this for my Git projects at work.
+&lt;ul&gt;
+    &lt;li&gt;I create a local branch to working.&lt;/li&gt;
+    &lt;li&gt;I setup my External Tools in Eclipse to run my test suite.&lt;/li&gt;
+    &lt;li&gt;The output of my test suite gets committed to my local branch.&lt;/li&gt;
+    &lt;li&gt;I squash the local branch messages when I merge in to master.&lt;/li&gt;
+    &lt;li&gt;I add some insightful commit message for my master commit. Like, I haz changes.&lt;/li&gt;
+&lt;/ul&gt;
+So yesterday, I roll up my sleeves and prepare to dive in to an older project that &lt;a href=&#34;http://en.wikipedia.org/wiki/Code_smell&#34;&gt;smells like rotten potatoes&lt;/a&gt;. The plan of attack is to take this project and bring it up-to-date with Python 2.6, Pylons 0.9.7, and SQLalchemy 0.5.2 in the process of doing it, re-factor and extend where needed, of course letting the tests drive. I start my work and wand waving and 2-3 hours in I&amp;rsquo;ve removed about 200 lines of cruft and copy paste inheritance extended flexibility by further encapsulating some behavior using the Strategy pattern. I&amp;rsquo;ve got 47 tests (including functional doctests) passing and I&amp;rsquo;m green bar and happy with my time spent. So now time to merge this baby back in to master.&lt;/p&gt;
+
+&lt;p&gt;My test suite external tool performs the hg add . and I keep my .hgignore pretty up-to-date for Python projects, so I feel confident doing that. I open up the terminal to check out the change sets and start the merge and I notice I missed a binary format in my .hgignore. So I now have about 15 unwanted files staged for adding. Being lazy and knowing my last commit was when I just ran my test suite, I blindly run.&lt;/p&gt;
+
+&lt;p&gt;[sourcecode lang=&amp;ldquo;bash&amp;rdquo;]
+$ ^R hg revert &lt;enter&gt; &lt;enter&gt; (Ctrl-R, hg revert - shell previous command search)
+$ hg revert -a &amp;ndash;no-backup&lt;/p&gt;
+
+&lt;h1 id=&#34;toc_0&#34;&gt;&amp;hellip;my work being destroyed because I was lazy and not paying attention&lt;/h1&gt;
+
+&lt;h1 id=&#34;toc_1&#34;&gt;whimpering&lt;/h1&gt;
+
+&lt;p&gt;[/sourcecode]&lt;/p&gt;
+
+&lt;p&gt;It is at this point my day goes from great to awful. I face palm as I watch the uncommitted changes I&amp;rsquo;ve been making over the last 3 hours get reverted. As I mentioned, this project was older, in fact, it was started before the migration to hg and I never updated the External Tools runnable for this project in Eclipse to do the new hg add / commits. So every time I thought I was committing when I was running the tests, I was in fact not. Fortunate for me, I did have some buffers open and was able to recover the end result in about 45 minutes of hacking, but I did lose all of my change history which was very very disappointing (not to mention scary).&lt;/p&gt;
+
+&lt;p&gt;So if I had any advice after this it would be ensure your older projects are up-to-date with how you do things now and they follow your current development process before you start refactoring. I guess the oneliner could be; When refactoring a project start with the tool set first.&lt;/p&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>Jython 2.5 and snakefight for deploying Pylons w/ SQLAlchemy &#43; Oracle.</title>
+      <link>http://localhost:1313/jython-snakefight-pylons/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 UTC</pubDate>
+      
+      <guid>http://localhost:1313/jython-snakefight-pylons/</guid>
+      <description>
+
+&lt;p&gt;&lt;strong&gt;UPDATE / 13 March 2009: &lt;/strong&gt;&lt;a href=&#34;http://pypi.python.org/pypi/snakefight&#34;&gt;snakefight 0.3&lt;/a&gt; now has a &amp;ndash;include-jar option, prefer that to using my hack.&lt;/p&gt;
+
+&lt;p&gt;After reading &lt;a href=&#34;http://dunderboss.blogspot.com/2009/03/deploying-pylons-apps-to-java-servlet.html&#34;&gt;P. Jenvey&amp;rsquo;s blog post about Deploying Pylons Apps to Java Servlet Containers&lt;/a&gt; I immediately downloaded the Jython 2.5 beta and installed snakefight to give it a try. One of our services where I work is a Pylons based application. It is deployed using paster and Apache ProxyPass. Our main application is written in Java and is deployed as a war under Jetty. So if I can get my Pylons application built as a war and deployed that way, it would greatly simplify our deployment process.&lt;/p&gt;
+
+&lt;p&gt;[sourcecode language=&amp;ldquo;bash&amp;rdquo;]
+$ sudo /opt/jython25/bin/easy_install snakefight
+$ /opt/jython25/bin/jython setup.py develop
+$ /opt/jython25/bin/jython setup.py bdist_war &amp;ndash;paster-config dev_r2.ini
+&amp;hellip; output of success and stuff &amp;hellip;
+$ cp dist/project-0.6.8dev.war /opt/jetty/webapps
+[/sourcecode]&lt;/p&gt;
+
+&lt;p&gt;Now I visit my local server and hit the project context. I get some database errors, kind of expected them. So for the time being, I&amp;rsquo;ll be running this directly using Jython to speed up the debugging process. A quick googling of my DB issues turns up &lt;a href=&#34;http://pylonshq.com/pasties/77c3184b14d6936d86d13e4e65df92d2&#34;&gt;zxoracle for SQLalchemy&lt;/a&gt; which uses Jython zxJDBC. I install that in to sqlalchemy/databases as zxoracle.py and give it another go. Changing the oracle:// lines in my .ini file to now read zxoracle:// Now it can&amp;rsquo;t find the 3rd party Oracle libraries (ojdbc.jar).&lt;/p&gt;
+
+&lt;p&gt;[sourcecode]
+$ cd ./dist
+$ jar xf project-0.6.8dev.war
+$ cd WEB-INF/lib
+$ ls&lt;/p&gt;
+
+&lt;h1 id=&#34;toc_0&#34;&gt;no ojdbc.jar as expected &amp;hellip;&lt;/h1&gt;
+
+&lt;p&gt;$ cd ~/project
+$ export CLASSPATH=/opt/jython25/jython.jar:/usr/lib/jvm/java/jre/lib/ext/ojdbc.jar
+$ /opt/jython25/bin/jython /opt/jython25/bin/paster serve &amp;ndash;reload dev_r2.ini
+[/sourcecode]&lt;/p&gt;
+
+&lt;p&gt;Now it is looking a little better and it able to find the jar, but still a DB issue, now with SQLalchemy library. Not having a ton of time to investigate, I decide to try rolling back my SQAlachemy version for Jython. Turns out rolling back to 0.5.0 fixed the issue. I&amp;rsquo;ll be investigating why it was breaking with 0.5.2 soon &amp;trade;. So now I rerun it, and get a new error.&lt;/p&gt;
+
+&lt;p&gt;[sourcecode lang=&amp;ldquo;bash&amp;rdquo;]
+AttributeError: &amp;lsquo;ZXOracleDialect&amp;rsquo; object has no attribute &amp;lsquo;optimize_limits&amp;rsquo;
+[/sourcecode]&lt;/p&gt;
+
+&lt;p&gt;I decide I am just going to go in to the &lt;a href=&#34;http://trac.pieceofpy.com/pieceofpy/browser/snakefight-java-libs&#34;&gt;zxoracle.py and add optimize_limits = False to the ZXOracleDialect&lt;/a&gt;. No idea what this breaks or harms, but I do it anyway and rerun the application. Success! Every thing is working now. No liking the idea of having to manually insert the Oracle jar in to the WEB-INF/lib and not really wanting to much around with environment variables, I also implemented a quick and dirty include-java-libs for snakefight, the diff for command.py is below. This allows me to pass in a : separated list of jars to include in the WEB-INF/lib. &lt;strong&gt;EDIT: &lt;/strong&gt;The diff I posted isn&amp;rsquo;t needed since I put it on my hg repo. &lt;a href=&#34;http://trac.pieceofpy.com/pieceofpy/browser/snakefight-java-libs&#34;&gt;You can grab it from here.&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;So now I am back to building my war. Just as before.
+[sourcecode lang=&amp;ldquo;bash&amp;rdquo;]
+$ /opt/jython25/bin/jython setup.py bdist_war &amp;ndash;paste-config dev_r2.ini &amp;ndash;include-java-libs /opt/jython25/extlibs/ojdbc.jar
+running bdist_war
+creating build/bdist.java1.6.0_12
+creating build/bdist.java1.6.0_12/war
+creating build/bdist.java1.6.0_12/war/WEB-INF
+creating build/bdist.java1.6.0_12/war/WEB-INF/lib-python
+running easy_install project
+adding eggs (to WEB-INF/lib-python)
+adding jars (to WEB-INF/lib)
+adding WEB-INF/lib/jython.jar
+adding Paste ini file (to dev_r2.ini)
+adding Paste app loader (to WEB-INF/lib-python/____loadapp.py)
+generating deployment descriptor
+adding deployment descriptor (WEB-INF/web.xml)
+created dist/project-0.6.8dev-py2.5.war
+$ cp dist/project-0.6.8dev-py2.5.war /opt/jetty/webapps
+$ sudo /sbin/service jetty restart
+[/sourcecode]&lt;/p&gt;
+
+&lt;p&gt;And presto! I am in business. My pylons application is deployed under Jetty and all the &lt;a href=&#34;http://seleniumhq.org/&#34;&gt;selenium functional tests&lt;/a&gt; are passing. I am sure there is probably a easier, neater, or cleaner way to do all this, but this was my first iteration through and also my first time ever deploying a WAR to a java servlet container so all in all I am happy with the results. Performance seems about the same as when running the application with paster serve, but Jetty does use a little more memory than before (expected I guess).&lt;/p&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>Migrating to Blogofile</title>
+      <link>http://localhost:1313/migration-blogofile/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 UTC</pubDate>
+      
+      <guid>http://localhost:1313/migration-blogofile/</guid>
+      <description>&lt;p&gt;Because I am a lemming and everyone else is doing it, I too am going to migrate to blogofile! Then I&amp;rsquo;ll blog about doing it!&lt;/p&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>Moving by blog back!</title>
+      <link>http://localhost:1313/moving-blog-back/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 UTC</pubDate>
+      
+      <guid>http://localhost:1313/moving-blog-back/</guid>
+      <description>&lt;p&gt;ok, combining personal blog and tech blog was a bad idea. I didn&amp;rsquo;t realize there were some many people following each that were completely uninsterested in the other one. So after some thought, I will be bring back all my Tech posting to &lt;a href=&#34;http://pieceofpy.com&#34;&gt;pieceofpy.com&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;My personal stuff will now be on &lt;a href=&#34;http://riotousliving.com&#34;&gt;Riotous Living&lt;/a&gt;! which is a much better platform for all the crazy stuff I do that isn&amp;rsquo;t tech related.&lt;/p&gt;
+
+&lt;p&gt;Thanks for putting up with all my shifting and moving around!&lt;/p&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>My Software Analogy</title>
+      <link>http://localhost:1313/my-software-analogy/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 UTC</pubDate>
+      
+      <guid>http://localhost:1313/my-software-analogy/</guid>
+      <description>&lt;p&gt;&lt;img class=&#34;aligncenter size-full wp-image-303&#34; title=&#34;unrelated-picture&#34; src=&#34;http://pieceofpy.com/wp-content/uploads/2009/04/unrelated-picture.jpg&#34; alt=&#34;unrelated-picture&#34; width=&#34;450&#34; height=&#34;360&#34; /&gt;&lt;/p&gt;
+
+&lt;p&gt;Sometimes putting into words the practices you use can expose obvious flaws where you needimprovementsand provide a starting point for introducing new practices in to your development. Analogies are often used to express sometimes foreign, sometimes complex ideas by bringing them in to a realm that is familiar.&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;Idea&lt;/strong&gt;
+&lt;span style=&#34;font-weight: normal;&#34;&gt;My development is fueled with an idea. The idea sometimes bad, sometimes good, and rarely great, but nonetheless this is where I start. The idea usually stems from a problem. I want to be able to do Foo or I&amp;rsquo;d really like if Bar was able to do this.&lt;/span&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;span style=&#34;font-weight: normal;&#34;&gt;What ever it maybe, I think it is important to take the time to outline your idea. Give yourself some initial requirements. Give yourself some structure to build on. You need a solid foundation for a project to be seen to completion and even with that, most fail to make it.&lt;/span&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;span style=&#34;font-weight: normal;&#34;&gt;Now don&amp;rsquo;t get me wrong, I am not saying you need a full set of business requirements with risk analysis, input from legal, hiring a marketing firm to ensure there issufficientmarket share to capture to justify the risk of development. I am just saying you need to have some kind of outline, some set of initial requirements, your motivation. They are easy to create and it only takes a minute.&lt;/span&gt;&lt;/p&gt;
+
+&lt;p&gt;Once it makes it past the idea stage, it means I&amp;rsquo;ve written down on paper. I&amp;rsquo;ve created a loose set of requirements for the project and I still think it is a decent enough idea to continue.&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;Design&lt;/strong&gt;
+&lt;span style=&#34;font-weight: normal;&#34;&gt;The design process is unique beast. There is plenty of reading material out there about design and about architecting software. I am by no means a great architect. I know enough UML to not be confused by it, but I couldn&amp;rsquo;t punch my way out of a wet Visio box.&lt;/span&gt;&lt;/p&gt;
+
+&lt;p&gt;My approach to design is brief at best. I hop a plane to 30,000 ft and look around. I make some notes of that obvious things I see. Oh look a Factory Pattern, oh look a white fluffy Strategy pattern, hey that skyscrapper looks a lot like a Reactor pattern and that lake looks like a Facade. I like patterns, even though some people seem to think they hinder innovation and developers coming up with new awesomeness. I make some notes and polish my lead balls to ensure my development compass points North. That is it.&lt;/p&gt;
+
+&lt;p&gt;As a rule of thumb, I try to spend no more than a day on this phase. Depending on the scope of the project and the requirements you may require more or less time, but that is really up to your gut. As soon as you feel comfortable laying down code, start laying down code.&lt;/p&gt;
+
+&lt;p&gt;&lt;img class=&#34;aligncenter size-medium wp-image-302&#34; title=&#34;plants-tell-me-fings&#34; src=&#34;http://pieceofpy.com/wp-content/uploads/2009/04/plants-tell-me-fings-300x225.jpg&#34; alt=&#34;plants-tell-me-fings&#34; width=&#34;300&#34; height=&#34;225&#34; /&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;Now The Analogy -GrowingSoftware.&lt;/strong&gt;
+&lt;span style=&#34;font-weight: normal;&#34;&gt;I am a giant fan boi when it comes to test driven and agile processes, I mix and match the different processes to meet my needs. My favorite anology I use to describe my process of what I like to call organic development, involves growing plants. I am sure the term organic development already exists and means something completely different, but I don&amp;rsquo;t care, I like it for this.&lt;/span&gt;
+&lt;ul&gt;
+    &lt;li&gt;Idea - Decide you want to plant something and read up on what you&amp;rsquo;re planting.&lt;/li&gt;
+    &lt;li&gt;Design - Sun? Shade? Raised bed?&lt;/li&gt;
+    &lt;li&gt;Coding - Watering,fertilizing, repotting and transplanting.&lt;/li&gt;
+&lt;/ul&gt;
+So with the idea you read about what you are planting. You look at maybe some other people who have planted the same type of plants and read on their experiences if they are available.&lt;/p&gt;
+
+&lt;p&gt;Now the design. You pick out your pots or bed type. Decide if you are gonna usenaturallight,artificiallight, how much water and they type of delivery mechanism? I hear they have these cool water globes now!&lt;/p&gt;
+
+&lt;p&gt;Now you can plant the seed. You water and weed and as your plantgrowsyou prune, stake in supports, and continue to care for it until it comes to bare.With the proper care and handling you can produce a healthy, beautiful, lowmaintenanceplant.&lt;/p&gt;
+
+&lt;p&gt;Keeping with this software is a plant analogy, somethings to watch out for. Water too much you run the risk of killing your plant (developer burn out). Prune too much and you can kill it (premature optimization). Basically in the early stages of a plants life mistakes can easily kill it I think this is very similar to software.&lt;/p&gt;
+
+&lt;p&gt;As your plant takes root it becomes easier and easier to maintain. Things like transplanting, ripping a plant out to the roots andreplantingin a new bed are risky, but if done right, can produce a larger, healthier plant. Like software, sometimes completely gutting a prototype might be the right thing to do, but you increase the risk of killing the project.&lt;/p&gt;
+
+&lt;p&gt;But also plants, like software, can be very forgiving as long as you catch the the fact early that you are giving your plant too much or too little of water, pruning, fertilizer, soil to grow in, etc&amp;hellip; you should be able tosalvageit. Though it will take more work and time, with extended care an over or under watered plant can be saved from the brink of death with a little time investment and care. But sometimes there is nothing you can do, like an over pruned Bonsaitree, once the damage is done, even if you continue to grow your plant, it will never feel right for many many years.&lt;/p&gt;
+
+&lt;p&gt;So anyway, that is might crazy, abrupt, all over the place abstract take on software. What&amp;rsquo;s yours?&lt;/p&gt;
+
+&lt;p&gt;On a side note, an email commenter Linda requested I have more pictures in my posts so this one is for you Linda.&lt;/p&gt;
+
+&lt;p&gt;EDIT: Fixed the strong tags. WP decided to do something weird with the formatting. Also fixed some typo&amp;rsquo;s.&lt;/p&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>Voting and the land of ice and snow.</title>
+      <link>http://localhost:1313/us-voting-iceland/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 UTC</pubDate>
+      
+      <guid>http://localhost:1313/us-voting-iceland/</guid>
+      <description>&lt;p&gt;Today is election day in the states. Lots of free coffee and donut offers floating around for those few people wearing their I voted sticker.&lt;/p&gt;
+
+&lt;p&gt;Tomorrow I head out for my trip to Iceland. From Florida to Iceland in the Fall, makes perfect sense right? It was an excuse for me to purchase some new warm wear and jogging shoes, have to keep up with the exercise routine even on vacation. I should be able to maintain the blog from there keeping the spirit of blog every day in November.&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;Snippet of Python&lt;/strong&gt;
+In an effort to always have something a little Python related in all my posts, here is how to use list comprehension to filter out no value items from a list.
+[sourcecode language=&amp;ldquo;python&amp;rdquo;]
+foo = [&amp;ldquo;A&amp;rdquo;, &amp;ldquo;&amp;rdquo;, &amp;ldquo;C&amp;rdquo;, None, &amp;ldquo;E&amp;rdquo;]
+bar = [i for i in foo if i]
+print bar
+[&amp;lsquo;A&amp;rsquo;, &amp;lsquo;C&amp;rsquo;, &amp;lsquo;E&amp;rsquo;]
+[/sourcecode]&lt;/p&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>What I Look For In A Job</title>
+      <link>http://localhost:1313/job-hunting/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 UTC</pubDate>
+      
+      <guid>http://localhost:1313/job-hunting/</guid>
+      <description>&lt;p&gt;So I&amp;rsquo;m currently looking for new work and I&amp;rsquo;ve defined my list of items that are high priority to me. I figured I&amp;rsquo;d list them here and then break each down in to a little detail. Mainly because I&amp;rsquo;m up late at a stopping point in some code and haven&amp;rsquo;t updated my blog in forever.
+&lt;ul&gt;
+    &lt;li&gt;Refreshing&lt;/li&gt;
+    &lt;li&gt;Excitement&lt;/li&gt;
+    &lt;li&gt;Vision&lt;/li&gt;
+    &lt;li&gt;Caring&lt;/li&gt;
+&lt;/ul&gt;
+&lt;strong&gt;Refreshing&lt;/strong&gt;&lt;/p&gt;
+
+&lt;p&gt;What do I mean by refreshing? I mean a company that isn&amp;rsquo;t doing what everyone else. Something that isn&amp;rsquo;t YAIC (Yet Another Internet Company). For me, this can really mean two things though. It could also mean a company that produces software for an industry I&amp;rsquo;ve never worked in before, but ideally it is a company doing something new, innovative, and refreshing. At the end of the day, writing software for them makes you go &amp;ldquo;Ahhhhhhhhhh&amp;rdquo;.&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;Excitement&lt;/strong&gt;&lt;/p&gt;
+
+&lt;p&gt;I want everyone in the company I am working for to be jacked about working there. I want people to be excited about the products. Even if they are boring everyday products. If everyone there is excited about them and cares about them it promotes a much better work environment and in my experience a higher quality product.&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;Vision&lt;/strong&gt;&lt;/p&gt;
+
+&lt;p&gt;Here&amp;rsquo;s where we are. Here&amp;rsquo;s where we are going. Here is how WE are gonna do it. This seems as one of those things that is so easily over looked once you&amp;rsquo;re out of lets keep this startup from dying working 100 hours a week mode, but even for established companies this is so important. Without a vision your company will eventually end up stuck in the mud.&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;Caring&lt;/strong&gt;&lt;/p&gt;
+
+&lt;p&gt;This is more in the human respect. We are sometimes at work more than we are at home. This is especially the case with small companies and start-ups (and even some big ones). Companies that care, have employees that care. Treating employees like cattle will only result in employees treating the company like a feed station. Every place I&amp;rsquo;ve worked that did mandatory start / end times or mandatory OT always had issues getting coverage and had huge turn over rates compared to flex time locations with resources for employees to relax, take breaks, and feel cared about.&lt;/p&gt;
+</description>
+    </item>
+    
+  </channel>
+</rss>

@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+      <title>Updates on occasional posts about technology </title>
+      <generator uri="https://gohugo.io">Hugo</generator>
+    <link>http://localhost:1313/categories/updates/index.xml</link>
+    <language>en-us</language>
+    
+    
+    <updated>Mon, 01 Jan 0001 00:00:00 UTC</updated>
+    
+    <item>
+      <title>Moving by blog back!</title>
+      <link>http://localhost:1313/moving-blog-back/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 UTC</pubDate>
+      
+      <guid>http://localhost:1313/moving-blog-back/</guid>
+      <description>&lt;p&gt;ok, combining personal blog and tech blog was a bad idea. I didn&amp;rsquo;t realize there were some many people following each that were completely uninsterested in the other one. So after some thought, I will be bring back all my Tech posting to &lt;a href=&#34;http://pieceofpy.com&#34;&gt;pieceofpy.com&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;My personal stuff will now be on &lt;a href=&#34;http://riotousliving.com&#34;&gt;Riotous Living&lt;/a&gt;! which is a much better platform for all the crazy stuff I do that isn&amp;rsquo;t tech related.&lt;/p&gt;
+
+&lt;p&gt;Thanks for putting up with all my shifting and moving around!&lt;/p&gt;
+</description>
+    </item>
+    
+  </channel>
+</rss>

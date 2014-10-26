@@ -1,0 +1,226 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+      <title>Python Sqlalchemy on occasional posts about technology </title>
+      <generator uri="https://gohugo.io">Hugo</generator>
+    <link>http://localhost:1313/tags/python-sqlalchemy/index.xml</link>
+    <language>en-us</language>
+    
+    
+    <updated>Mon, 01 Jan 0001 00:00:00 UTC</updated>
+    
+    <item>
+      <title>SQLalchemy Cleanup Challenge</title>
+      <link>http://localhost:1313/sqlalchemy-cleanup/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 UTC</pubDate>
+      
+      <guid>http://localhost:1313/sqlalchemy-cleanup/</guid>
+      <description>&lt;p&gt;Yesterday I found myself writing some very interesting SQLalchemy. The problem is I have a date column in
+PostgreSQL that is stored as epoch time, so it is just an Interger column. I need to group by year,month and
+grab the total count of status=&amp;lsquo;A&amp;rsquo; groups for that year,month combination.&lt;/p&gt;
+
+&lt;p&gt;Here is what I came up with, can you make it cleaner? Faster? I am curious to see the different variations
+people come up with.&lt;/p&gt;
+
+&lt;pre class=&#34;brush: py&#34;&gt;
+        pg_date_part_month = sa.func.date_part(&#39;month&#39;,
+                sa.func.to_timestamp(Group.register_time))
+        pg_date_part_year = sa.func.date_part(&#39;year&#39;,
+                sa.func.to_timestamp(Group.register_time))
+
+        group_month_select = ( 
+            db.query(
+                sa.sql.label(&#39;year&#39;, pg_date_part_year),
+                sa.sql.label(&#39;month&#39;, pg_date_part_month),
+                sa.sql.label(&#39;total&#39;, sa.func.count(Group.status))
+            )   
+            .filter_by(status=&#39;A&#39;)
+            .group_by(pg_date_part_year)
+            .group_by(pg_date_part_month)
+            .group_by(Group.status)
+            .order_by(pg_date_part_year)
+            .order_by(pg_date_part_month)
+        )
+&lt;/pre&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>Tags with SQLalchemy</title>
+      <link>http://localhost:1313/sqlalchemy-tags/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 UTC</pubDate>
+      
+      <guid>http://localhost:1313/sqlalchemy-tags/</guid>
+      <description>&lt;p&gt;You see lots of examples on the net for SQLalchemy. Implementing a blog, implementing a wiki, even other articles on implementing tags. Some are good, some are pretty poor, and some are just plain out of date. After some researching on best practices for implementing a Tag system with SQLalchemy I&amp;rsquo;ve come up with the solution you are about to read.&lt;/p&gt;
+
+&lt;p&gt;I&amp;rsquo;ve pulled these examples from real world production code. Just renamed them and shortened them up a little for the blog post. I pulled the naming convention right from SimpleSite example for Pylons. Here is the the table layout. Simple. A page, tag, and relation table.&lt;/p&gt;
+
+&lt;p&gt;
+&lt;pre class=&#34;brush: py&#34;&gt;
+page_table = sa.Table(&#34;page&#34;, meta.metadata,
+    sa.Column(&#34;id&#34;, sa.types.Integer, sa.schema.Sequence(&#39;page_seq_id&#39;, optional=True), primary_key=True),
+    sa.Column(&#34;name&#34;, sa.types.Unicode(100), nullable=False),
+)
+
+tag_table = sa.Table(&#34;tag&#34;, meta.metadata,
+    sa.Column(&#34;id&#34;, sa.types.Integer, sa.schema.Sequence(&#39;taq_seq_id&#39;, optional=True), primary_key=True),
+    sa.Column(&#34;name&#34;, sa.types.Unicode(50), nullable=False, unique=True),
+)
+
+pagetag_table = sa.Table(&#34;pagetag&#34;, meta.metadata,
+    sa.Column(&#34;id&#34;, sa.types.Integer, sa.schema.Sequence(&#39;pagetag_seq_id&#39;, optional=True), primary_key=True),
+    sa.Column(&#34;pageid&#34;, sa.types.Integer, sa.schema.ForeignKey(&#39;page.id&#39;)),
+    sa.Column(&#34;tagid&#34;, sa.types.Integer, sa.schema.ForeignKey(&#39;tag.id&#39;)),
+)
+&lt;/pre&gt;
+&lt;/p&gt;
+
+&lt;p&gt;Now the important part, the mapper. The mapper is what is going to tell sqlalchemy what you are trying to do and how to handle and relate those ForeignKeys. It does the heavy lifting so you don&amp;rsquo;t have to.&lt;/p&gt;
+
+&lt;p&gt;
+&lt;pre class=&#34;brush: py&#34;&gt;
+class Tag(object):
+    pass
+    
+class Page(object):
+    pass
+
+orm.mapper(Tag, tag_table)
+orm.mapper(Page, page_table, properties = {
+    &#39;tags&#39;:orm.relation(Tag, secondary=pagetag_table, cascade=&#34;all,delete-orphan&#34;),
+})
+&lt;/pre&gt;
+&lt;/p&gt;
+
+&lt;p&gt;This does two things. It setups the relationship and also uses the built-in cascade rule from SQLalchemy to ensure that no orphan tags are left in the database.&lt;/p&gt;
+
+&lt;p&gt;So now we can use this model setup like so. Here, I&amp;rsquo;ve just started up my paster shell so I could work through some quick usage examples.&lt;/p&gt;
+
+&lt;p&gt;
+&lt;pre class=&#34;brush: py&#34;&gt;
+page = model.Page()
+page.name = &#34;Example Page&#34;
+
+tag = model.Tag()
+name = &#34;tag&#34;
+
+page.tags.append(tag)
+meta.Session.save(page)
+meta.Session.commit()
+
+tag_q = meta.Session.query(model.Tag)
+tags = tag_q.all()
+len(tags)
+
+# filter pages by tag(s)
+page_q = meta.Session.query(model.Page)
+pages = page_q.join(&#39;tags&#39;).filter_by(name=&#34;tag&#34;).all()
+
+# delete-orphans does the work for us here...
+meta.Session.delete(pages[0])
+meta.Session.commit()
+
+tags = tag_q.all()
+len(tags)
+
+# tag cloud anyone?
+# see the source code linked below for a properly weighted tag cloud.
+tag_q = meta.Session.query(func.count(&#34;*&#34;).label(&#34;tagcount&#34;), model.Tag)
+tag_r = tag_q.filter(model.Tag.id==model.pagetag_table.c.tagid).group_by(model.Tag.id).all()
+
+# what about pages with related tags?
+page_q = meta.Session.query(model.Page)
+
+taglist = [&#34;tag1&#34;, &#34;tag2&#34;]
+tagcount = len(taglist)
+page_q.join(model.Page.tags).filter(model.Tag.name.in_(taglist)).\
+group_by(model.Page.id).having(func.count(model.Page.id) == tagcount).all()
+&lt;/pre&gt;
+&lt;/p&gt;
+
+&lt;p&gt;Ok, now the fun part, what about all related tags? An intersection between an arbitrary number of many-to-many relationships? For that I added a static method to my tag class. Something like this.&lt;/p&gt;
+
+&lt;p&gt;
+&lt;pre class=&#34;brush: py&#34;&gt;
+class Tag(object):
+    @staticmethod
+    def get_related(tags=[]):
+        tag_count = len(tags)
+        
+        inner_q = select([pagetag_table.c.pageid])
+        inner_w = inner_q.where(
+            and_(pagetag_table.c.tagid == Tag.id,Tag.name.in_(tags))
+        ).group_by(pagetag_table.c.pageid).having(func.count(pagetag_table.c.pageid) == tag_count).correlate(None)
+        
+        outer_q = select([Tag.id, Tag.name, func.count(pagetag_table.c.shipid)])
+        outer_w = outer_q.where(
+            and_(pagetag_table.c.pageid.in_(inner_w),
+            not_(Tag.name.in_(tags)),
+            Tag.id == pagetag_table.c.tagid)
+        ).group_by(pagetag_table.c.tagid)
+        
+        related_tags = meta.Session.execute(outer_w).fetchall()
+        return related_tags
+&lt;/pre&gt;
+&lt;/p&gt;
+
+&lt;p&gt;A big thanks to &lt;a href=&#34;http://cakephp.org/&#34;&gt;PHP-Cake&lt;/a&gt; and &lt;a href=&#34;http://tagschema.com/&#34;&gt;TagSchema&lt;/a&gt; for the ideas, concepts, and implementation examples.&lt;/p&gt;
+
+&lt;p&gt;You can find the actual code that this blog was the basis for at:
+&lt;a href=&#34;http://trac.pieceofpy.com/pieceofpy/browser/tags-sqlalchemy&#34;&gt;http://trac.pieceofpy.com/pieceofpy/browser/tags-sqlalchemy&lt;/a&gt;&lt;/p&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>Using SQLAlchemy Custom Types to Convert Integers to DateTime</title>
+      <link>http://localhost:1313/sqlalchemy-datetime-integer/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 UTC</pubDate>
+      
+      <guid>http://localhost:1313/sqlalchemy-datetime-integer/</guid>
+      <description>&lt;p&gt;Today I was working on fetching out some data from an existing PostgreSQL server and generating
+some BSON output that would later be imported in to MongoDB. One of the problems I ran in to was
+that I needed to format the timestamps easily for each row of data.&lt;/p&gt;
+
+&lt;p&gt;Searching the internet I ran across &lt;a href=&#34;http://threebean.wordpress.com/2011/09/01/automatically-converting-integer-timestamps-to-python-datetime-in-reflected-sqlalchemy-models/&#34;&gt;this blog post by Ralph Bean&lt;/a&gt;, which does just that, but at a level
+that was well beyond what I needed. So taking away some inspiration from Ralph&amp;rsquo;s blog post, I decided
+to just go with a &lt;a href=&#34;http://www.sqlalchemy.org/docs/core/types.html#custom-types&#34;&gt;Custom Type&lt;/a&gt;.&lt;/p&gt;
+
+&lt;pre class=&#34;brush: py&#34;&gt;
+from time import mktime
+from datetime import datetime
+
+class IntegerDateTime(types.TypeDecorator):
+    &#34;&#34;&#34;Used for working with epoch timestamps.
+
+    Converts datetimes into epoch on the way in.
+    Converts epoch timestamps to datetimes on the way out.
+    &#34;&#34;&#34;
+    impl = types.INTEGER
+    def process_bind_param(self, value, dialect):
+        return mktime(value.timetuple())
+    def process_result_value(self, value, dialect):
+        return datetime.fromtimestamp(value)
+&lt;/pre&gt;
+
+&lt;p&gt;Then in my reflected table, I just override the column that holds the integer representation of the
+datetime I want.&lt;/p&gt;
+
+&lt;pre class=&#34;brush: py&#34;&gt;
+group_table = sa.Table(&#39;groups&#39;, metadata,
+    sa.Column(&#39;register_time&#39;, IntegerDateTime),
+    autoload=True,
+    include_columns=[
+        &#39;group_id&#39;,
+    &#39;register_time&#39;,
+    &#39;type&#39;
+    ],
+)
+&lt;/pre&gt;
+
+&lt;p&gt;Now when we query and begin to use our results, register_time will be a DateTime object making it
+very easy to do any timedelta arithmetic or string formatting.&lt;/p&gt;
+</description>
+    </item>
+    
+  </channel>
+</rss>

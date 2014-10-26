@@ -1,0 +1,158 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+      <title>Python on occasional posts about technology </title>
+      <generator uri="https://gohugo.io">Hugo</generator>
+    <link>http://localhost:1313/tags/python/index.xml</link>
+    <language>en-us</language>
+    
+    
+    <updated>Sun, 14 Jul 2013 12:15:00 UTC</updated>
+    
+    <item>
+      <title>Pyramid Task Queue with pyres and redis</title>
+      <link>http://localhost:1313/pyramid-pyres-redis/</link>
+      <pubDate>Sun, 14 Jul 2013 12:15:00 UTC</pubDate>
+      
+      <guid>http://localhost:1313/pyramid-pyres-redis/</guid>
+      <description>&lt;p&gt;This is a story about Pyramid, pyres, some Python 3.3 porting, and just how easy it is to
+get a task queue working with Pyramid and redis.&lt;/p&gt;
+
+&lt;p&gt;The story starts with John Anderson convincing me to work on notaliens.com. In the process of
+developing the Sites portion of the project we decided we wanted to implement a task queue
+for capturing, storing, and generating the thumbnails of the sites that are submitted
+to notalienss.&lt;/p&gt;
+
+&lt;p&gt;After looking over a few choices, John had some previous experience with pyres at
+SurveyMonkey so we pushed forward with that.&lt;/p&gt;
+
+&lt;p&gt;During the process of implementing the task queue we discovered that pyres wasn&amp;rdquo;t Python 3.3
+compatible. As the flagship community site for the Pyramid project, we felt maintaining
+Python 3.3 support was important.&lt;/p&gt;
+
+&lt;p&gt;So we had a choice, switch to an already Pyhton 3.3 compatible task queue
+system or take on porting pyres to Python 3.3. We talked about some other options like
+using celery or retools, but we decided we liked the API and the simplicity of pyres so much
+that we could take on the porting effort.&lt;/p&gt;
+
+&lt;p&gt;Fortunately for us the pyres project had some great tests. This made the process of porting
+pretty simple. You can actually see the diff for the pull request we submitted to pyres.&lt;/p&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>Allura - Google Summer of Code 2013</title>
+      <link>http://localhost:1313/allura-gsoc-apply-now/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 UTC</pubDate>
+      
+      <guid>http://localhost:1313/allura-gsoc-apply-now/</guid>
+      <description>&lt;p&gt;&lt;a href=&#34;http://google-melange.appspot.com/gsoc/homepage/google/gsoc2013&#34;&gt;Google Summer of Code&lt;/a&gt; is right around the corner. In fact student applications are already open.
+The &lt;a href=&#34;http://www.apache.org/&#34;&gt;Apache Software Foundation&lt;/a&gt; has been accepted as one of the mentoring organizations.
+This is great news for &lt;a href=&#34;http://incubator.apache.org/allura/&#34;&gt;Allura&lt;/a&gt; which is part of the ASF Incubator, because we will be eligble to mentor and accept
+student proposals for working on Allura.&lt;/p&gt;
+
+&lt;p&gt;So if you are intersted in working on a open project hosting platform that is written in Python, I encourage you to register and submit a proposal to the
+Apache Software Foundation for working on the Allura project. You can find the tickets that are part of the Allura GSoC 2013 on the
+&lt;a href=&#34;https://issues.apache.org/jira/issues/?filter=12323652&amp;amp;jql=summary%20~%20Allura%20AND%20labels%20%3D%20gsoc2013&#34;&gt;Apache COMDEV Jira&lt;/a&gt;.&lt;/p&gt;
+
+&lt;p&gt;You can also find useful information about the GSoC on the &lt;a href=&#34;http://community.apache.org/gsoc.html&#34;&gt;ASF GSoC FAQ Page&lt;/a&gt; and on the &lt;a href=&#34;https://sourceforge.net/p/allura/wiki/Google%20Summer%20of%20Code/&#34;&gt;Allura GSoC Wiki page&lt;/a&gt;.&lt;/p&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>New Year&#39;s Python Meme 2012</title>
+      <link>http://localhost:1313/new-years-python-meme-2012/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 UTC</pubDate>
+      
+      <guid>http://localhost:1313/new-years-python-meme-2012/</guid>
+      <description>&lt;p&gt;&lt;strong&gt;1. What&amp;rsquo;s the coolest Python application, framework, or library you have discovered in 2012?&lt;/strong&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&#34;http://matplotlib.org&#34;&gt;matplotlib&lt;/a&gt; - This library is a python 2D plotting library that creates great figures that you can use
+to provide a visual representation of many data. You can generate plots, histograms, bar charts, etc. The API
+for figure creation is very simple and straight forward and I have really enjoyed using it over the last few months.&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;2. What new programming technique did you learn in 2012&lt;/strong&gt;&lt;/p&gt;
+
+&lt;p&gt;The programming I do is a pretty equal mix of brand new code and extensions to existing code. This year I took the time to learn
+how to better refactor existing code. That can mean a lot of things to a lot of people, but I specifically focused on refreshing
+my knowledge of code smells as defined in &lt;em&gt;Refactoring - Fowler (1999)&lt;/em&gt; and taking the time to learn how to make better code from
+the start by re-reading &lt;em&gt;Clean Code - Martin (2008)&lt;/em&gt;.&lt;/p&gt;
+
+&lt;p&gt;Everytime I re-read books such as these, they almost feel completely new. The years that have passed have given me a completely
+different learning expereince from the exact same text.&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;3. Which open source project did you contribute to the most in 2012? What did you do?&lt;/strong&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&#34;http://sourceforge.net/p/allura&#34;&gt;Allura&lt;/a&gt; - To be fair, I work for SourceForge so I get to contribue to Allura as part of my
+day job. The contributions range from bug fixes to backend updates to tools and extensions.&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&#34;http://docs.pylonsproject.org/projects/pyramid/en/latest/&#34;&gt;Pyramid&lt;/a&gt; - This is the project I contributed to the most that
+was not part of my day job. That said, the overall level of contributions wasn&amp;rsquo;t that high, just a few bug fixes, minor
+JSON renderer update, documentation tweaks, and some Pyramid related blog posts.
+You can see them &lt;a href=&#34;https://github.com/Pylons/pyramid/commits?author=wwitzel3&#34;&gt;here&lt;/a&gt;.&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;4. Which Python blog or website did you read the most in 2012&lt;/strong&gt;&lt;/p&gt;
+
+&lt;p&gt;Reddit, but to be fair, a lot of the stories I went to on Reddit were because they were linked in the Pycoder&amp;rsquo;s Weekly
+newsletter. So maybe Pycoder&amp;rsquo;s Weekly should take the credit.&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;5. What are the top things you want to learn in 2013&lt;/strong&gt;&lt;/p&gt;
+
+&lt;p&gt;In 2013 I hope to continue learning more about mobile development, use AngularJS for something other than a trivial demo, and
+continue my general quest to always be a better developer than I am today. I&amp;rsquo;ve also been learning a lot of nutrition and other
+health sciences and will probably contintue to focusing on learning more about them in 2013.&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;6. What is the top software, application, or library you wish someone would write in 2013&lt;/strong&gt;&lt;/p&gt;
+
+&lt;p&gt;I think it would be really awesome if there was a recipe application that allowed you to enter in your macronutrient needs for
+the day (Protein, Fat, Carbs) and spit out a list of recipes, based on a selected meal frequency, that would make you hit all
+of your requirements.&lt;/p&gt;
+
+&lt;p&gt;Want to do your own list? here&amp;rsquo;s how:&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;copy-paste the questions and answser them in your blog&lt;/li&gt;
+&lt;li&gt;tweet it with #2012pythonmeme hashtag&lt;/li&gt;
+&lt;/ul&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>Python 2.6 Released</title>
+      <link>http://localhost:1313/python-26-release/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 UTC</pubDate>
+      
+      <guid>http://localhost:1313/python-26-release/</guid>
+      <description>&lt;p&gt;Python 2.6 was release yesterday. I&amp;rsquo;ve had a chance to run most of my code through this latest version and haven&amp;rsquo;t run in to any issues. Looking over the features list I did notice a couple things you might be interested to know.
+&lt;ul&gt;
+    &lt;li&gt;json module added to standard library&lt;/li&gt;
+    &lt;li&gt;multiprocessing module was also added&lt;/li&gt;
+    &lt;li&gt;with keyword - cleans up some of those try/finally blocks&lt;/li&gt;
+    &lt;li&gt;as keyword - more important than people realize&lt;/li&gt;
+    &lt;li&gt;print as a method (future imports, standard in 3.0)&lt;/li&gt;
+    &lt;li&gt;user defined maps can be used with ** for passing in keyword args&lt;/li&gt;
+&lt;/ul&gt;
+All this and more can be found on the &lt;a href=&#34;http://docs.python.org/whatsnew/2.6.html&#34;&gt;What&amp;rsquo;s New in Python 2.6&lt;/a&gt; page. But if you&amp;rsquo;re too lazy to read that, at least take the time to look at this example of using as, this was a much needed new keyword in Python and really cleans up code.&lt;/p&gt;
+
+&lt;p&gt;I&amp;rsquo;ve seen the following a lot, as mentioned on the python.org site. People think this is catching either KeyError or ValueError but they are wrong. It is only catching KeyError and storing that exception object in the ValueError variable.&lt;/p&gt;
+
+&lt;p&gt;[sourcecode language=&amp;lsquo;python&amp;rsquo;]
+try:
+    print my_dict[&amp;lsquo;nokey&amp;rsquo;]
+except KeyError, ValueError:
+    # handle the exception(s)
+[/sourcecode]&lt;/p&gt;
+
+&lt;p&gt;Those exceptions should be in a tuple, then a comma for the variable to store the exception object in. The new method uses the as keyword and removes that ambiguous comma and makes for a much cleaner exception block when reading.&lt;/p&gt;
+
+&lt;p&gt;[sourcecode language=&amp;lsquo;python&amp;rsquo;]
+try:
+    print my_dict[&amp;lsquo;nokey&amp;rsquo;]
+except (KeyError, ValueError) as e:
+    print e
+[/sourcecode]&lt;/p&gt;
+</description>
+    </item>
+    
+  </channel>
+</rss>

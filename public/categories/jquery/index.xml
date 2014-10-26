@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+      <title>Jquery on occasional posts about technology </title>
+      <generator uri="https://gohugo.io">Hugo</generator>
+    <link>http://localhost:1313/categories/jquery/index.xml</link>
+    <language>en-us</language>
+    
+    
+    <updated>Mon, 01 Jan 0001 00:00:00 UTC</updated>
+    
+    <item>
+      <title>jQuery getJSON and IE cache</title>
+      <link>http://localhost:1313/jquery-getjson-ie-cache/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 UTC</pubDate>
+      
+      <guid>http://localhost:1313/jquery-getjson-ie-cache/</guid>
+      <description>&lt;p&gt;I am sure everyone else who lives in the world of jQuery knows this, so this is more here for my own future reference and avoiding and more wasting of time, but if you are going to us $.getJSON helper in jQuery, append a time stamp to it to prevent odd caching behavior in IE. See the example below.&lt;/p&gt;
+
+&lt;p&gt;&lt;code&gt;
+$.getJSON(&amp;ldquo;/story/story&lt;em&gt;id.php?&lt;/em&gt;=&amp;ldquo;+(new Date().getTime()), function(json) {
+    $(&amp;lsquo;#next_story_id&amp;rsquo;).html(&amp;rsquo;S&amp;rsquo; + json.next_story_id);
+});
+&lt;/code&gt;&lt;/p&gt;
+
+&lt;p&gt;This might not be the best way to do it and really, this is good practice for all dynamic requests to avoid caching issues from the browser and the server. Chalk this up as a good learning experience that sucked 30 minutes of my life. I hate front end stuff.&lt;/p&gt;
+</description>
+    </item>
+    
+  </channel>
+</rss>

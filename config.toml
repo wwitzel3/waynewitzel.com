@@ -1,3 +1,15 @@
-baseurl = "http://yourSiteHere"
+baseurl = "http://waynewitzel.com"
 languageCode = "en-us"
-title = "my new hugo site"
+title = "occasional posts about technology"
+theme = "redlounge"
+disqusShortname = "waynewitzel"
+socialsharing = true
+
+[params]
+	sidebartitle = "Wayne Witzel"
+	sidebartagline = "occasional posts about technology"
+
+[[menu.social]]
+	pre = "<i class='fa fa-twitter'></i>"
+    url = "http://www.twitter.com/wwitzel3"
+    identifier = "twitter"

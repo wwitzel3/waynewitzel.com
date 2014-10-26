@@ -1,0 +1,545 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+      <title>Pyramid on occasional posts about technology </title>
+      <generator uri="https://gohugo.io">Hugo</generator>
+    <link>http://localhost:1313/categories/pyramid/index.xml</link>
+    <language>en-us</language>
+    
+    
+    <updated>Mon, 01 Jan 0001 00:00:00 UTC</updated>
+    
+    <item>
+      <title>Hooking up Whoosh and SQLalchemy (sawhoosh)</title>
+      <link>http://localhost:1313/sqlalchemy-whoosh/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 UTC</pubDate>
+      
+      <guid>http://localhost:1313/sqlalchemy-whoosh/</guid>
+      <description>
+
+&lt;p&gt;I was talking to Tim VanSteenburgh (we both do work for Geek.net) and he had a proof of concept for automatically updating a search index when a change happens to a model and pairing a unified search results page with that to make an easy one-stop search solution for a website. I thought this was a pretty cool idea, so I decided to do a implementation of it on top of the Pyramid framework and share it the readers of my blog. I choose Whoosh only so that I could have an easy way for users to try the project out. Since whoosh is pure python it installs when you run your setup.py develop. But this approach could be applied to any searching system. Tim was using solr.&lt;/p&gt;
+
+&lt;h2 id=&#34;toc_0&#34;&gt;Demo Project&lt;/h2&gt;
+
+&lt;p&gt;The purpose of the post is to summarize briefly the steps taken to achieve the desired results of automatically updating the index information when models change. Please browse the source and clone and run the project, looking at the source as a whole will definitely give you a better start to finish understanding than just reading this blog post.&lt;/p&gt;
+
+&lt;p&gt;GitHub: &lt;a href=&#34;https://github.com/wwitzel3/sawhoosh&#34;&gt;sawhoosh&lt;/a&gt;&lt;/p&gt;
+
+&lt;h2 id=&#34;toc_1&#34;&gt;Whooshing Your Models&lt;/h2&gt;
+
+&lt;p&gt;There are few parts that make up the magic of all this, but each part is really simple. First you have the index schema itself. This is setup to hold the unique ID of an item, as well as a pickled version of the uninstantiated class, and an aggregate of values (decided by you) that you want to be searchable for the item. The schema looks like this:&lt;/p&gt;
+
+&lt;pre class=&#34;brush: py&#34;&gt;
+class SawhooshSchema(SchemaClass):
+    value = TEXT
+    id = ID(stored=True, unique=True)
+    cls = ID(stored=True)
+&lt;/pre&gt;
+
+&lt;p&gt;In the Whoosh world this basically says store ID and CLS so it comes back with the search results, but not value. value will be what we will search over in order to find our results. We need to tell our models what attributes are important to use for indexing, I&amp;rsquo;ve chosen to do this with a whoosh_value property on the model itself.&lt;/p&gt;
+
+&lt;pre class=&#34;brush: py&#34;&gt;
+class Document(Base):
+    __tablename__ = &#39;document&#39;
+    __whoosh_value__ = &#39;id,title,content,author_id&#39;
+    id = Column(CHAR(32), primary_key=True, default=new_uuid)
+    title = Column(String, nullable=False)
+    content = Column(Text, nullable=False)
+    author_id = Column(Integer, ForeignKey(&#39;author.id&#39;), index=True)
+    def __str__(self):
+        return u&#39;Document - Title: {0}&#39;.format(self.title)
+&lt;/pre&gt;
+
+&lt;p&gt;This says make the id, title, content, and author_id for document all searchable values. This happens automatically for us because our Base class has a parent class that handles all of the Whoosh work. This parent class, I&amp;rsquo;ve called it SawhooshBase, handles all the indexing, reindexing, and deindexing of our models. The class itself looks like this:&lt;/p&gt;
+
+&lt;pre class=&#34;brush: py&#34;&gt;
+class SawhooshBase(object):
+    # The fields of the class you want to index (make searchable)
+    __whoosh_value__ = &#39;attribue,attribute,...&#39;
+    def index(self, writer):
+        id = u&#39;{0}&#39;.format(self.id)
+        cls = u&#39;{0}&#39;.format(pickle.dumps(self.__class__))
+        value = u&#39; &#39;.join([getattr(self, attr) for attr in self.__whoosh_value__.split(&#39;,&#39;)])
+        writer.add_document(id=id, cls=cls, value=value)
+    def reindex(self, writer):
+        id = u&#39;{0}&#39;.format(self.id)
+        writer.delete_by_term(&#39;id&#39;, self.id)
+        self.index(writer)
+    def deindex(self, writer):
+        id = u&#39;{0}&#39;.format(self.id)
+        writer.delete_by_term(&#39;id&#39;, self.id)
+        
+Base = declarative_base(cls=SawhooshBase)
+&lt;/pre&gt;
+
+&lt;p&gt;As you can see in the index method, we use the whoosh_value to create an aggregate of searchable strings and supply that to the value we defined in our search schema. We pickle the class and also store the ID. This is what later lets us easily take search results and turn them in to object instances.&lt;/p&gt;
+
+&lt;p&gt;Those methods above are only ever run by our SQLalchemy after_flush session event, though that is not to say you couldn&amp;rsquo;t run them manually. The callback and event hook looks like this:&lt;/p&gt;
+
+&lt;pre class=&#34;brush: py&#34;&gt;
+def update_indexes(session, flush_context):
+    writer = WIX.writer()
+    for i in session.new:
+        i.index(writer)
+    for i in session.dirty:
+        i.reindex(writer)
+    for i in session.deleted:
+        i.deindex(writer)        
+    writer.commit()
+event.listen(DBSession, &#39;after_flush&#39;, update_indexes)
+&lt;/pre&gt;
+
+&lt;p&gt;The WIX object you see being used here is created much the same way you create your DBSession and you can view that in the &lt;a href=&#34;https://github.com/wwitzel3/sawhoosh/blob/master/sawhoosh/search.py&#34;&gt;search.py&lt;/a&gt; file of the project. Everything else is pretty straight forward. Call the respective indexer methods for new, dirty, and deleted items in the session.&lt;/p&gt;
+
+&lt;h2 id=&#34;toc_2&#34;&gt;Using in the View&lt;/h2&gt;
+
+&lt;p&gt;Now we have our models all &lt;strong&gt;&lt;em&gt;whooshified&lt;/em&gt;&lt;/strong&gt; (technical term) and we want to have our users searching and displaying usable results. To start we have a simple search form that when submitted does a GET request to our search method with keywords. Now since the whoosh query parser is already smart enough to pickup things like AND and OR we don&amp;rsquo;t have to do much.&lt;/p&gt;
+
+&lt;p&gt;The view code itself is where we use another helper method called results_to_instance (also in &lt;a href=&#34;https://github.com/wwitzel3/sawhoosh/blob/master/sawhoosh/search.py&#34;&gt;search.py&lt;/a&gt;). This method takes our search results, unpickles the class, fetches the instance from the DB and places the result in to a list. That method looks like this:&lt;/p&gt;
+
+&lt;pre class=&#34;brush: py&#34;&gt;
+def results_to_instances(request, results):
+    instances = []
+    for r in results:
+        cls = pickle.loads(&#39;{0}&#39;.format(r.get(&#39;cls&#39;)))
+        id = r.get(&#39;id&#39;)
+        instance = request.db.query(cls).get(id)
+        instances.append(instance)
+    return instances
+&lt;/pre&gt;
+
+&lt;p&gt;Now this is where you see the benefit of pickling the class type with the search result. We have ready to use instances of multiple types from a single search result. We can pass them in to a template to render the results, but since we have a mix of instance types, we need a unified way to render them out without explicitly checking their type or using a series of if attribute checks. I decided I would use &lt;strong&gt;str&lt;/strong&gt; on the model to be a search results safe friendly way to display the object to the user and that I would define a route_name helper method on the model so that I can use request.route_url(object.route_name()) to generate the clickable links in the results. The combination of this can be viewed below:&lt;/p&gt;
+
+&lt;pre class=&#34;brush: html&#34;&gt;
+%if results:
+&lt;ul id=&#34;search_results&#34;&gt;
+% for r in results:
+    &lt;li&gt;&lt;a href=&#34;${request.route_url(r.route_name(), id=r.id)}&#34;&gt;${r}&lt;/a&gt;&lt;/li&gt;
+%endfor
+&lt;/ul&gt;
+%else:
+&lt;p&gt;No results found&lt;/p&gt;
+%endif
+&lt;/pre&gt;
+
+&lt;p&gt;And the view itself uses some things we haven&amp;rsquo;t talked about yet. QueryParser is just part of Whoosh and it is what turns your keywords in to something useful. request.ix is just a shortcut to our WIX object we created, we&amp;rsquo;ve added it using a custom Request class (same as we&amp;rsquo;ve done with db), you can see that in the &lt;a href=&#34;https://github.com/wwitzel3/sawhoosh/blob/master/sawhoosh/security.py&#34;&gt;security.py&lt;/a&gt; file of the project. From there we render the search results html and return it to our AJAX caller to inject in to the page. You can see this is also where we use the results_to_instances method discussed earlier.&lt;/p&gt;
+
+&lt;pre class=&#34;brush: py&#34;&gt;
+@view_config(route_name=&#39;search&#39;, renderer=&#39;json&#39;, xhr=True)
+def search_ajax(request):
+    query = request.params.get(&#39;keywords&#39;)
+    parser = QueryParser(&#39;value&#39;, request.ix.schema)
+    with request.ix.searcher() as searcher:
+        query = parser.parse(query)
+        results = searcher.search(query)
+        search_results_html=render(&#39;sawhoosh:templates/search/results.mako&#39;,
+                              dict(results=results_to_instances(request, results)),
+                              request=request)
+    return dict(search_results_html=search_results_html)
+&lt;/pre&gt;
+
+&lt;h2 id=&#34;toc_3&#34;&gt;Summary&lt;/h2&gt;
+
+&lt;p&gt;There you have it. A search indexer using SQLalchemy on top of Pyramid. I highly recommend you clone the git repo for this project or review the code using the Git website if you are interested in getting a start to finish feel. The project allows you to add Authors and Documents and Edit and Delete them all while updating the local search index stored in the a directory on the file system.&lt;/p&gt;
+
+&lt;p&gt;GitHub: &lt;a href=&#34;https://github.com/wwitzel3/sawhoosh&#34;&gt;sawhoosh&lt;/a&gt;&lt;/p&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>Pyramid - JSON Serialize Custom Objects</title>
+      <link>http://localhost:1313/pyramid-object-serialization/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 UTC</pubDate>
+      
+      <guid>http://localhost:1313/pyramid-object-serialization/</guid>
+      <description>&lt;p&gt;When writing web application that expose an API, at some point we end up
+needing to serialize our custom objects. We create these objects
+ourselves and other times we are using third-party libraries.&lt;/p&gt;
+
+&lt;p&gt;Fortunately the latest Pyramid master has new features that allow you to
+easily define a serialization protocol for custom objects.&lt;/p&gt;
+
+&lt;p&gt;We provide you with two approaches, the first one will feel familar if you have
+used TurboGears. The second allows you to handle the serialization
+of any object, even those third-party ones you didn&amp;rsquo;t write.&lt;/p&gt;
+
+&lt;h3&gt;Using __json__&lt;/h3&gt;
+Using the \_\_json\_\_ method is great when you want an easy way to serialize your
+own objects. All you need to do is define a \_\_json\_\_ method on your class and
+use the default json renderer on your view. Like this.
+
+&lt;pre class=&#34;brush: py&#34;&gt;
+
+class CustomObject(object):
+    def __init__(self, name, email):
+        self.name = name
+        self.email = email
+        self.timestamp = datetime.utcnow()
+    def __json__(self, request):
+        return dict(
+            name=self.name,
+            email=self.email,
+            timestamp=self.timestamp.isoformat(),
+            )
+
+@view_config(route_name=&#34;custom_object&#34;, renderer=&#34;json&#34;)
+def custom_object(request):
+    from objects import CustomObject
+    results = dict(
+        count=2,
+        objects=[
+            CustomObject(&#39;Wayne Witzel III&#39;, &#39;wayne@pieceofpy.com&#39;),
+            CustomObject(&#39;Fake Person&#39;, &#39;fake.person@pieceofpy.com&#39;),
+            ],
+        )
+
+    return results
+
+&lt;/pre&gt;
+
+You can see here, this is taking the non-serializable datetime that is part
+of your custom object and turning it into a serializable string using the
+isoformat call. The default json renderer looks for this special \_\_json\_\_ method.
+Once you have that defined, there is nothing more for us to do. As long as the
+return of \_\_json\_\_ is serializable, everything is handled for us. Even when
+returning lists of custom objects, like say the results of a SQL query.
+
+&lt;h3&gt;Using add_adapter&lt;/h3&gt;
+
+&lt;p&gt;Now if extending the object itself isn&amp;rsquo;t desirable, you can use a custom
+adapater. This uses a type checking approach, that registers a serialization
+method for a specific type. It has a little more setup than the __json__
+approach above, but is great when dealing with built-in types of third party
+objects.&lt;/p&gt;
+
+&lt;p&gt;First we create a method that knows how to serialize our object.&lt;/p&gt;
+
+&lt;pre class=&#34;brush: py&#34;&gt;
+
+class ThirdPartyObject(object):
+    def __init__(self):
+        self.value = Decimal(0.1)
+
+def third_party_adapter(obj, request):
+    return dict(
+        value=str(obj.value),
+        )
+
+&lt;/pre&gt;
+
+&lt;p&gt;So here, we define a very simple adapter that knows how to deal with our
+Decimal value. Now in our __init__ we need to tell Pyramid about
+this custom method.&lt;/p&gt;
+
+&lt;pre class=&#34;brush: py&#34;&gt;
+json_third_party = JSON()
+json_third_party.add_adapter(ThirdPartyObject, third_party_adapter)
+config.add_renderer(&#39;json_third_party&#39;, json_third_party)
+config.add_route(&#39;third_party&#39;, &#39;/third_party.json&#39;)
+&lt;/pre&gt;
+
+&lt;p&gt;Finally we can now tell our view to use our newly registered json_third_party
+renderer when our view returns.&lt;/p&gt;
+
+&lt;pre class=&#34;brush: py&#34;&gt;
+@view_config(route_name=&#34;third_party&#34;, renderer=&#34;json_third_party&#34;)
+def third_party(request):
+    from objects import ThirdPartyObject
+    results = dict(
+        count=1,
+        objects=[
+            ThirdPartyObject(),
+            ],
+        )
+    return results
+&lt;/pre&gt;
+
+&lt;p&gt;As you can see if is very easy to configure Pyramid to JSON serialize custom
+objects even if you aren&amp;rsquo;t the original author or don&amp;rsquo;t want to modify the
+code of an object.&lt;/p&gt;
+
+&lt;h3&gt;Resources&lt;/h3&gt;
+
+&lt;p&gt;You can try out this feature by checking out the &lt;a href=&#34;https://github.com/Pylons/pyramid&#34;&gt;latest copy of Pyramid master
+from Github&lt;/a&gt;. A working Pyramid demo for this blog post is &lt;a href=&#34;https://github.com/wwitzel3/pieceofpy/tree/master/json_serialize_demo&#34;&gt;available here&lt;/a&gt;.&lt;/p&gt;
+
+&lt;p&gt;Reference: &lt;a href=&#34;http://docs.pylonsproject.org/projects/pyramid/en/master/narr/renderers.html#json-serializing-custom-objects&#34;&gt;Renderers&lt;/a&gt;&lt;/p&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>Pyramid and Traversal with a RESTful interface</title>
+      <link>http://localhost:1313/pyramid-bad-traversal/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 UTC</pubDate>
+      
+      <guid>http://localhost:1313/pyramid-bad-traversal/</guid>
+      <description>
+
+&lt;h2 id=&#34;toc_0&#34;&gt;UPDATE (2011-08-05)&lt;/h2&gt;
+
+&lt;p&gt;Please use caution when reading this post. A lot of the approach and implementation here is flawed. I am keeping the post up for historical purposes, but I am currently working on a follow up post that has a much better and proper implementation of traversal for SQLalchemy models. The practice of not returning real instances as traversal expects and tightly coupling the models to the traversal method is something that is less than desirable and will lead to more pain than gain long term. That being said, some of the approaches here are a good way to learn about traversal and how one might want to use it with their data model.&lt;/p&gt;
+
+&lt;h2 id=&#34;toc_1&#34;&gt;Original Post&lt;/h2&gt;
+
+&lt;p&gt;When Pyramid was first being developed I was intrigued by the idea that I could create context aware views and use a host of methods to check permissions on those contexts, generate URLs based off those contexts, and auto-magically call the view required based on the context and the requested resource path.&lt;/p&gt;
+
+&lt;p&gt;So one of my first experiments with Pyramid was to implement proper resource urls for contexts in a RESTful fashion. Eventually I plan to do this for the entire collection as well, but for now all I need is the context level RESTful interface. The goal of which is to have URLs that go something like this.&lt;/p&gt;
+
+&lt;ul&gt;
+    &lt;li&gt; /resource/id (GET) - default view of the resource &lt;/li&gt;
+    &lt;li&gt; /resource/id/edit (GET) - the form that allows you to edit the resource &lt;/li&gt;
+    &lt;li&gt; /resource/id/create (GET) - the form that allows you to edit the resource &lt;/li&gt;
+    &lt;li&gt; /resource/id (PUT) - updates &lt;/li&gt;
+    &lt;li&gt; /resource/id (POST) - create &lt;/li&gt;
+    &lt;li&gt; /resource/id (DELETE) - delete &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;This ends up being pretty damn simple with Pyramid and Traversal and for those of you new to traversal or even those who aren&amp;rsquo;t, I highly recommend reading the &lt;a href=&#34;http://docs.pylonsproject.org/projects/pyramid/dev/narr/muchadoabouttraversal.html&#34;&gt;Much Ado About Traversal&lt;/a&gt; chapter in the Pyramid documentation. Also on a side note all of the snippets from this post are part of a real project called &lt;a href=&#34;https://sourceforge.net/p/stockpot/code&#34;&gt;Stockpot&lt;/a&gt; and the code is freely available via SourceForge.&lt;/p&gt;
+
+&lt;h2 id=&#34;toc_2&#34;&gt;My Root&lt;/h2&gt;
+
+&lt;p&gt;So first step for me was to design my Root object. This is the really the foundation for traversal and determines what resources it will be able to find and how to interact with them once it finds them. My Root object is simple and looks like this.&lt;/p&gt;
+
+&lt;pre class=&#34;brush: py&#34;&gt;
+def _owned(obj, name, parent):
+    obj.__name__ = name
+    obj.__parent__ = parent
+    return obj
+    
+class Root(dict):
+    __name__ = None
+    __parent__ = None
+    #
+    def __init__(self, request):
+        dict.__init__(self)
+        self.request = request
+        self[&#39;user&#39;] = _owned(User, &#39;user&#39;, self)
+&lt;/pre&gt;
+
+&lt;p&gt;This is pretty straightforward. We create a user entry point for the first call to &lt;strong&gt;getitem&lt;/strong&gt; and return the User model with a name of user and the Root object as the parent.&lt;/p&gt;
+
+&lt;h2 id=&#34;toc_3&#34;&gt;My Model&lt;/h2&gt;
+
+&lt;p&gt;For my Root object to really do anything useful our model class needs to do some work so that when the traversal algorithm calls &lt;strong&gt;getitem&lt;/strong&gt; on our User model it actually gets something useful back. I&amp;rsquo;ve done this using a base class for my declarative_base call.&lt;/p&gt;
+
+&lt;pre class=&#34;brush: py&#34;&gt;
+class StockpotBase(object):
+    @classmethod
+    def __getitem__(cls, k):
+        try:
+            result =  DBSession().query(cls).filter_by(id=k).one()
+            result.__parent__ = result
+            result.__name__ = str(k)
+            return result
+        except NoResultFound, e:
+            raise KeyError
+    @classmethod
+    def __len__(cls):
+        return DBSession().query(cls).count()    
+    @classmethod
+    def __iter__(cls):
+        return (x for x in DBSession().query(cls))
+        
+Base = declarative_base(cls=StockpotBase)
+
+class User(Base):
+    __tablename__ = &#39;users&#39;
+    __name__ = &#39;user&#39;
+    #
+    def __init__(self, email, password=None, display_name=None):
+        self.email = email
+        self.password = password
+        self.display_name = display_name
+    #
+    id = Column(Integer, primary_key=True)
+    email = Column(String, nullable=False, unique=True)
+    password = Column(String, nullable=True)
+    display_name = Column(String, nullable=True)
+    user_groups = relation(Group, backref=&#39;user&#39;, secondary=groups)
+    groups = association_proxy(&#39;user_groups&#39;, &#39;name&#39;, creator=Group.group_creator)
+    recipes = relation(Recipe, backref=&#39;user&#39;)
+    #
+    def __str__(self):
+        return &#39;User(id={0}, email={1}, groups={2})&#39;.format(self.id, self.email, self.groups)
+
+    def __repr__(self):
+        return self.__str__()
+&lt;/pre&gt;
+
+&lt;p&gt;So that is a pretty big chunk of code so let me go through what is happening, it is rather simple. I&amp;rsquo;ve created StockpotBase which has the methods our traversal algorithm is going to want. I&amp;rsquo;ve used that as the cls for my declarative_base call so that any class that I create that inherits from Base will have all of the proper methods needed.&lt;/p&gt;
+
+&lt;p&gt;The &lt;strong&gt;getitem&lt;/strong&gt; itself ensures that the parent is set to the generic user class and the name of the class is set to the primary key. This is important later when we start using resource_url() to generate links for us in our templates, if you consider that the urls will be generated with the pattern of /&lt;strong&gt;parent&lt;/strong&gt;.&lt;strong&gt;name&lt;/strong&gt;/context.&lt;strong&gt;name&lt;/strong&gt;&lt;/p&gt;
+
+&lt;h2 id=&#34;toc_4&#34;&gt;My Views&lt;/h2&gt;
+
+&lt;p&gt;With the Root object setup and our model &amp;ldquo;traversal enabled&amp;rdquo;, we can look at how the views for this will be setup. I personally like to use the config.scan(&amp;lsquo;stockpot.views&amp;rsquo;) helper and use the @view_config decorator for my views. I find it cleaner and easier to to have the view_config right with the actually def.&lt;/p&gt;
+
+&lt;pre class=&#34;brush: py&#34;&gt;
+# RESOURCE_URL = /user/id
+@view_config(context=User, renderer=&#39;user/view.mako&#39;)
+def get(request):
+    return dict(user=request.context)
+    
+# RESOURCE_URL = /user/id/edit
+@view_config(name=&#39;edit&#39;, context=User, renderer=&#39;user/edit.mako&#39;)
+def edit(request):
+    return dict(user=request.context)
+&lt;/pre&gt;
+
+&lt;p&gt;So here is the default GET view. It allows anyone to use this view, but I will have a blog post about permissions with ACL and traversal later, and it uses the renderer of my user/view.mako template. Then we have the edit view which requires User:edit permissions and uses the edit.mako template. Pretty simple. Next we have the first of the JSON views (they don&amp;rsquo;t have to be JSON).&lt;/p&gt;
+
+&lt;pre class=&#34;brush: py&#34;&gt;
+@view_config(context=User, request_method=&#39;PUT&#39;, xhr=True, renderer=&#39;json&#39;)
+def put(request):
+    user = request.context
+    return dict(method=&#39;PUT&#39;, user_id=user.id, email=user.email)
+&lt;/pre&gt;
+
+&lt;p&gt;And the mako template jQuery for this might look something like this&lt;/p&gt;
+
+&lt;p&gt;$$code(lang=javascript, linenums=True)
+$(document).ready(function() {
+    $(&amp;lsquo;#put&amp;rsquo;).click(function() {
+        $.ajax({
+            url: &amp;lsquo;${request.resource_url(user)}&amp;lsquo;,
+            type: &amp;lsquo;PUT&amp;rsquo;,
+            context: document.body,
+            dataType: &amp;lsquo;json&amp;rsquo;,
+            success: function(data) {
+                console.log(data);
+                alert(&amp;lsquo;done&amp;rsquo;);
+            }
+        });
+    });
+});
+&lt;/pre&gt;&lt;/p&gt;
+
+&lt;p&gt;And that is it. You would repeat the same view pattern for request_method POST and request_method DELETE and you would have RESTful API in to your resources/models in a very clean fashion.&lt;/p&gt;
+
+&lt;h2 id=&#34;toc_5&#34;&gt;What Happens&lt;/h2&gt;
+
+&lt;p&gt;When a user visits the resource url a simple series of calls to &lt;strong&gt;getitem&lt;/strong&gt; happens. The Root (/) object is called with &amp;lsquo;user&amp;rsquo;. A User object with the name of &amp;lsquo;user&amp;rsquo; and the parent of Root is returned. The User class has it&amp;rsquo;s &lt;strong&gt;getitem&lt;/strong&gt; called and uses the DBSession to lookup a user based on the key given. For example /user/1 (Root / User / k) would result in &amp;lsquo;1&amp;rsquo; being passed to the user objects &lt;strong&gt;getitem&lt;/strong&gt; as the key. If it locates the user, it returns the instance and sets the name and parent. If you don&amp;rsquo;t set the name when you call resource_url with the context, the generated URL would look read /user instead of /user/1.&lt;/p&gt;
+
+&lt;p&gt;There is nothing after the 1 so it looks for a generic unnamed view that handles the User context. In our case, our get method. When you add on edit, /user/1/edit it works in the same fashion, but when it tries to call &lt;strong&gt;getitem&lt;/strong&gt; a second time on the User instance it will throw a key error which tells Pyramid that I am looking for a view named edit with the context of User. This traversal works the same way for the JSON calls as well.&lt;/p&gt;
+
+&lt;h2 id=&#34;toc_6&#34;&gt;Feedback&lt;/h2&gt;
+
+&lt;p&gt;I don&amp;rsquo;t like the fact that there are extra DB calls here, but it is a trade off. Even the /user/1/edit has to make two database calls to get the KeyError and review the proper view, but as a side-effect I can do something like /user/1/collection/1 and get the specific item of the collection owned by the user. That extends to edits as well &amp;hellip; /user/1/collection/1/edit. Overall I like how this pattern has evolved in my application, but would appreciate any feedback or suggested improvements to what I&amp;rsquo;ve done so far.&lt;/p&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>Pyramid and velruse for Google authentication</title>
+      <link>http://localhost:1313/pyramid-velruse/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 UTC</pubDate>
+      
+      <guid>http://localhost:1313/pyramid-velruse/</guid>
+      <description>
+
+&lt;p&gt;As I continue to work with Pyramid I find myself really enjoying the web development I am doing. Recently I needed to integrate Google OAuth (and eventually Facebook and Twitter) as part of the options for the user signup experience. I knew &lt;a href=&#34;http://cd34.com/blog/&#34;&gt;Chris Davies&lt;/a&gt; has done something similar recently based on some Google+ activity I had read of his, so while I was exploring options, I also spoke with him about his experience with python-openid and velruse. The feedback and examples he gave to me are pretty much the basis for what you are about to read on how to get Google OAuth working with your Pyramid application.&lt;/p&gt;
+
+&lt;p&gt;This post only describes how to do the Google Authentication with Pyramid and velruse, but you can easily adapt the information in the post to work with Twitter and Facebook. All the code that these snippets were taken from are available in their entirety in the &lt;a href=&#34;https://sourceforge.net/p/stockpot/code/&#34;&gt;stockpot git repository&lt;/a&gt; on Sourceforge.&lt;/p&gt;
+
+&lt;h3 id=&#34;toc_0&#34;&gt;Setting it all up&lt;/h3&gt;
+
+&lt;p&gt;When I first looked at &lt;a href=&#34;http://packages.python.org/velruse&#34;&gt;velruse&lt;/a&gt; I was a little intimidated. The documentation isn&amp;rsquo;t the greatest in the world and the code is very compact (but well done), so it took a bit for me to become comfortable with it. After some code reading and submitting a &lt;a href=&#34;https://github.com/bbangert/velruse/pull/21&#34;&gt;small fix so it could use SQLite as a storage type&lt;/a&gt; I was ready to rock and roll.&lt;/p&gt;
+
+&lt;p&gt;Once I had it pip installed and in my setup.py as a requirement the next step was to setup the ini to create and serve an instance of verluse along side my pyramid application. Here are the app and pipeline sections of the ini file.&lt;/p&gt;
+
+&lt;pre class=&#34;brush: py&#34;&gt;
+[app:stockpot]
+use = egg:stockpot
+default_locale_name = en
+
+[app:velruse]
+use = egg:velruse
+config_file = %(here)s/CONFIG.yaml
+
+[pipeline:pstockpot]
+pipeline = exc tm stockpot
+
+[pipeline:pvelruse]
+pipeline = exc tm velruse
+
+[composite:main]
+use = egg:Paste#urlmap
+/ = pstockpot
+/velruse = pvelruse
+&lt;/pre&gt;
+
+&lt;h3 id=&#34;toc_1&#34;&gt;Integrating the pieces&lt;/h3&gt;
+
+&lt;p&gt;velruse is configured using a YAML file. This file at a minimum needs a Store, which will hold the key,value pairs your callback receives. It also needs the OpenID and OpenID store which hold the generic realm, endpoint regex, and store information for all the providers. It is important for most providers that your realm and endpoint match what you&amp;rsquo;ve setup in their system.&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;&lt;em&gt;Tip:&lt;/em&gt;&lt;/strong&gt; &lt;em&gt;Use /etc/hosts file to point to your local machine so that when you are redirected to the endpoint with the GET token your application receives everything ok&lt;/em&gt;&lt;/p&gt;
+
+&lt;pre class=&#34;brush: xml&#34;&gt;
+Store:
+    Type: SQL
+    DB: sqlite:////path/to/data/stockpot.db
+Google:
+    OAuth Consumer Key: MYKEY
+    OAuth Consumer Secret: MYSECRET
+OpenID:
+    Realm: http://example.com:6543
+    Endpoint Regex: http:/example.com
+OpenID Store:
+    Type: openid.store.memstore:MemoryStore
+&lt;/pre&gt;
+
+&lt;p&gt;Now in your Pyramid application you will need to do some setup.&lt;/p&gt;
+
+&lt;p&gt;You will need to make sure that the KeyStorage table is being created along with your application tables and you will also need to create a callback method to handle the response from the OAuth endpoint. Also somewhere you&amp;rsquo;ll need to add a simple view that contains the Google Login form.&lt;/p&gt;
+
+&lt;pre class=&#34;brush: html&#34;&gt;
+&lt;form action=&#34;/velruse/google/auth&#34; method=&#34;post&#34;&gt;
+&lt;input type=&#34;hidden&#34; name=&#34;popup_mode&#34; value=&#34;popup&#34; /&gt;
+&lt;input type=&#34;hidden&#34; name=&#34;end_point&#34; value=&#34;http://communitycookbook.net:6543/login&#34; /&gt;
+&lt;input type=&#34;submit&#34; value=&#34;Login with Google&#34; /&gt;
+&lt;/form&gt;
+&lt;/pre&gt;
+
+&lt;p&gt;And here is the simple addition to the models. This assumes you are using the same DB for your application and velruse.&lt;/p&gt;
+
+&lt;pre class=&#34;brush: py&#34;&gt;
+from velruse.store.sqlstore import SQLBase
+
+## inside initialize_sql
+SQLBase.metadata.bind = engine
+SQLBase.metadata.create_all(engine)
+&lt;/pre&gt;
+
+&lt;p&gt;I added the callback code to my existing login handler, it looks for the token, attempts to lookup the values for that token in the KeyStorage of velruse. Upon the success of the lookup it loads the JSON string, extracts the verifiedEmail. The email is used to lookup a pre-existing user or create a new one if it doesn&amp;rsquo;t exist. Then we call remember with the request and the user.id just like normal. Now we have a logged in user.&lt;/p&gt;
+
+&lt;pre class=&#34;brush: py&#34;&gt;
+if &#39;token&#39; in request.params:
+    try:
+        token = request.params.get(&#39;token&#39;)
+        storage = DBSession.query(KeyStorage).filter_by(key=token).one()
+        values = json.loads(storage.value)
+        if values.get(&#39;status&#39;) == &#39;ok&#39;:
+            email = values.get(&#39;profile&#39;,dict()).get(&#39;verifiedEmail&#39;)
+            try:
+                user = DBSession.query(User).filter_by(email=email).one()
+            except orm.exc.NoResultFound:
+                user = User(email)
+                request.db.add(user)
+                request.db.flush()
+
+            headers = remember(request, user.id)
+            return HTTPFound(location=resource_url(request.next, request),
+                             headers=headers)
+    except orm.exc.NoResultFound:
+        request.session.flash(&#39;Unable to Authenticate you using OpenID&#39;)
+&lt;/pre&gt;
+
+&lt;p&gt;From here you can treat this user like any other. They have created an entry in your user table and you can start adding the user to groups or setting permanent properties on the user. All in all a pretty simple process when you put it down on paper, but I know for me it all felt a little overwhelming until I actually got it all put together and working.&lt;/p&gt;
+
+&lt;h3 id=&#34;toc_2&#34;&gt;Feedback&lt;/h3&gt;
+
+&lt;p&gt;If you know of ways to improve the code or see obviously glaring issues please leave a comment or email me at my first name @ pieceofpy.com.&lt;/p&gt;
+</description>
+    </item>
+    
+  </channel>
+</rss>

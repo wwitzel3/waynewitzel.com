@@ -1,0 +1,651 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+      <title> on occasional posts about technology </title>
+      <generator uri="https://gohugo.io">Hugo</generator>
+    <link>http://localhost:1313/index.xml</link>
+    <language>en-us</language>
+    
+    
+    <updated>Sat, 25 Oct 2014 16:37:16 EDT</updated>
+    
+    <item>
+      <title>Migrating to Hugo</title>
+      <link>http://localhost:1313/migration-hugo/</link>
+      <pubDate>Sat, 25 Oct 2014 16:37:16 EDT</pubDate>
+      
+      <guid>http://localhost:1313/migration-hugo/</guid>
+      <description>&lt;p&gt;Sometimes I think the only reason I actually keep this blog around is that I can continue to
+play with different content systems and migrating between them. That said, I am slowly migrating
+all of the existing content for waynewitzel.com over to &lt;a href=&#34;http://gohugo.io&#34;&gt;Hugo&lt;/a&gt;. Hugo is a
+static site generator written in Go. It is fast, customizable, and very easy to use.&lt;/p&gt;
+
+&lt;p&gt;Unlike previous attempts to migrate, I ensured that all of my content was migrated to the new
+site before switching over. I also ensured that I maintained the URL signature for the existing
+posts on waynewitzel.com.&lt;/p&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>Pyramid Task Queue with pyres and redis</title>
+      <link>http://localhost:1313/pyramid-pyres-redis/</link>
+      <pubDate>Sun, 14 Jul 2013 12:15:00 UTC</pubDate>
+      
+      <guid>http://localhost:1313/pyramid-pyres-redis/</guid>
+      <description>&lt;p&gt;This is a story about Pyramid, pyres, some Python 3.3 porting, and just how easy it is to
+get a task queue working with Pyramid and redis.&lt;/p&gt;
+
+&lt;p&gt;The story starts with John Anderson convincing me to work on notaliens.com. In the process of
+developing the Sites portion of the project we decided we wanted to implement a task queue
+for capturing, storing, and generating the thumbnails of the sites that are submitted
+to notalienss.&lt;/p&gt;
+
+&lt;p&gt;After looking over a few choices, John had some previous experience with pyres at
+SurveyMonkey so we pushed forward with that.&lt;/p&gt;
+
+&lt;p&gt;During the process of implementing the task queue we discovered that pyres wasn&amp;rdquo;t Python 3.3
+compatible. As the flagship community site for the Pyramid project, we felt maintaining
+Python 3.3 support was important.&lt;/p&gt;
+
+&lt;p&gt;So we had a choice, switch to an already Pyhton 3.3 compatible task queue
+system or take on porting pyres to Python 3.3. We talked about some other options like
+using celery or retools, but we decided we liked the API and the simplicity of pyres so much
+that we could take on the porting effort.&lt;/p&gt;
+
+&lt;p&gt;Fortunately for us the pyres project had some great tests. This made the process of porting
+pretty simple. You can actually see the diff for the pull request we submitted to pyres.&lt;/p&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>Allura - Google Summer of Code 2013</title>
+      <link>http://localhost:1313/allura-gsoc-apply-now/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 UTC</pubDate>
+      
+      <guid>http://localhost:1313/allura-gsoc-apply-now/</guid>
+      <description>&lt;p&gt;&lt;a href=&#34;http://google-melange.appspot.com/gsoc/homepage/google/gsoc2013&#34;&gt;Google Summer of Code&lt;/a&gt; is right around the corner. In fact student applications are already open.
+The &lt;a href=&#34;http://www.apache.org/&#34;&gt;Apache Software Foundation&lt;/a&gt; has been accepted as one of the mentoring organizations.
+This is great news for &lt;a href=&#34;http://incubator.apache.org/allura/&#34;&gt;Allura&lt;/a&gt; which is part of the ASF Incubator, because we will be eligble to mentor and accept
+student proposals for working on Allura.&lt;/p&gt;
+
+&lt;p&gt;So if you are intersted in working on a open project hosting platform that is written in Python, I encourage you to register and submit a proposal to the
+Apache Software Foundation for working on the Allura project. You can find the tickets that are part of the Allura GSoC 2013 on the
+&lt;a href=&#34;https://issues.apache.org/jira/issues/?filter=12323652&amp;amp;jql=summary%20~%20Allura%20AND%20labels%20%3D%20gsoc2013&#34;&gt;Apache COMDEV Jira&lt;/a&gt;.&lt;/p&gt;
+
+&lt;p&gt;You can also find useful information about the GSoC on the &lt;a href=&#34;http://community.apache.org/gsoc.html&#34;&gt;ASF GSoC FAQ Page&lt;/a&gt; and on the &lt;a href=&#34;https://sourceforge.net/p/allura/wiki/Google%20Summer%20of%20Code/&#34;&gt;Allura GSoC Wiki page&lt;/a&gt;.&lt;/p&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>Another try at a blog a day?</title>
+      <link>http://localhost:1313/blog-a-day-redux/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 UTC</pubDate>
+      
+      <guid>http://localhost:1313/blog-a-day-redux/</guid>
+      <description>&lt;p&gt;This month is a little calmer for me. No Iceland trip, no Thanksgiving trip, basically no nothing except work and side projects. So I figure I&amp;rsquo;ll have another go at this blog a day thing, minus the 1st and 2nd of this month because I had food poisoning.&lt;/p&gt;
+
+&lt;p&gt;November I made it deep in to the first day before my blogging stopped. Hopefully December will be better for me.&lt;/p&gt;
+
+&lt;p&gt;Unrelated note, get the book &lt;a href=&#34;http://www.amazon.com/American-Lion-Andrew-Jackson-White/dp/1400063256&#34;&gt;American Lion&lt;/a&gt;. Excellent book about Andrew Jackson.&lt;/p&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>Blog a day or something... Proxy Pattern!</title>
+      <link>http://localhost:1313/python-proxy-pattern/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 UTC</pubDate>
+      
+      <guid>http://localhost:1313/python-proxy-pattern/</guid>
+      <description>&lt;p&gt;Been reading around and I guess November is the official blog entry a day writers month or something. I&amp;rsquo;ll make a go again. In October, I tried the one post a day run for my blog. I did well, but fell short in the end. Though I&amp;rsquo;ve already missed the first two days in November, I&amp;rsquo;ll call that the margin of error.&lt;/p&gt;
+
+&lt;p&gt;Oh and I believe the posts should have some meat to them. Not just another &amp;ldquo;Hey look, a post, I win November.&amp;rdquo; Though as a last resort, I am not above that.&lt;/p&gt;
+
+&lt;p&gt;So for lack of anything better to write about, here is an oldie but goodie. A Python implementation of the proxy pattern (&lt;a href=&#34;http://en.wikipedia.org/wiki/Lazy_loading#Virtual_proxy&#34;&gt;virtual proxy&lt;/a&gt;) with a real worldish feel to it.&lt;/p&gt;
+
+&lt;p&gt;First we define our ABC and subclass it for our needs.
+&lt;pre class=&#34;brush: py&#34;&gt;
+class File(object):
+    def load(self):
+        pass&lt;/p&gt;
+
+&lt;p&gt;class RealFile(File):
+    def &lt;strong&gt;init&lt;/strong&gt;(self, name):
+        self.name = name
+        self.load()&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;    def load(self):
+    print &amp;quot;Loading %s...&amp;quot; % (self.name)
+def process1(self):
+    print &amp;quot;[phase1] Processing %s...&amp;quot; % (self.name)
+def process2(self):
+    print &amp;quot;[phase2] Processing %s...&amp;quot; % (self.name)
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;&lt;/pre&gt;&lt;/p&gt;
+
+&lt;p&gt;Now, we can subclass File for our proxy. Now I know what you are saying. You don&amp;rsquo;t need the extra levels of abstraction because Python doesn&amp;rsquo;t have the levels of type sensitivity of other languages. Could you just implement this in the first RealFile subclass? Yes, but that isn&amp;rsquo;t the point of this. The verbosity helps define the example and keeps this implementation language independent (mostly).&lt;/p&gt;
+
+&lt;pre class=&#34;brush: py&#34;&gt;
+class ProxyFile(File):
+    def __init__(self, name):
+        self.name = name
+        self.file = None
+        
+    def process1(self):
+        if not self.file:
+            self.file = RealFile(self.name)
+        self.file.process1()
+
+    def process2(self):
+        if not self.file:
+            self.file = RealFile(self.name)
+        self.file.process2()
+&lt;/pre&gt;
+
+&lt;p&gt;So you can see, this hides away the details of loading the file. Allows the user to call process1 / process2 as the business logic determines and preforms lazy loading. The Proxy pattern is very powerful when combined with other patterns. Like &lt;a href=&#34;http://en.wikipedia.org/wiki/Null_Object_pattern&#34;&gt;Null Object&lt;/a&gt; and Lazy loading.&lt;/p&gt;
+
+&lt;pre class=&#34;brush: py&#34;&gt;
+def main():
+    f1 = ProxyFile(&#34;bigdb01.csv&#34;)
+    f2 = ProxyFile(&#34;bigdb02.csv&#34;)
+    f3 = ProxyFile(&#34;bigdb03.csv&#34;)
+    
+    f1.process1()
+    # some busines logic
+    f1.process2()
+    # more BL
+    f2.process2()
+    # more BL
+    f2.process1()
+    # Hey, we found what we needed, skipped f3
+    #f3.process()
+    
+if __name__ == &#39;__main__&#39;:
+    main()
+&lt;/pre&gt;
+
+&lt;p&gt;You can view full source at: &lt;a href=&#34;http://trac.pieceofpy.com/pieceofpy/browser/patterns/proxy.py&#34;&gt;http://trac.pieceofpy.com/pieceofpy/browser/patterns/proxy.py&lt;/a&gt;&lt;/p&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>Blog themes and SCM.</title>
+      <link>http://localhost:1313/blog-updates-pt1/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 UTC</pubDate>
+      
+      <guid>http://localhost:1313/blog-updates-pt1/</guid>
+      <description>&lt;p&gt;We have a new theme? You like? If not, blame commenter rholmes, it is his fault. Seriously though. In a previous post he brought up a very good point, the site looked like hell if you were browsing with images off. Well this new theme looks better with images off and overall it isn&amp;rsquo;t too horribly bad. So, if you don&amp;rsquo;t like it, suggest one, just make sure it looks good with images turned off.&lt;/p&gt;
+
+&lt;p&gt;Now to the SCM part. After about a week of playing with &lt;a href=&#34;https://github.com/&#34;&gt;Github&lt;/a&gt; and &lt;a href=&#34;http://lighthouseapp.com/&#34;&gt;Lighthouse&lt;/a&gt;, I found them both to be great products. They integrated well with each other and the tools for working with Git are available under every platform. If I didn&amp;rsquo;t already have my own server and experience deploying &lt;a href=&#34;http://trac.edgewall.org/&#34;&gt;Trac&lt;/a&gt; and &lt;a href=&#34;http://www.selenic.com/mercurial/wiki/&#34;&gt;Mercurial&lt;/a&gt; I would use both these services without question. That being said, though I have enjoyed my time working with those tools, I&amp;rsquo;ve migrated my Github source and Lighthouse tickets over to a newly installed Trac 0.11, full circle.&lt;/p&gt;
+
+&lt;p&gt;End result. If you like tinkering. If you like managing your own installations or you have some customization/integration you would like to do, use Trac and Mercurial, otherwise use Github and one of the great ticket systems it integrates with; I enjoyed Lighthouse.&lt;/p&gt;
+
+&lt;p&gt;For fun, here is the circle of ticketing and scm life I&amp;rsquo;ve gone through over the last 6 years or so.
+&lt;ul&gt;
+    &lt;li&gt;cvs and PHP Ticket&lt;/li&gt;
+    &lt;li&gt;svn and home grown Python tickets&lt;/li&gt;
+    &lt;li&gt;svn and Trac&lt;/li&gt;
+    &lt;li&gt;Github and Lighthouse&lt;/li&gt;
+    &lt;li&gt;mercurial and Trac&lt;/li&gt;
+&lt;/ul&gt;&lt;/p&gt;
+
+&lt;p&gt;Have to wonder what is next. A lot of people at work have been asking me why Github or mercurial? Why Wayne? True, that most of the time I am using the repositories for me, myself, and I (De La Soul), but the benefits extend just beyond handling version control for an arbitrary number of developers and clean merges. I&amp;rsquo;ll do a write up soon.&lt;/p&gt;
+
+&lt;p&gt;All the sourcecode for this site is now located at: &lt;a href=&#34;http://trac.pieceopfy.com/pieceofpy&#34;&gt;http://trac.pieceopfy.com/pieceofpy&lt;/a&gt;
+I&amp;rsquo;ll be updating all the old links through the other posts to reflect this. Fun.&lt;/p&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>Book: Test Driven Development by Example (Refresher)</title>
+      <link>http://localhost:1313/tdd-by-example/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 UTC</pubDate>
+      
+      <guid>http://localhost:1313/tdd-by-example/</guid>
+      <description>&lt;p&gt;I found an old book on the shelf the other day. One I hadn&amp;rsquo;t worked through in some time. &amp;ldquo;Test Driven Development By Example&amp;rdquo; by Kent Beck. It was one of the first books I had ever picked up and read about test driven development and really kicked off my shift in towards TDD and other agile practices.&lt;/p&gt;
+
+&lt;p&gt;So with this nostalgia, I decided I&amp;rsquo;ll grab the book and work through it once again. Cover to cover, as my ode to the first book that radically changed how I felt and thought about programming in a long time and as a refresher course for the real basics of TDD, since I notice myself falling in to some poor patterns at work.&lt;/p&gt;
+
+&lt;p&gt;One thing that stood out to me right away and this goes back to what I had mentioned earlier about some poor patterns at work. I had pretty much completely forgotten about how/when/why to triangulate. I am not a giant fan of it over all, but when dealing with very complex systems and your brain just won&amp;rsquo;t give you the obvious implementation and there is no static value to make a test pass. Triangulation really shines in this instance and right after reading the chapter that covered it, I opened the VPN and got a requirement crossed of my list by triangulating with my test case.&lt;/p&gt;
+
+&lt;p&gt;For those not familiar with the practices within TDD, the break down is simple. Tests first, write passing code as fast as possible, refactor code. With triangulation, you use your test to drive the how a method or class develops. With triangulation you don&amp;rsquo;t change your exist tests, you just add new requirements to them. We&amp;rsquo;ll you a very simple example of a Number class.&lt;/p&gt;
+
+&lt;p&gt;[sourcecode language=&amp;lsquo;python&amp;rsquo;]
+def test_Equality():
+ assert Number(10) == Number(10)
+[/sourcecode]&lt;/p&gt;
+
+&lt;p&gt;That might be your first test. Very easy to make pass. Just have Number constructor return 10. Green light, go home. So imagine this like some complex class we are trying to add this functionality on to. Here is how you&amp;rsquo;d modify the test to begin the triangulation process.&lt;/p&gt;
+
+&lt;p&gt;[sourcecode language=&amp;lsquo;python&amp;rsquo;]
+def test_Equality():
+ assert Numer(10) == Number(10)
+ assert Number(10) != Number(15)
+[/sourcecode]&lt;/p&gt;
+
+&lt;p&gt;You see? Now, returning 10 won&amp;rsquo;t work. So now you&amp;rsquo;ve got another very small piece to implement. You continue to do this in very small pieces until you have a eureka moment and begin to see the obvious solutions as you make more tests or until you&amp;rsquo;ve taken 1000 baby steps and built the whole class.&lt;/p&gt;
+
+&lt;p&gt;Anyway, I&amp;rsquo;ve worked through the first serveral chapaters so far. I&amp;rsquo;ll have a link to the TDD source once my repository is back online.&lt;/p&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>Book: The Art of Unit Testing</title>
+      <link>http://localhost:1313/art-of-unit-testing/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 UTC</pubDate>
+      
+      <guid>http://localhost:1313/art-of-unit-testing/</guid>
+      <description>&lt;p&gt;This is a short review of the first chapter of&lt;a class=&#34;ext-link&#34; href=&#34;http://www.manning.com/osherove/&#34;&gt;&lt;span class=&#34;icon&#34;&gt;The Art of Unit Testing&lt;/span&gt;&lt;/a&gt;. Which is available for free.&lt;/p&gt;
+
+&lt;p&gt;The chapter is short and concise. It is a good warm up for what the reader is to expect in the coming chapters.&lt;/p&gt;
+
+&lt;p&gt;The initial fail project that is talked about is covered in very brief. It touches on some reasons why it failed, things like unmaintainable unit tests, but it almost seems as if the project itself confused functional tests with unit tests, which I guess would be a reason to author a book about good unit tests and what a unit test is and is not.&lt;/p&gt;
+
+&lt;p&gt;It has a great definition of what a good unit test is.&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;DEFINITION: A GOOD UNIT TEST&lt;/strong&gt;
+&lt;em&gt;A unit test is an automated piece of code that invokes a different method and then checks some assumptions about the logical behavior of that method or class under test.&lt;/em&gt;
+&lt;em&gt;A unit test is written using a unit testing framework. It can be written easily and runs quickly. It can be executed, repeatedly, by anyone on the development team.&lt;/em&gt;&lt;/p&gt;
+
+&lt;p&gt;I found this to be a very good definition and plan to adopt it when I am asked this question. In fact, I&amp;rsquo;m going to add it to my wiki.&lt;a class=&#34;wiki&#34; href=&#34;http://blog.pieceofpy.com/wiki/UnitTest&#34;&gt;UnitTest&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;The author also touches on TDD in the very first chapter, which I was surprised, and delighted to see. His coverage is very basic, much like you&amp;rsquo;ll find in my&lt;a href=&#34;http://blog.pieceofpy.com/blog/intro-to-tdd&#34;&gt;Introduction to TDD&lt;/a&gt;series on this blog. The author dedicates the unreleased chapter 12 to this subject. Looking forward to it.&lt;/p&gt;
+
+&lt;p&gt;Overall, the first chapter has inspired me to purchase the early release digital edition of the book. So expect a full review shortly.&lt;/p&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>Boost Python, Threads, and Releasing the GIL</title>
+      <link>http://localhost:1313/python-boost-gil/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 UTC</pubDate>
+      
+      <guid>http://localhost:1313/python-boost-gil/</guid>
+      <description>&lt;p&gt;
+After Beazley&#39;s talk at PyCon &amp;quot;Understanding the Python GIL&amp;quot; I released I had never done any work that released the GIL, spawned threads, did some work, and then restored the GIL. So I wanted to see if I could so something like that with Boost::Python and Boost::Thread and the type of performance I&#39;d get from it with an empty while loop as the baseline. So I hacked up some quick and dirty C++ code and quick bit of runable Python to test out the resulting module and away I went. Below are the code snippets, links to bitbucket, and the results of the Python runable.
+
+&lt;pre class=&#34;brush: cpp&#34;&gt;
+#include &lt;iostream&gt;
+#include &lt;vector&gt;
+#include &lt;boost/shared_ptr.hpp&gt;
+#include &lt;boost/thread.hpp&gt;
+#include &lt;boost/python.hpp&gt;
+
+class ScopedGILRelease {
+public:
+    inline ScopedGILRelease() { m_thread_state = PyEval_SaveThread(); }
+    inline ~ScopedGILRelease() {
+        PyEval_RestoreThread(m_thread_state);
+        m_thread_state = NULL;
+    }
+private:
+    PyThreadState* m_thread_state;
+};
+
+void loop(long count)
+{
+    while (count != 0) {
+        count -= 1;
+    }
+    return;
+}
+
+void nogil(int threads, long count)
+{
+    if (threads &lt;= 0 || count &lt;= 0)
+        return;
+    
+    ScopedGILRelease release_gil = ScopedGILRelease();
+    long thread_count = (long)ceil(count / threads);
+    
+    std::vector&lt;boost::shared_ptr&lt;boost::thread&gt; &gt; v_threads;
+    for (int i=0; i != threads; i++) {
+        boost::shared_ptr&lt;boost::thread&gt;
+        m_thread = boost::shared_ptr&lt;boost::thread&gt;(
+            new boost::thread(
+                boost::bind(loop,thread_count)
+            )
+        );
+        v_threads.push_back(m_thread);
+    }
+    
+    for (int i=0; i != v_threads.size(); i++)
+        v_threads[i]-&gt;join();
+    
+    return;
+}
+
+BOOST_PYTHON_MODULE(nogil)
+{
+    using namespace boost::python;
+    def(&#34;nogil&#34;, nogil);
+}
+&lt;/pre&gt;
+&lt;/p&gt;
+
+&lt;p&gt;
+Then I used the following Python script to run some quick tests.
+
+&lt;pre class=&#34;brush: py&#34;&gt;
+import time
+import nogil
+
+def timer(func):
+    def wrapper(*arg):
+        t1 = time.time()
+        func(*arg)
+        t2 = time.time()
+        print &#34;%s took %0.3f ms&#34; % (func.func_name, (t2-t1)*1000.0)
+    return wrapper
+
+@timer
+def loopone():
+    count = 5000000
+    while count != 0:
+        count -= 1
+
+@timer
+def looptwo():
+    count = 5000000
+    nogil.nogil(1,count)
+
+@timer
+def loopthree():
+    count = 5000000
+    nogil.nogil(2,count)
+
+@timer
+def loopfour():
+    count = 5000000
+    nogil.nogil(4,count)
+    
+@timer
+def loopfive():
+    count = 5000000
+    nogil.nogil(6,count)
+        
+def main():
+    loopone()
+    looptwo()
+    loopthree()
+    loopfour()
+    loopfive()
+    
+if __name__ == &#39;__main__&#39;:
+    main()
+&lt;/pre&gt;
+&lt;/p&gt;
+
+&lt;p&gt;
+The results I got were quite interesting and very consistent on my MacBook Pro. I ran the script about 1,000 times and got roughly the same results every time.
+
+&lt;pre class=&#34;brush: bash&#34;&gt;
+loopone took 364.159 ms (pure python)
+looptwo took 15.295 ms (c++, no GIL, single thread)
+loopthree took 7.763 ms (c++, no GIL, two threads)
+loopfour took 8.119 ms (c++, no GIL, four threads)
+loopfive took 11.102 ms (c++, no GIL, six threads)
+&lt;/pre&gt;
+&lt;/p&gt;
+
+&lt;p&gt;Anyway, that&amp;rsquo;s all really. Nothing profound here, no super insightful ending. Just hey look and stuff is faster and I might use this. All the code for this is available in my bitbucket repo. &lt;a href=&#34;http://bitbucket.org/wwitzel3/code/src/tip/nogil/&#34;&gt;http://bitbucket.org/wwitzel3/code/src/tip/nogil/&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;You will require Boost Library including Boost Python and Boost Thread as well as Python libraries and includes to build this. For boost, bjam &amp;ndash;with-python &amp;ndash;with-thread variant=release toolset=gcc is all I did on my Mac. Then I added the resulting lib&amp;rsquo;s as Framework dependencies in Xcode along with the Python.framework.&lt;/p&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>City and state lookup from zipcode</title>
+      <link>http://localhost:1313/python-city-state-lookup/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 UTC</pubDate>
+      
+      <guid>http://localhost:1313/python-city-state-lookup/</guid>
+      <description>&lt;p&gt;We wanted to be able to present the user with an input box for their zip and then determine the city state for that zipcode. We don&amp;rsquo;t care about city aliases we just want to get the proper city name. I was given a file from zip-codes.com and told to make it so. This was going to be rather simple and boring. Part of the requirement was to have a tuple returned that contained city, state, short state, and zip code when doing lookups. The other part was easily handling the infrequent updates. After looking at the &lt;a href=&#34;http://www.zip-codes.com/files/sample_database/zip-codes-database-STANDARD-SAMPLE.zip&#34;&gt;sample data&lt;/a&gt; and determining that their main file is CSV but all of their updates are sent out at Tab delimited. Honestly that made me happy because it was great excuse to use csv.Sniffer. So here is the Django model I ended up with.&lt;/p&gt;
+
+&lt;p&gt;
+&lt;pre class=&#34;brush: py&#34;&gt;
+from django.db import models
+from django.core.exceptions import ObjectDoesNotExist
+from csv import Sniffer, DictReader
+
+# Not sold on this name, but couldn&#39;t think of a better one.
+class Location(models.Model):
+    &#34;&#34;&#34;
+    location / zipcode lookup table
+    &#34;&#34;&#34;
+    
+    zipcode = models.CharField(max_length=5, unique=True, db_index=True)
+    city = models.CharField(max_length=150)
+    state = models.CharField(max_length=150)
+    state_abbrv = models.CharField(max_length=2)
+    
+    @classmethod
+    def load(cls, filename):
+        &#34;&#34;&#34;
+        reads filename, attempts to determine if it is comma or tab delimited
+        creates or updates records based on ZipCode and PrimaryRecord key pair
+        the following fields must exist in the file: ZipCode, PrimaryRecord,
+        CityMixedCase, StateFullName, State
+        &#34;&#34;&#34;
+        
+        csv_fd = open(filename, &#39;r&#39;)
+        
+        # grab the header for Sniffer
+        # reset the position back to the start of the file
+        csv_header = csv_fd.readline()
+        csv_fd.seek(0)
+        
+        # determine if we are CSV or Tab delimited
+        dialect = Sniffer().sniff(csv_header)
+        csv_dict = DictReader(csv_fd, dialect=dialect)
+        
+        for row in csv_dict:
+            if row[&#39;PrimaryRecord&#39;] == &#34;P&#34;:
+                zipcode = row[&#39;ZipCode&#39;]
+                ZL, created = cls.objects.get_or_create(zipcode=zipcode)
+                ZL.zipcode = zipcode
+                ZL.city = row[&#39;CityMixedCase&#39;]
+                ZL.state = row[&#39;StateFullName&#39;]
+                ZL.state_abbrv = row[&#39;State&#39;]
+                ZL.save()
+                
+    @classmethod
+    def lookup(cls, zipcode):
+        &#34;&#34;&#34;
+        given a zipcode will lookup, populate, and return a tuple with
+        city, state, zip information else return unavailable and searched zipcode
+        &#34;&#34;&#34;
+        
+        try:
+            zl = cls.objects.get(zipcode=zipcode)
+            return (zl.city, zl.state, zl.state_abbrv, zipcode)
+        except ObjectDoesNotExist:
+            return ((&#39;unavailable&#39;,) * 3) + (zipcode,)
+&lt;/pre&gt;
+&lt;/p&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>Code: Buffer CGI file uploads in Windows</title>
+      <link>http://localhost:1313/buffer-cgi-uploads/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 UTC</pubDate>
+      
+      <guid>http://localhost:1313/buffer-cgi-uploads/</guid>
+      <description>
+
+&lt;p&gt;Note to self, when handling CGI file uploads on a Windows machine, you need the following boiler plate to properly handler binary files.
+[sourcecode language=&amp;lsquo;python&amp;rsquo;]
+try: # Windows needs stdio set for binary mode.
+    import msvcrt
+    msvcrt.setmode (0, os.O_BINARY) # stdin  = 0
+    msvcrt.setmode (1, os.O_BINARY) # stdout = 1
+except ImportError:
+    pass
+[/sourcecode]
+Also, if you&amp;rsquo;re handling very large files and don&amp;rsquo;t want to eat up all your memory saving them using the copyfileobj method, you can use a generator to buffer read and write the file.&lt;/p&gt;
+
+&lt;p&gt;[sourcecode language=&amp;lsquo;python&amp;rsquo;]
+def buffer(f, sz=1024):
+    while True:
+        chunk = f.read(sz)
+        if not chunk: break
+        yield chunk&lt;/p&gt;
+
+&lt;h1 id=&#34;toc_0&#34;&gt;then use it like this &amp;hellip;&lt;/h1&gt;
+
+&lt;p&gt;for chunk in buffer(fp.file)
+[/sourcecode]&lt;/p&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>Code: Saving in memory file to disk</title>
+      <link>http://localhost:1313/memory-to-file/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 UTC</pubDate>
+      
+      <guid>http://localhost:1313/memory-to-file/</guid>
+      <description>
+
+&lt;p&gt;Okay, I discovered this today when looking to increase the speed at which uploaded documents were saved to disk. Now, I can&amp;rsquo;t explain the inner workings of why it is fast(er), all I know is that with the exact same form upload test ran 100 times with a 25MB file over a 100Mbit/s network this method was on average a whole 2.3 seconds faster over traditional methods of write, writelines, etc..&lt;/p&gt;
+
+&lt;p&gt;How does this extend to real-world production usage over external networks, well no idea. Though I plan to find out. So you all will be the first to know as soon as I find some guinea pig site that does enough file uploads to implement this on.
+[sourcecode language=&amp;lsquo;python&amp;rsquo;]&lt;/p&gt;
+
+&lt;h1 id=&#34;toc_0&#34;&gt;Minus some boiler plate for validity and variable setup.&lt;/h1&gt;
+
+&lt;p&gt;import os
+import shutil
+memory_file = request.POST[&amp;lsquo;upload&amp;rsquo;]
+disk_file = open(os.path.join(save_folder, save_name),&amp;lsquo;w&amp;rsquo;)
+shutil.copyfileobj(memory_file.file, disk_file)
+disk_file.close()
+[/sourcecode]&lt;/p&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>Concatenating PDF with Python</title>
+      <link>http://localhost:1313/python-concatenating-pdf/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 UTC</pubDate>
+      
+      <guid>http://localhost:1313/python-concatenating-pdf/</guid>
+      <description>&lt;p&gt;I need to concatenate a set of PDFs, I will take you through my standard issue Python development approach when doing something I&amp;rsquo;ve never done before in Python.&lt;/p&gt;
+
+&lt;p&gt;My first instinct was to google for pyPDF. Success! So, fore go reading any doc and just give the old easy_install a try.&lt;/p&gt;
+
+&lt;pre class=&#34;brush: bash&#34;&gt;
+$ sudo easy_install pypdf
+&lt;/pre&gt;
+
+&lt;p&gt;Another success! Ok, a couple help() calls later and I am ready to go. The end result is surprisingly small and seems to run fast enough even for PDFs with 50+ pages.&lt;/p&gt;
+
+&lt;pre class=&#34;brush: py&#34;&gt;
+from pyPdf import PdfFileWriter, PdfFileReader
+
+def append_pdf(input,output):
+    [output.addPage(input.getPage(page_num)) for page_num in range(input.numPages)]
+
+output = PdfFileWriter()
+append_pdf(PdfFileReader(file(&#34;sample.pdf&#34;,&#34;rb&#34;)),output)
+append_pdf(PdfFileReader(file(&#34;sample.pdf&#34;,&#34;rb&#34;)),output)
+
+output.write(file(&#34;combined.pdf&#34;,&#34;wb&#34;))
+&lt;/pre&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>Deploying Pylons with nginx</title>
+      <link>http://localhost:1313/deploy-pylons-nginx/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 UTC</pubDate>
+      
+      <guid>http://localhost:1313/deploy-pylons-nginx/</guid>
+      <description>&lt;p&gt;In preparation for a production deployment of a new Pylons app, I&amp;rsquo;ve been looking in to different deployment methods. In an effort to to be /. safe and Diggable when the new application launches, we&amp;rsquo;ve decided on 4 server deployment.&lt;/p&gt;
+
+&lt;p&gt;&lt;ul&gt;
+    &lt;li&gt;1 nginx server&lt;/li&gt;
+    &lt;li&gt;2 pylons (paster) servers&lt;/li&gt;
+    &lt;li&gt;1 postgresql server&lt;/li&gt;
+&lt;/ul&gt;
+I built nginx from the source without issues. The default install location of /usr/local/nginx works for me. You&amp;rsquo;ll need to make any init scripts and install them, see your platform doucmentation for how to do this. You&amp;rsquo;ll also want to be sure to add the new log dir to any log stats/consolidating/trimming jobs you run.&lt;/p&gt;
+
+&lt;p&gt;Here is the important parts of the nginx configuration for proxying to the Paster servers. Also be sure you adjust your keep alive and connection timeout settings, if you have just a standard Ajaxy Web 2.0 application, you&amp;rsquo;ll want to kick that down to 5 5 or 5 10. They default is way to high unless you&amp;rsquo;re doing constant streaming of live updates or something to that degree.&lt;/p&gt;
+
+&lt;pre&gt;
+worker_processes  2;
+events {
+    worker_connections  1024;
+}
+http {
+    client_body_timeout   5;
+    client_header_timeout 5;
+    keepalive_timeout     5 5;
+    send_timeout          5;
+    
+    tcp_nodelay on;
+    tcp_nopush  on;
+
+    gzip              on;
+    gzip_buffers      16 8k;
+    gzip_comp_level   1;
+    gzip_http_version 1.0;
+    gzip_min_length   0;
+    gzip_types        text/plain text/html text/css;
+    gzip_vary         on;
+
+    upstream pasters {
+        server 10.3.0.5:5010;
+        server 10.3.0.6:5011;
+    }
+    server {
+        listen       80;
+        server_name  localhost;
+
+        location / {
+            proxy_pass http://pasters;
+            proxy_redirect default;
+        }
+    }
+&lt;/pre&gt;
+
+&lt;p&gt;The paster servers are setup like this, I put them both in the same .ini and setup them up in the tpl. This lets me do an easy_install , setup-app based deployment without having to manually edit the ini to change the port numbers, which is error prone. This also lets you adjust and tune per server, instead of deploying 1 server section and changing it for each. Example would be if one server was way more powerful, you could tune it and then use the weighting in nginx to prefer that server. All without having to edit the ini after deployment.&lt;/p&gt;
+
+&lt;pre&gt;
+[server:main]
+use = egg:Paste#http
+host = 0.0.0.0
+port = 5010
+use_threadpool = True
+threadpool_workers = 10
+
+[server:main2]
+use = egg:Paste#http
+host = 0.0.0.0
+port = 5011
+use_threadpool = True
+threadpool_workers = 10
+&lt;/pre&gt;
+
+&lt;p&gt;Using 10 1000 on Apache bench gave me some good results. 85 requests per second to either of the standalone Paster servers. 185 requests per second when balanced with nginx. For fun, I deployed a third on my database server and was pleased to see 250 requests per second. Then I deployed 3 per server. So a total of 9 paster instances and was able to see 1080 requests per second. I also increased the thread of each from 10 to 25 , this uses more memory, but enables a higher RPS.&lt;/p&gt;
+
+&lt;p&gt;Getting closer to the estimated 2,500 needed to survive a /. and should survive the estimated 1,000 from a high Digg.&lt;/p&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>Dynamic and static typing with unit tests.</title>
+      <link>http://localhost:1313/tests-dynamic-static/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 UTC</pubDate>
+      
+      <guid>http://localhost:1313/tests-dynamic-static/</guid>
+      <description>&lt;p&gt;There is an on going discussion at the office with a team member who refuses to use dynamic languages. Claiming that most of his errors are typographical errors and they are caught by the compiler. So for him, since these errors are not caught until runtime, he throws and entire group of languages out the window. He also claims that to ensure that same level of checking with a dynamic language you would have to create more unit tests than normal to prevent introducing unhandled runtime exceptions.&lt;/p&gt;
+
+&lt;p&gt;So I decided to do a little test over the weekend. I created a very simple Number class in Python and C++. Using the exact same TDD development process, I implemented some very basic operations including division, addition, subtraction, etc&amp;hellip; I ended up with 12 tests. The exact same tests for both the C++ and Python implementation resulting in 100% of the executation path being covered. I decided that the compliation (in case of C++) and passing of the tests determined a success.&lt;/p&gt;
+
+&lt;p&gt;Then went back and inserted common typographical errors. Mistypes, extra = signs, not enough = signs, miseplled_varaibles, etc&amp;hellip; The end result was I was unable to get my unit tests passing while introducing syntax that would induce an unhandled runtime exception in Python. Granted, in C++ the compiler did catch a lot of things for me, but the point here is I didn&amp;rsquo;t have to create any extra tests to ensure that same level of confidence in my Python code.&lt;/p&gt;
+</description>
+    </item>
+    
+  </channel>
+</rss>

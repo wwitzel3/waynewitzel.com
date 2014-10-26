@@ -1,0 +1,150 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+      <title>Python Whoosh Pyramid on occasional posts about technology </title>
+      <generator uri="https://gohugo.io">Hugo</generator>
+    <link>http://localhost:1313/tags/python-whoosh-pyramid/index.xml</link>
+    <language>en-us</language>
+    
+    
+    <updated>Mon, 01 Jan 0001 00:00:00 UTC</updated>
+    
+    <item>
+      <title>Hooking up Whoosh and SQLalchemy (sawhoosh)</title>
+      <link>http://localhost:1313/sqlalchemy-whoosh/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 UTC</pubDate>
+      
+      <guid>http://localhost:1313/sqlalchemy-whoosh/</guid>
+      <description>
+
+&lt;p&gt;I was talking to Tim VanSteenburgh (we both do work for Geek.net) and he had a proof of concept for automatically updating a search index when a change happens to a model and pairing a unified search results page with that to make an easy one-stop search solution for a website. I thought this was a pretty cool idea, so I decided to do a implementation of it on top of the Pyramid framework and share it the readers of my blog. I choose Whoosh only so that I could have an easy way for users to try the project out. Since whoosh is pure python it installs when you run your setup.py develop. But this approach could be applied to any searching system. Tim was using solr.&lt;/p&gt;
+
+&lt;h2 id=&#34;toc_0&#34;&gt;Demo Project&lt;/h2&gt;
+
+&lt;p&gt;The purpose of the post is to summarize briefly the steps taken to achieve the desired results of automatically updating the index information when models change. Please browse the source and clone and run the project, looking at the source as a whole will definitely give you a better start to finish understanding than just reading this blog post.&lt;/p&gt;
+
+&lt;p&gt;GitHub: &lt;a href=&#34;https://github.com/wwitzel3/sawhoosh&#34;&gt;sawhoosh&lt;/a&gt;&lt;/p&gt;
+
+&lt;h2 id=&#34;toc_1&#34;&gt;Whooshing Your Models&lt;/h2&gt;
+
+&lt;p&gt;There are few parts that make up the magic of all this, but each part is really simple. First you have the index schema itself. This is setup to hold the unique ID of an item, as well as a pickled version of the uninstantiated class, and an aggregate of values (decided by you) that you want to be searchable for the item. The schema looks like this:&lt;/p&gt;
+
+&lt;pre class=&#34;brush: py&#34;&gt;
+class SawhooshSchema(SchemaClass):
+    value = TEXT
+    id = ID(stored=True, unique=True)
+    cls = ID(stored=True)
+&lt;/pre&gt;
+
+&lt;p&gt;In the Whoosh world this basically says store ID and CLS so it comes back with the search results, but not value. value will be what we will search over in order to find our results. We need to tell our models what attributes are important to use for indexing, I&amp;rsquo;ve chosen to do this with a whoosh_value property on the model itself.&lt;/p&gt;
+
+&lt;pre class=&#34;brush: py&#34;&gt;
+class Document(Base):
+    __tablename__ = &#39;document&#39;
+    __whoosh_value__ = &#39;id,title,content,author_id&#39;
+    id = Column(CHAR(32), primary_key=True, default=new_uuid)
+    title = Column(String, nullable=False)
+    content = Column(Text, nullable=False)
+    author_id = Column(Integer, ForeignKey(&#39;author.id&#39;), index=True)
+    def __str__(self):
+        return u&#39;Document - Title: {0}&#39;.format(self.title)
+&lt;/pre&gt;
+
+&lt;p&gt;This says make the id, title, content, and author_id for document all searchable values. This happens automatically for us because our Base class has a parent class that handles all of the Whoosh work. This parent class, I&amp;rsquo;ve called it SawhooshBase, handles all the indexing, reindexing, and deindexing of our models. The class itself looks like this:&lt;/p&gt;
+
+&lt;pre class=&#34;brush: py&#34;&gt;
+class SawhooshBase(object):
+    # The fields of the class you want to index (make searchable)
+    __whoosh_value__ = &#39;attribue,attribute,...&#39;
+    def index(self, writer):
+        id = u&#39;{0}&#39;.format(self.id)
+        cls = u&#39;{0}&#39;.format(pickle.dumps(self.__class__))
+        value = u&#39; &#39;.join([getattr(self, attr) for attr in self.__whoosh_value__.split(&#39;,&#39;)])
+        writer.add_document(id=id, cls=cls, value=value)
+    def reindex(self, writer):
+        id = u&#39;{0}&#39;.format(self.id)
+        writer.delete_by_term(&#39;id&#39;, self.id)
+        self.index(writer)
+    def deindex(self, writer):
+        id = u&#39;{0}&#39;.format(self.id)
+        writer.delete_by_term(&#39;id&#39;, self.id)
+        
+Base = declarative_base(cls=SawhooshBase)
+&lt;/pre&gt;
+
+&lt;p&gt;As you can see in the index method, we use the whoosh_value to create an aggregate of searchable strings and supply that to the value we defined in our search schema. We pickle the class and also store the ID. This is what later lets us easily take search results and turn them in to object instances.&lt;/p&gt;
+
+&lt;p&gt;Those methods above are only ever run by our SQLalchemy after_flush session event, though that is not to say you couldn&amp;rsquo;t run them manually. The callback and event hook looks like this:&lt;/p&gt;
+
+&lt;pre class=&#34;brush: py&#34;&gt;
+def update_indexes(session, flush_context):
+    writer = WIX.writer()
+    for i in session.new:
+        i.index(writer)
+    for i in session.dirty:
+        i.reindex(writer)
+    for i in session.deleted:
+        i.deindex(writer)        
+    writer.commit()
+event.listen(DBSession, &#39;after_flush&#39;, update_indexes)
+&lt;/pre&gt;
+
+&lt;p&gt;The WIX object you see being used here is created much the same way you create your DBSession and you can view that in the &lt;a href=&#34;https://github.com/wwitzel3/sawhoosh/blob/master/sawhoosh/search.py&#34;&gt;search.py&lt;/a&gt; file of the project. Everything else is pretty straight forward. Call the respective indexer methods for new, dirty, and deleted items in the session.&lt;/p&gt;
+
+&lt;h2 id=&#34;toc_2&#34;&gt;Using in the View&lt;/h2&gt;
+
+&lt;p&gt;Now we have our models all &lt;strong&gt;&lt;em&gt;whooshified&lt;/em&gt;&lt;/strong&gt; (technical term) and we want to have our users searching and displaying usable results. To start we have a simple search form that when submitted does a GET request to our search method with keywords. Now since the whoosh query parser is already smart enough to pickup things like AND and OR we don&amp;rsquo;t have to do much.&lt;/p&gt;
+
+&lt;p&gt;The view code itself is where we use another helper method called results_to_instance (also in &lt;a href=&#34;https://github.com/wwitzel3/sawhoosh/blob/master/sawhoosh/search.py&#34;&gt;search.py&lt;/a&gt;). This method takes our search results, unpickles the class, fetches the instance from the DB and places the result in to a list. That method looks like this:&lt;/p&gt;
+
+&lt;pre class=&#34;brush: py&#34;&gt;
+def results_to_instances(request, results):
+    instances = []
+    for r in results:
+        cls = pickle.loads(&#39;{0}&#39;.format(r.get(&#39;cls&#39;)))
+        id = r.get(&#39;id&#39;)
+        instance = request.db.query(cls).get(id)
+        instances.append(instance)
+    return instances
+&lt;/pre&gt;
+
+&lt;p&gt;Now this is where you see the benefit of pickling the class type with the search result. We have ready to use instances of multiple types from a single search result. We can pass them in to a template to render the results, but since we have a mix of instance types, we need a unified way to render them out without explicitly checking their type or using a series of if attribute checks. I decided I would use &lt;strong&gt;str&lt;/strong&gt; on the model to be a search results safe friendly way to display the object to the user and that I would define a route_name helper method on the model so that I can use request.route_url(object.route_name()) to generate the clickable links in the results. The combination of this can be viewed below:&lt;/p&gt;
+
+&lt;pre class=&#34;brush: html&#34;&gt;
+%if results:
+&lt;ul id=&#34;search_results&#34;&gt;
+% for r in results:
+    &lt;li&gt;&lt;a href=&#34;${request.route_url(r.route_name(), id=r.id)}&#34;&gt;${r}&lt;/a&gt;&lt;/li&gt;
+%endfor
+&lt;/ul&gt;
+%else:
+&lt;p&gt;No results found&lt;/p&gt;
+%endif
+&lt;/pre&gt;
+
+&lt;p&gt;And the view itself uses some things we haven&amp;rsquo;t talked about yet. QueryParser is just part of Whoosh and it is what turns your keywords in to something useful. request.ix is just a shortcut to our WIX object we created, we&amp;rsquo;ve added it using a custom Request class (same as we&amp;rsquo;ve done with db), you can see that in the &lt;a href=&#34;https://github.com/wwitzel3/sawhoosh/blob/master/sawhoosh/security.py&#34;&gt;security.py&lt;/a&gt; file of the project. From there we render the search results html and return it to our AJAX caller to inject in to the page. You can see this is also where we use the results_to_instances method discussed earlier.&lt;/p&gt;
+
+&lt;pre class=&#34;brush: py&#34;&gt;
+@view_config(route_name=&#39;search&#39;, renderer=&#39;json&#39;, xhr=True)
+def search_ajax(request):
+    query = request.params.get(&#39;keywords&#39;)
+    parser = QueryParser(&#39;value&#39;, request.ix.schema)
+    with request.ix.searcher() as searcher:
+        query = parser.parse(query)
+        results = searcher.search(query)
+        search_results_html=render(&#39;sawhoosh:templates/search/results.mako&#39;,
+                              dict(results=results_to_instances(request, results)),
+                              request=request)
+    return dict(search_results_html=search_results_html)
+&lt;/pre&gt;
+
+&lt;h2 id=&#34;toc_3&#34;&gt;Summary&lt;/h2&gt;
+
+&lt;p&gt;There you have it. A search indexer using SQLalchemy on top of Pyramid. I highly recommend you clone the git repo for this project or review the code using the Git website if you are interested in getting a start to finish feel. The project allows you to add Authors and Documents and Edit and Delete them all while updating the local search index stored in the a directory on the file system.&lt;/p&gt;
+
+&lt;p&gt;GitHub: &lt;a href=&#34;https://github.com/wwitzel3/sawhoosh&#34;&gt;sawhoosh&lt;/a&gt;&lt;/p&gt;
+</description>
+    </item>
+    
+  </channel>
+</rss>

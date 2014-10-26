@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+      <title>Personal on occasional posts about technology </title>
+      <generator uri="https://gohugo.io">Hugo</generator>
+    <link>http://localhost:1313/tags/personal/index.xml</link>
+    <language>en-us</language>
+    
+    
+    <updated>Mon, 01 Jan 0001 00:00:00 UTC</updated>
+    
+    <item>
+      <title>Another try at a blog a day?</title>
+      <link>http://localhost:1313/blog-a-day-redux/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 UTC</pubDate>
+      
+      <guid>http://localhost:1313/blog-a-day-redux/</guid>
+      <description>&lt;p&gt;This month is a little calmer for me. No Iceland trip, no Thanksgiving trip, basically no nothing except work and side projects. So I figure I&amp;rsquo;ll have another go at this blog a day thing, minus the 1st and 2nd of this month because I had food poisoning.&lt;/p&gt;
+
+&lt;p&gt;November I made it deep in to the first day before my blogging stopped. Hopefully December will be better for me.&lt;/p&gt;
+
+&lt;p&gt;Unrelated note, get the book &lt;a href=&#34;http://www.amazon.com/American-Lion-Andrew-Jackson-White/dp/1400063256&#34;&gt;American Lion&lt;/a&gt;. Excellent book about Andrew Jackson.&lt;/p&gt;
+</description>
+    </item>
+    
+  </channel>
+</rss>

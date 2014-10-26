@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+      <title>Updates Holidays Hardware on occasional posts about technology </title>
+      <generator uri="https://gohugo.io">Hugo</generator>
+    <link>http://localhost:1313/tags/updates-holidays-hardware/index.xml</link>
+    <language>en-us</language>
+    
+    
+    <updated>Mon, 01 Jan 0001 00:00:00 UTC</updated>
+    
+    <item>
+      <title>Holidays and New Server</title>
+      <link>http://localhost:1313/holidays-new-server/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 UTC</pubDate>
+      
+      <guid>http://localhost:1313/holidays-new-server/</guid>
+      <description>&lt;p&gt;I&amp;rsquo;ve been a little behind on my posts what with the holidays here and me doing all sorts of traveling and migrating to the new server for pieceofpy.com I haven&amp;rsquo;t really had time to make any new useful posts. So just taking the time to let everyone know I am not dead and wishing everyone happy holidays and a good winter.&lt;/p&gt;
+
+&lt;p&gt;Oh and the new server is lovely. The specs are below and so far I couldn&amp;rsquo;t be happier.
+&lt;ul&gt;
+    &lt;li&gt;3.2GHz P4 Core Duo2&lt;/li&gt;
+    &lt;li&gt;2GB Memory&lt;/li&gt;
+    &lt;li&gt;36GB 15k SCSI (Mirrored)&lt;/li&gt;
+    &lt;li&gt;500GB monthly transfer&lt;/li&gt;
+&lt;/ul&gt;&lt;/p&gt;
+</description>
+    </item>
+    
+  </channel>
+</rss>

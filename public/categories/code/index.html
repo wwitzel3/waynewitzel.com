@@ -1,0 +1,258 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en-us">
+<head>
+  <title> Code // occasional posts about technology </title>
+  <link href="http://gmpg.org/xfn/11" rel="profile">
+<meta http-equiv="content-type" content="text/html; charset=utf-8">
+
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
+
+<meta name="description" content="">
+<meta name="keywords" content="">
+<meta name="author" content="">
+
+  <meta property="og:title" content="Code" />
+<meta property="og:description" content="" />
+<meta property="og:type" content="website" />
+<meta property="og:locale" content="en_US" />
+<meta property="og:url" content="http://localhost:1313/categories/code/" />
+
+
+  
+  <link rel="stylesheet" href="http://yui.yahooapis.com/pure/0.5.0/base-min.css">
+  <link rel="stylesheet" href="http://yui.yahooapis.com/pure/0.5.0/pure-min.css">
+  
+  
+    <link rel="stylesheet" href="http://yui.yahooapis.com/pure/0.5.0/grids-responsive-min.css">
+  
+  
+
+  <link rel="stylesheet" href="http://localhost:1313/css/redlounge.css">
+  <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet">
+  <link href='http://fonts.googleapis.com/css?family=Raleway:400,200,100,700,300,500,600,800' rel='stylesheet' type='text/css'>
+  <link href='http://fonts.googleapis.com/css?family=Libre+Baskerville:400,700,400italic' rel='stylesheet' type='text/css'>
+
+  
+  <link rel="apple-touch-icon-precomposed" sizes="144x144" href="/touch-icon-144-precomposed.png">
+  <link rel="shortcut icon" href="/favicon.png">
+
+  
+  <link href="http://localhost:1313/categories/code/index.xml" rel="alternate" type="application/rss+xml" title="occasional posts about technology" />
+
+  
+  <link rel="stylesheet" href="https://yandex.st/highlightjs/8.0/styles/tomorrow-night-bright.min.css">
+  <script src="https://yandex.st/highlightjs/8.0/highlight.min.js"></script>
+  <script>hljs.initHighlightingOnLoad();</script>
+
+  
+
+  
+
+  
+</head>
+
+<body>
+	<div id="layout" class="pure-g">
+    <div class="sidebar pure-u-1 pure-u-md-1-4">
+  <div class="header">
+    
+
+    <h1 class="brand-title">Wayne Witzel</h1>
+    <h2 class="brand-tagline">occasional posts about technology</h2>
+
+    <nav class="nav">
+      <ul class="nav-list">
+        <li class="nav-item"><span class="nav-item-separator">//</span><a href="http://localhost:1313">Home</a></li>
+        
+      </ul>
+    </nav>
+
+    
+    <div class="social-buttons">
+      
+        
+        <a href="http://www.twitter.com/wwitzel3" target="_blank"><i class='fa fa-twitter'></i></a>
+        
+      
+      
+    </div>
+    
+
+  </div>
+</div>
+
+
+    <div class="content pure-u-1 pure-u-md-3-4">
+      <a name="top"></a>
+      
+
+      <div class="posts">
+        
+          <section  class="post">
+            <header class="post-header">
+            
+            <h1 class="post-title">
+              <a href="/buffer-cgi-uploads/">Code: Buffer CGI file uploads in Windows</a>
+            </h1>
+            </header>
+            <p class="post-meta">
+            	
+		          <span class="post-date">
+		            <span class="post-date-day"><sup>1</sup></span><span class="post-date-separator">/</span><span class="post-date-month">Jan</span> <span class="post-date-year">0001</span>
+		          </span>
+      				
+      				
+      					
+      				
+              
+                <span class="post-reading-time"><i class="fa fa-clock-o"></i> <em>1 min. read</em></span>
+              
+      				
+      					<div class="post-categories">
+      					
+      						<a class="post-category post-category-python" href="/categories/python">python</a> 
+      					
+      						<a class="post-category post-category-code" href="/categories/code">code</a> 
+      					
+      					</div>
+      				
+            </p>
+            <article class="post-summary">
+            	Note to self, when handling CGI file uploads on a Windows machine, you need the following boiler plate to properly handler binary files. [sourcecode language=&lsquo;python&rsquo;] try: # Windows needs stdio set for binary mode. import msvcrt msvcrt.setmode (0, os.O_BINARY) # stdin = 0 msvcrt.setmode (1, os.O_BINARY) # stdout = 1 except ImportError: pass [/sourcecode] Also, if you&rsquo;re handling very large files and don&rsquo;t want to eat up all your memory saving them using the copyfileobj method, you can use a generator to buffer read and write the file.
+            </article>
+			<div class="read-more-link">
+				<a href="/buffer-cgi-uploads/"><span class="read-more-slashes">//</span>Read More...</a>
+			</div>
+          </section>
+        
+          <section  class="post">
+            <header class="post-header">
+            
+            <h1 class="post-title">
+              <a href="/memory-to-file/">Code: Saving in memory file to disk</a>
+            </h1>
+            </header>
+            <p class="post-meta">
+            	
+		          <span class="post-date">
+		            <span class="post-date-day"><sup>1</sup></span><span class="post-date-separator">/</span><span class="post-date-month">Jan</span> <span class="post-date-year">0001</span>
+		          </span>
+      				
+      				
+      					
+      				
+              
+                <span class="post-reading-time"><i class="fa fa-clock-o"></i> <em>1 min. read</em></span>
+              
+      				
+      					<div class="post-categories">
+      					
+      						<a class="post-category post-category-python" href="/categories/python">python</a> 
+      					
+      						<a class="post-category post-category-code" href="/categories/code">code</a> 
+      					
+      					</div>
+      				
+            </p>
+            <article class="post-summary">
+            	Okay, I discovered this today when looking to increase the speed at which uploaded documents were saved to disk. Now, I can&rsquo;t explain the inner workings of why it is fast(er), all I know is that with the exact same form upload test ran 100 times with a 25MB file over a 100Mbit/s network this method was on average a whole 2.3 seconds faster over traditional methods of write, writelines, etc..
+            </article>
+			<div class="read-more-link">
+				<a href="/memory-to-file/"><span class="read-more-slashes">//</span>Read More...</a>
+			</div>
+          </section>
+        
+          <section  class="post">
+            <header class="post-header">
+            
+            <h1 class="post-title">
+              <a href="/python-concatenating-pdf/">Concatenating PDF with Python</a>
+            </h1>
+            </header>
+            <p class="post-meta">
+            	
+		          <span class="post-date">
+		            <span class="post-date-day"><sup>1</sup></span><span class="post-date-separator">/</span><span class="post-date-month">Jan</span> <span class="post-date-year">0001</span>
+		          </span>
+      				
+      				
+      					
+      				
+              
+                <span class="post-reading-time"><i class="fa fa-clock-o"></i> <em>1 min. read</em></span>
+              
+      				
+      					<div class="post-categories">
+      					
+      						<a class="post-category post-category-python" href="/categories/python">python</a> 
+      					
+      						<a class="post-category post-category-code" href="/categories/code">code</a> 
+      					
+      					</div>
+      				
+            </p>
+            <article class="post-summary">
+            	I need to concatenate a set of PDFs, I will take you through my standard issue Python development approach when doing something I&rsquo;ve never done before in Python. My first instinct was to google for pyPDF. Success! So, fore go reading any doc and just give the old easy_install a try. $ sudo easy_install pypdf Another success! Ok, a couple help() calls later and I am ready to go. The end result is surprisingly small and seems to run fast enough even for PDFs with 50+ pages.
+            </article>
+			<div class="read-more-link">
+				<a href="/python-concatenating-pdf/"><span class="read-more-slashes">//</span>Read More...</a>
+			</div>
+          </section>
+        
+          <section  class="post">
+            <header class="post-header">
+            
+            <h1 class="post-title">
+              <a href="/pylons-polling-ajax/">Pylons and long-live AJAX request.</a>
+            </h1>
+            </header>
+            <p class="post-meta">
+            	
+		          <span class="post-date">
+		            <span class="post-date-day"><sup>1</sup></span><span class="post-date-separator">/</span><span class="post-date-month">Jan</span> <span class="post-date-year">0001</span>
+		          </span>
+      				
+      				
+      					
+      				
+              
+                <span class="post-reading-time"><i class="fa fa-clock-o"></i> <em>2 min. read</em></span>
+              
+      				
+      					<div class="post-categories">
+      					
+      						<a class="post-category post-category-python" href="/categories/python">python</a> 
+      					
+      						<a class="post-category post-category-code" href="/categories/code">code</a> 
+      					
+      						<a class="post-category post-category-pylons" href="/categories/pylons">pylons</a> 
+      					
+      					</div>
+      				
+            </p>
+            <article class="post-summary">
+            	So I am playing around in Firefox with XMLHttpRequest. Looking in to a way to facilate a server update to a client without have to refresh the page or use Javascript timers. So the long-live HTTP request seems the way to go. This little app will at most have 20-30 connections at once, so I am not worried about the open connection per client. The data it calculates is rather large and intensive to gather, so I paired it with the cache decorator snippet found on ActiveState and used in Expert Python Programming.
+            </article>
+			<div class="read-more-link">
+				<a href="/pylons-polling-ajax/"><span class="read-more-slashes">//</span>Read More...</a>
+			</div>
+          </section>
+        
+      </div>
+
+      <div class="footer">
+	<hr class="thin" />
+	<div class="pure-menu pure-menu-horizontal pure-menu-open">
+		<ul class="footer-menu">
+		
+		</ul>
+	</div>
+
+	<p>&copy; 2014. All rights reserved. </p>
+</div>
+    </div>
+  </div>
+  
+</body>
+</html>

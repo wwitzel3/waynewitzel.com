@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+      <title>Python Pylons Windows Deploy on occasional posts about technology </title>
+      <generator uri="https://gohugo.io">Hugo</generator>
+    <link>http://localhost:1313/tags/python-pylons-windows-deploy/index.xml</link>
+    <language>en-us</language>
+    
+    
+    <updated>Mon, 01 Jan 0001 00:00:00 UTC</updated>
+    
+    <item>
+      <title>How-To: Python, Pylons, and Windows</title>
+      <link>http://localhost:1313/pylons-on-windows/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 UTC</pubDate>
+      
+      <guid>http://localhost:1313/pylons-on-windows/</guid>
+      <description>&lt;p&gt;A friend having issues installing Pylons on Windows XP with Python 2.6 gave me the idea to do this quick write up. So here it is, the 6 step method for running Pylons on Windows XP.
+&lt;ul&gt;
+    &lt;li&gt;Download &lt;a href=&#34;http://python.org&#34;&gt;Python&lt;/a&gt;.&lt;/li&gt;
+    &lt;li&gt;Add Python to your path and launch a command prompt.&lt;/li&gt;
+    &lt;li&gt;Download &lt;a href=&#34;http://peak.telecommunity.com/DevCenter/EasyInstall&#34;&gt;ez_setup.py&lt;/a&gt;, python ez_setup.py&lt;/li&gt;
+    &lt;li&gt;Download &lt;a href=&#34;http://pypi.python.org/pypi/simplejson&#34;&gt;simplejson&lt;/a&gt;, python setup.py &amp;ndash;without-speedups install&lt;/li&gt;
+    &lt;li&gt;easy_install Pylons&lt;/li&gt;
+        &lt;li&gt;easy_install formbuild&lt;/li&gt;
+    &lt;li&gt;Do a quick test; paster create &amp;ndash;template=pylons&lt;/li&gt;
+&lt;/ul&gt;
+And that is all she wrote. Pretty easy. The reason we install simplejson seperate is because the default behavior is to build with speedups and well .. by default, that behavior won&amp;rsquo;t work on a standard Windows XP machine. So we install it seperate to avoid any conflicts.&lt;/p&gt;
+</description>
+    </item>
+    
+  </channel>
+</rss>

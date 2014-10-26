@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+      <title>Python Design Pylons on occasional posts about technology </title>
+      <generator uri="https://gohugo.io">Hugo</generator>
+    <link>http://localhost:1313/tags/python-design-pylons/index.xml</link>
+    <language>en-us</language>
+    
+    
+    <updated>Mon, 01 Jan 0001 00:00:00 UTC</updated>
+    
+    <item>
+      <title>Fat models, skinny controllers</title>
+      <link>http://localhost:1313/fat-models-skinny-controllers/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 UTC</pubDate>
+      
+      <guid>http://localhost:1313/fat-models-skinny-controllers/</guid>
+      <description>&lt;p&gt;In the world of MVC and RESTful services, the old addage fat models, skinny controllers is something I&amp;rsquo;m sure you&amp;rsquo;ve constantly seen and read about. So what does it really mean? How do you benefit? Is it the silver bullet for MVC development? What are the draw backs?&lt;/p&gt;
+
+&lt;p&gt;Using the latest versions of Pylons and SQLalchemy (0.9.7rc2 and 0.5.0rc1 respectivly) we can implement this methodology pretty easily. We&amp;rsquo;ll use formencode schemas to handle the basic input validation and then keep our business logic in the controller itself.&lt;/p&gt;
+
+&lt;p&gt;Here is what a controller method using this concept might look like.&lt;/p&gt;
+
+&lt;p&gt;[sourcecode language=&amp;lsquo;python&amp;rsquo;]
+class MemberController(BaseController):&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;def __before__(self):
+    if session.has_key(&#39;memberid&#39;):
+        c.memberid = session[&#39;memberid&#39;]
+
+@validate(schema=model.forms.schema.SubscriptionSchema(), form=&#39;new&#39;)
+def create(self):
+    subscription = model.Subscription(c.memberid, **self.form_result)
+    meta.Session.save(subscription)
+    meta.Session.commit()
+    return redirect_to(controller=&#39;member&#39;, action=&#39;account&#39;)
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;[/sourcecode]&lt;/p&gt;
+
+&lt;p&gt;The schema validation affords us the luxury of being able to just pass our data directly to the model. The &lt;strong&gt;before&lt;/strong&gt; method checks the session for the memberid assigned at login and gives us access to it, further keeping our method nice and clean. The model would implement the business logic, in this case since this is creating a new subscription, it would just sum now() and deltatime(days=days) to determine the expired.&lt;/p&gt;
+
+&lt;p&gt;This model could later be expanded upon, say for example you added an upgrade methods to your controller. Now, the same subscription model could be used with some added logic. The model could now have a static prorate method to expire the existing account and make room for creating the new subscription. I&amp;rsquo;ve pushed the example source to my github, hopefully this will get your brain juices flowing. If I get bored, I&amp;rsquo;ll toss together a complete working example and check it in.&lt;/p&gt;
+
+&lt;p&gt;Source for this post can be found at
+&lt;a href=&#34;http://trac.pieceofpy.com/pieceofpy/browser/fat-models-skinny-controllers&#34;&gt;http://trac.pieceofpy.com/pieceofpy/browser/fat-models-skinny-controllers&lt;/a&gt;&lt;/p&gt;
+</description>
+    </item>
+    
+  </channel>
+</rss>

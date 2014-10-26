@@ -1,0 +1,130 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+      <title>Brainstorm on occasional posts about technology </title>
+      <generator uri="https://gohugo.io">Hugo</generator>
+    <link>http://localhost:1313/categories/brainstorm/index.xml</link>
+    <language>en-us</language>
+    
+    
+    <updated>Mon, 01 Jan 0001 00:00:00 UTC</updated>
+    
+    <item>
+      <title>Blog themes and SCM.</title>
+      <link>http://localhost:1313/blog-updates-pt1/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 UTC</pubDate>
+      
+      <guid>http://localhost:1313/blog-updates-pt1/</guid>
+      <description>&lt;p&gt;We have a new theme? You like? If not, blame commenter rholmes, it is his fault. Seriously though. In a previous post he brought up a very good point, the site looked like hell if you were browsing with images off. Well this new theme looks better with images off and overall it isn&amp;rsquo;t too horribly bad. So, if you don&amp;rsquo;t like it, suggest one, just make sure it looks good with images turned off.&lt;/p&gt;
+
+&lt;p&gt;Now to the SCM part. After about a week of playing with &lt;a href=&#34;https://github.com/&#34;&gt;Github&lt;/a&gt; and &lt;a href=&#34;http://lighthouseapp.com/&#34;&gt;Lighthouse&lt;/a&gt;, I found them both to be great products. They integrated well with each other and the tools for working with Git are available under every platform. If I didn&amp;rsquo;t already have my own server and experience deploying &lt;a href=&#34;http://trac.edgewall.org/&#34;&gt;Trac&lt;/a&gt; and &lt;a href=&#34;http://www.selenic.com/mercurial/wiki/&#34;&gt;Mercurial&lt;/a&gt; I would use both these services without question. That being said, though I have enjoyed my time working with those tools, I&amp;rsquo;ve migrated my Github source and Lighthouse tickets over to a newly installed Trac 0.11, full circle.&lt;/p&gt;
+
+&lt;p&gt;End result. If you like tinkering. If you like managing your own installations or you have some customization/integration you would like to do, use Trac and Mercurial, otherwise use Github and one of the great ticket systems it integrates with; I enjoyed Lighthouse.&lt;/p&gt;
+
+&lt;p&gt;For fun, here is the circle of ticketing and scm life I&amp;rsquo;ve gone through over the last 6 years or so.
+&lt;ul&gt;
+    &lt;li&gt;cvs and PHP Ticket&lt;/li&gt;
+    &lt;li&gt;svn and home grown Python tickets&lt;/li&gt;
+    &lt;li&gt;svn and Trac&lt;/li&gt;
+    &lt;li&gt;Github and Lighthouse&lt;/li&gt;
+    &lt;li&gt;mercurial and Trac&lt;/li&gt;
+&lt;/ul&gt;&lt;/p&gt;
+
+&lt;p&gt;Have to wonder what is next. A lot of people at work have been asking me why Github or mercurial? Why Wayne? True, that most of the time I am using the repositories for me, myself, and I (De La Soul), but the benefits extend just beyond handling version control for an arbitrary number of developers and clean merges. I&amp;rsquo;ll do a write up soon.&lt;/p&gt;
+
+&lt;p&gt;All the sourcecode for this site is now located at: &lt;a href=&#34;http://trac.pieceopfy.com/pieceofpy&#34;&gt;http://trac.pieceopfy.com/pieceofpy&lt;/a&gt;
+I&amp;rsquo;ll be updating all the old links through the other posts to reflect this. Fun.&lt;/p&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>Dynamic and static typing with unit tests.</title>
+      <link>http://localhost:1313/tests-dynamic-static/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 UTC</pubDate>
+      
+      <guid>http://localhost:1313/tests-dynamic-static/</guid>
+      <description>&lt;p&gt;There is an on going discussion at the office with a team member who refuses to use dynamic languages. Claiming that most of his errors are typographical errors and they are caught by the compiler. So for him, since these errors are not caught until runtime, he throws and entire group of languages out the window. He also claims that to ensure that same level of checking with a dynamic language you would have to create more unit tests than normal to prevent introducing unhandled runtime exceptions.&lt;/p&gt;
+
+&lt;p&gt;So I decided to do a little test over the weekend. I created a very simple Number class in Python and C++. Using the exact same TDD development process, I implemented some very basic operations including division, addition, subtraction, etc&amp;hellip; I ended up with 12 tests. The exact same tests for both the C++ and Python implementation resulting in 100% of the executation path being covered. I decided that the compliation (in case of C++) and passing of the tests determined a success.&lt;/p&gt;
+
+&lt;p&gt;Then went back and inserted common typographical errors. Mistypes, extra = signs, not enough = signs, miseplled_varaibles, etc&amp;hellip; The end result was I was unable to get my unit tests passing while introducing syntax that would induce an unhandled runtime exception in Python. Granted, in C++ the compiler did catch a lot of things for me, but the point here is I didn&amp;rsquo;t have to create any extra tests to ensure that same level of confidence in my Python code.&lt;/p&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>Keeping a Kitchen: A programmers approach.</title>
+      <link>http://localhost:1313/programmers-kitchen/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 UTC</pubDate>
+      
+      <guid>http://localhost:1313/programmers-kitchen/</guid>
+      <description>&lt;p&gt;&lt;strong&gt;A recipe site to end all recipe sites?&lt;/strong&gt;
+After going through piles of recipe and food sites I found absolutely nothing that met my needs, be it a pay site or a free site. Nothing did what I was looking for. After speaking to some friends and family, throwing around my ideas, I decided that was I was looking for wasn&amp;rsquo;t all that far fetched, just no one has really taken the time to do it.&lt;/p&gt;
+
+&lt;p&gt;First, lets cover what is how there.
+&lt;ul&gt;
+    &lt;li&gt;Recipe sites (tons)&lt;/li&gt;
+    &lt;li&gt;Diet sites (tons)&lt;/li&gt;
+    &lt;li&gt;Kitchen/pantry inventory sites (a few)&lt;/li&gt;
+&lt;/ul&gt;
+Doing some quick Google searches for those terms and you&amp;rsquo;ll find yourself piles of links. You&amp;rsquo;ll find plenty of sites that do food tracking for diets, plenty that do recipes, some that combine diets with recipes, but none that combine all three.&lt;/p&gt;
+
+&lt;p&gt;What I want from a site
+&lt;ul&gt;
+    &lt;li&gt; Recipe database&lt;/li&gt;
+    &lt;li&gt;Item database (for recipes and shopping lists)&lt;/li&gt;
+    &lt;li&gt;Ability to add new recipes&lt;/li&gt;
+    &lt;li&gt;Ability to edit existing recipes&lt;/li&gt;
+    &lt;li&gt;Kitchen/pantry inventory (barcodes?)&lt;/li&gt;
+    &lt;li&gt;Daily, Weekly, Monthly food planning&lt;/li&gt;
+    &lt;li&gt;Sensible shopping lists (more on this)&lt;/li&gt;
+&lt;/ul&gt;
+That is a fairly short list and I was unable to find all those elements in any site. As for those sites that had some of the elements, most were over complicated and far from intuitive to use.&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;Sensible shopping lists&lt;/strong&gt;
+Ok, simple example. Lets say you add the Chips and Salsa recipe to your list of items you&amp;rsquo;re eating this week. Your pantry inventory doesn&amp;rsquo;t contain chips or salsa. Most sites that incorporate recipes and shopping lists will give you a shopping list like this
+&lt;ul&gt;
+    &lt;li&gt; &lt;sup&gt;1&lt;/sup&gt;&amp;frasl;&lt;sub&gt;2&lt;/sub&gt; cup Salsa&lt;/li&gt;
+    &lt;li&gt;10 tortilla chips&lt;/li&gt;
+&lt;/ul&gt;
+OR it will just remove the quantities
+&lt;ul&gt;
+    &lt;li&gt; Salsa&lt;/li&gt;
+    &lt;li&gt;Tortilla Chips&lt;/li&gt;
+&lt;/ul&gt;
+The second one isn&amp;rsquo;t actually that bad, because that is what you need. The problem with the second list is when you already have Salsa or Tortilla chips. Most sites have no tie in to kitchen inventory. This site, if used religiously for all your recipes and meals would provide an accurate shopping list for all meals planned based on the shopping list you choose to receive.&lt;/p&gt;
+
+&lt;p&gt;This means you could enter in all your recipes, plan your meals for 3-months, and bring out 1 week or 2 week lists. As you mark meals cooked for each day, the lists will dynamically update to provide accurate inventory tracking.&lt;/p&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>Project: Developing a simple insurance interface.</title>
+      <link>http://localhost:1313/eve-insurance/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 UTC</pubDate>
+      
+      <guid>http://localhost:1313/eve-insurance/</guid>
+      <description>&lt;p&gt;I play a game called &lt;a href=&#34;http://eve-online.com&#34;&gt;EVE Online&lt;/a&gt; and I create and support a lot of software for our in-game corporation. After recently migrating forums away from punBB over to vBulletin I was stuck with the choice to either migrate our existing Ship Insurance script (written in PHP) or create a whole new system from scratch. Being a lover of Python, TDD, and sausage, I of course picked the rewrite option since it would be the most difficult and suck up more resources and time than just migrating some shitty PHP script.&lt;/p&gt;
+
+&lt;p&gt;The requirements are very simple.&lt;/p&gt;
+
+&lt;p&gt;Allow claim to be entered.
+Allow claim to be approved.
+Allow a claim to be denied.
+Allow an agent to see a listing of all claims.
+Allow filter options by ship type and pilot.
+Allow agent to enter in the payout.
+Save all past claim information. (reporting)
+My personal goals for this project.&lt;/p&gt;
+
+&lt;p&gt;100% coverage with unittests.
+Use TDD methods to develop the project.
+Use the Trac system to support development.
+Use Pylons with a SQLite DB
+Use Ext for any fancy shit.&lt;/p&gt;
+
+&lt;p&gt;Code available soon as I get my repository back online.&lt;/p&gt;
+</description>
+    </item>
+    
+  </channel>
+</rss>

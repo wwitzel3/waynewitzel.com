@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+      <title>Tools on occasional posts about technology </title>
+      <generator uri="https://gohugo.io">Hugo</generator>
+    <link>http://localhost:1313/categories/tools/index.xml</link>
+    <language>en-us</language>
+    
+    
+    <updated>Mon, 01 Jan 0001 00:00:00 UTC</updated>
+    
+    <item>
+      <title>Mac OS X custom Python build and rlwrap</title>
+      <link>http://localhost:1313/python-macosx-rlwrap/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 UTC</pubDate>
+      
+      <guid>http://localhost:1313/python-macosx-rlwrap/</guid>
+      <description>&lt;p&gt;I had built my Python interpreter from source because I wanted a 64bit compile to use with boost-python based generic algorithm. So for the last couple months I have not had readline support, which means no arrow support in the console. Also means neat shortcut&amp;rsquo;s like _ would work for assigning the last result of an expression.&lt;/p&gt;
+
+&lt;p&gt;I finally got annoyed enough today to fix it. After a ton of failed attempts and trying to rebuild it with readline support. I found a post in the Ruby world where someone has having similar issues. Their solution was rlwrap. Having homebrew installed, I figured I&amp;rsquo;d give that a try.&lt;/p&gt;
+
+&lt;p&gt;&lt;code&gt;
+wwitzel:~ brew install rlwrap
+wwitzel:~ alias python=&amp;lsquo;rlwrap python&amp;rsquo;
+&lt;/code&gt;&lt;/p&gt;
+
+&lt;p&gt;And presto, everything functioned as it should. I added the alias to my .bash_profile and made this blog post for when I forget about this in the future. Hope this helps someone else who might be wrestling with the same issue.&lt;/p&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>Setting up Eclipse for python development</title>
+      <link>http://localhost:1313/eclipse-setup/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 UTC</pubDate>
+      
+      <guid>http://localhost:1313/eclipse-setup/</guid>
+      <description>&lt;p&gt;The amount of package sites and updating I had to do to get Eclipse 3.4 setup the way I wanted wasn&amp;rsquo;t too bad, I just hope I don&amp;rsquo;t have to do that again any time soon. So in an effort to potentially ease any future installation and configuration of Eclipse I have composed the list of Eclipse Update URLs right here.
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;http://www.svnkit.com/&#34;&gt;Java SVN Library&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;http://subclipse.tigris.org/update_1.4.x&#34;&gt;Eclipse SVN integration&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;http://pydev.sourceforge.net/updates/&#34;&gt;PyDev&lt;/a&gt; (Python perspective in Eclipse)&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;http://download.eclipse.org/tools/mylyn/update/e3.4&#34;&gt;Mylyn&lt;/a&gt; (very nice task integration)&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;http://download.eclipse.org/tools/mylyn/update/extras&#34;&gt;Mylyn Trac connector&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;http://update.aptana.com/update/3.2/&#34;&gt;Aptana&lt;/a&gt; (nice syntax and JS/CSS editor)&lt;/li&gt;
+&lt;/ul&gt;&lt;/p&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>Sucker for the green. Python GUI Green-Bar?</title>
+      <link>http://localhost:1313/python-red-green-testing/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 UTC</pubDate>
+      
+      <guid>http://localhost:1313/python-red-green-testing/</guid>
+      <description>&lt;p&gt;I get made fun of on a daily basis for this but I am addicted to GUI Green-Bar testing. When I say that I literally mean a simple little Green/Red progress bar that shows me my pass/fail tests. I am addicted to it. I need it. Eclipse C++ and CUTE had spoiled me and now I desire the same thing for Python. Don&amp;rsquo;t get me wrong, I don&amp;rsquo;t practice &amp;ldquo;&lt;a href=&#34;http://www.adam-bien.com/roller/abien/entry/quality_assurance_driven_development_and&#34;&gt;metrics driven development&lt;/a&gt;&amp;rdquo;, but for me personally, it is a motivator, an easy and clearly defined goal in my test driven approach, make that bar go full green.&lt;/p&gt;
+
+&lt;p&gt;I&amp;rsquo;ve spent the last few hours on Google and misc blogs looking for GUI Green bar testing for modern Python and have been unsuccessful in finding anything. So I ask anyone who happens to read this blog if you know of any plugins for any IDEs or text editors that support this for Python.&lt;/p&gt;
+
+&lt;p&gt;In the mean time I started my first Eclipse plugin project ever in hopes I can hack my through enough Java and pull enough from PyDev extension that I can make a simple green bar for Eclipse that parses nosetests output or something.&lt;/p&gt;
+</description>
+    </item>
+    
+  </channel>
+</rss>

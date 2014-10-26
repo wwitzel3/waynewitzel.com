@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+      <title>Pylons Ajax Generators Decorators on occasional posts about technology </title>
+      <generator uri="https://gohugo.io">Hugo</generator>
+    <link>http://localhost:1313/tags/pylons-ajax-generators-decorators/index.xml</link>
+    <language>en-us</language>
+    
+    
+    <updated>Mon, 01 Jan 0001 00:00:00 UTC</updated>
+    
+    <item>
+      <title>Pylons and long-live AJAX request.</title>
+      <link>http://localhost:1313/pylons-polling-ajax/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 UTC</pubDate>
+      
+      <guid>http://localhost:1313/pylons-polling-ajax/</guid>
+      <description>&lt;p&gt;So I am playing around in Firefox with XMLHttpRequest. Looking in to a way to facilate a server update to a client without have to refresh the page or use Javascript timers. So the long-live HTTP request seems the way to go.&lt;/p&gt;
+
+&lt;p&gt;This little app will at most have 20-30 connections at once, so I am not worried about the open connection per client. The data it calculates is rather large and intensive to gather, so I paired it with the cache decorator snippet found on ActiveState and used in Expert Python Programming. This example feeds a cached datetime string. The caching lets different client receive the same data during the cache process. There is some lag between the updates since they all set their sleep at different points, there may be away around this though.&lt;/p&gt;
+
+&lt;p&gt;So here is my basic index.html.
+[sourcecode language=&amp;ldquo;html&amp;rdquo;]
+&lt;body&gt;
+&lt;em&gt;This will push data from the server to you every 5 seconds .. enjoy!&lt;/em&gt;
+&lt;ul id=&#34;container&#34;&gt;&lt;/ul&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;script&gt;
+var div = document.getElementById(&amp;lsquo;container&amp;rsquo;);
+function handleContent(event)
+{
+  var xml_packet = event.target.responseXML.documentElement;
+  div.innerHTML += &amp;lsquo;&lt;li&gt;&amp;rsquo; + xml_packet.childNodes[0].data + &amp;lsquo;&lt;/li&gt;&amp;rsquo;;
+}
+(function () {
+    var xrequest = new XMLHttpRequest();
+    xrequest.multipart = true;
+    xrequest.open(&amp;ldquo;GET&amp;rdquo;,&amp;ldquo;/server/index&amp;rdquo;,false);
+    xrequest.onload = handleContent;
+    xrequest.send(null);
+})();&lt;/p&gt;
+
+&lt;p&gt;&lt;/script&gt;
+&lt;/body&gt;
+[/sourcecode]&lt;/p&gt;
+
+&lt;p&gt;Now the controller code itself.
+[sourcecode language=&amp;ldquo;python&amp;rdquo;]
+class ServerController(BaseController):&lt;br /&gt;
+    def index(self):
+        response.headers[&amp;lsquo;Content-type&amp;rsquo;] = &amp;lsquo;multipart/x-mixed-replace;boundary=test&amp;rsquo;
+        return data_stream()&lt;/p&gt;
+
+&lt;p&gt;def data_stream(stream=True):
+    yield datetime_string()&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;while stream:
+    time.sleep(5)
+    yield datetime_string()
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;@memorize(duration=15)
+def datetime_string():&lt;br /&gt;
+    content = &amp;lsquo;&amp;ndash;test\nContent-type: application/xml\n\n&amp;rsquo;
+    content += &amp;lsquo;&amp;lt;?xml version=\&amp;lsquo;1.0\&amp;rsquo; encoding=\&amp;lsquo;ISO-8859-1\&amp;lsquo;?&amp;gt;\n&amp;rsquo;
+    content += &amp;lsquo;&lt;message&gt;&amp;rsquo; + str(datetime.datetime.now()) + &amp;lsquo;&lt;/message&gt;\n&amp;rsquo;
+    content += &amp;lsquo;&amp;ndash;test\n&amp;rsquo;&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;return content
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;[/sourcecode]&lt;/p&gt;
+
+&lt;p&gt;Also the decorator code for good measure.
+[sourcecode language=&amp;ldquo;python&amp;rdquo;]
+cache = {}&lt;/p&gt;
+
+&lt;p&gt;def is_old(entry, duration):
+    return time.time() - entry[&amp;lsquo;time&amp;rsquo;] &amp;gt; duration&lt;/p&gt;
+
+&lt;p&gt;def compute_key(function, args, kw):
+    key = pickle.dumps((function.func_name, args, kw))
+    return hashlib.sha1(key).hexdigest()&lt;/p&gt;
+
+&lt;p&gt;def memorize(duration=10):
+    def _memorize(function):
+        def __memorize(*args, **kw):
+            key = compute_key(function, args, kw)&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;        if (key in cache and not is_old(cache[key], duration)):
+            return cache[key][&#39;value&#39;]
+        result = function(*args, **kw)
+        cache[key] = {&#39;value&#39;: result, &#39;time&#39;:time.time()}
+        return result
+    return __memorize
+return _memorize
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;[/sourcecode]&lt;/p&gt;
+
+&lt;p&gt;Full working demo will be available in the HG repos shortly.&lt;/p&gt;
+</description>
+    </item>
+    
+  </channel>
+</rss>

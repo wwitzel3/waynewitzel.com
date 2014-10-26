@@ -1,0 +1,408 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+      <title>Pylons on occasional posts about technology </title>
+      <generator uri="https://gohugo.io">Hugo</generator>
+    <link>http://localhost:1313/categories/pylons/index.xml</link>
+    <language>en-us</language>
+    
+    
+    <updated>Mon, 01 Jan 0001 00:00:00 UTC</updated>
+    
+    <item>
+      <title>Deploying Pylons with nginx</title>
+      <link>http://localhost:1313/deploy-pylons-nginx/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 UTC</pubDate>
+      
+      <guid>http://localhost:1313/deploy-pylons-nginx/</guid>
+      <description>&lt;p&gt;In preparation for a production deployment of a new Pylons app, I&amp;rsquo;ve been looking in to different deployment methods. In an effort to to be /. safe and Diggable when the new application launches, we&amp;rsquo;ve decided on 4 server deployment.&lt;/p&gt;
+
+&lt;p&gt;&lt;ul&gt;
+    &lt;li&gt;1 nginx server&lt;/li&gt;
+    &lt;li&gt;2 pylons (paster) servers&lt;/li&gt;
+    &lt;li&gt;1 postgresql server&lt;/li&gt;
+&lt;/ul&gt;
+I built nginx from the source without issues. The default install location of /usr/local/nginx works for me. You&amp;rsquo;ll need to make any init scripts and install them, see your platform doucmentation for how to do this. You&amp;rsquo;ll also want to be sure to add the new log dir to any log stats/consolidating/trimming jobs you run.&lt;/p&gt;
+
+&lt;p&gt;Here is the important parts of the nginx configuration for proxying to the Paster servers. Also be sure you adjust your keep alive and connection timeout settings, if you have just a standard Ajaxy Web 2.0 application, you&amp;rsquo;ll want to kick that down to 5 5 or 5 10. They default is way to high unless you&amp;rsquo;re doing constant streaming of live updates or something to that degree.&lt;/p&gt;
+
+&lt;pre&gt;
+worker_processes  2;
+events {
+    worker_connections  1024;
+}
+http {
+    client_body_timeout   5;
+    client_header_timeout 5;
+    keepalive_timeout     5 5;
+    send_timeout          5;
+    
+    tcp_nodelay on;
+    tcp_nopush  on;
+
+    gzip              on;
+    gzip_buffers      16 8k;
+    gzip_comp_level   1;
+    gzip_http_version 1.0;
+    gzip_min_length   0;
+    gzip_types        text/plain text/html text/css;
+    gzip_vary         on;
+
+    upstream pasters {
+        server 10.3.0.5:5010;
+        server 10.3.0.6:5011;
+    }
+    server {
+        listen       80;
+        server_name  localhost;
+
+        location / {
+            proxy_pass http://pasters;
+            proxy_redirect default;
+        }
+    }
+&lt;/pre&gt;
+
+&lt;p&gt;The paster servers are setup like this, I put them both in the same .ini and setup them up in the tpl. This lets me do an easy_install , setup-app based deployment without having to manually edit the ini to change the port numbers, which is error prone. This also lets you adjust and tune per server, instead of deploying 1 server section and changing it for each. Example would be if one server was way more powerful, you could tune it and then use the weighting in nginx to prefer that server. All without having to edit the ini after deployment.&lt;/p&gt;
+
+&lt;pre&gt;
+[server:main]
+use = egg:Paste#http
+host = 0.0.0.0
+port = 5010
+use_threadpool = True
+threadpool_workers = 10
+
+[server:main2]
+use = egg:Paste#http
+host = 0.0.0.0
+port = 5011
+use_threadpool = True
+threadpool_workers = 10
+&lt;/pre&gt;
+
+&lt;p&gt;Using 10 1000 on Apache bench gave me some good results. 85 requests per second to either of the standalone Paster servers. 185 requests per second when balanced with nginx. For fun, I deployed a third on my database server and was pleased to see 250 requests per second. Then I deployed 3 per server. So a total of 9 paster instances and was able to see 1080 requests per second. I also increased the thread of each from 10 to 25 , this uses more memory, but enables a higher RPS.&lt;/p&gt;
+
+&lt;p&gt;Getting closer to the estimated 2,500 needed to survive a /. and should survive the estimated 1,000 from a high Digg.&lt;/p&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>Fat models, skinny controllers</title>
+      <link>http://localhost:1313/fat-models-skinny-controllers/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 UTC</pubDate>
+      
+      <guid>http://localhost:1313/fat-models-skinny-controllers/</guid>
+      <description>&lt;p&gt;In the world of MVC and RESTful services, the old addage fat models, skinny controllers is something I&amp;rsquo;m sure you&amp;rsquo;ve constantly seen and read about. So what does it really mean? How do you benefit? Is it the silver bullet for MVC development? What are the draw backs?&lt;/p&gt;
+
+&lt;p&gt;Using the latest versions of Pylons and SQLalchemy (0.9.7rc2 and 0.5.0rc1 respectivly) we can implement this methodology pretty easily. We&amp;rsquo;ll use formencode schemas to handle the basic input validation and then keep our business logic in the controller itself.&lt;/p&gt;
+
+&lt;p&gt;Here is what a controller method using this concept might look like.&lt;/p&gt;
+
+&lt;p&gt;[sourcecode language=&amp;lsquo;python&amp;rsquo;]
+class MemberController(BaseController):&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;def __before__(self):
+    if session.has_key(&#39;memberid&#39;):
+        c.memberid = session[&#39;memberid&#39;]
+
+@validate(schema=model.forms.schema.SubscriptionSchema(), form=&#39;new&#39;)
+def create(self):
+    subscription = model.Subscription(c.memberid, **self.form_result)
+    meta.Session.save(subscription)
+    meta.Session.commit()
+    return redirect_to(controller=&#39;member&#39;, action=&#39;account&#39;)
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;[/sourcecode]&lt;/p&gt;
+
+&lt;p&gt;The schema validation affords us the luxury of being able to just pass our data directly to the model. The &lt;strong&gt;before&lt;/strong&gt; method checks the session for the memberid assigned at login and gives us access to it, further keeping our method nice and clean. The model would implement the business logic, in this case since this is creating a new subscription, it would just sum now() and deltatime(days=days) to determine the expired.&lt;/p&gt;
+
+&lt;p&gt;This model could later be expanded upon, say for example you added an upgrade methods to your controller. Now, the same subscription model could be used with some added logic. The model could now have a static prorate method to expire the existing account and make room for creating the new subscription. I&amp;rsquo;ve pushed the example source to my github, hopefully this will get your brain juices flowing. If I get bored, I&amp;rsquo;ll toss together a complete working example and check it in.&lt;/p&gt;
+
+&lt;p&gt;Source for this post can be found at
+&lt;a href=&#34;http://trac.pieceofpy.com/pieceofpy/browser/fat-models-skinny-controllers&#34;&gt;http://trac.pieceofpy.com/pieceofpy/browser/fat-models-skinny-controllers&lt;/a&gt;&lt;/p&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>How-To: Python, Pylons, and Windows</title>
+      <link>http://localhost:1313/pylons-on-windows/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 UTC</pubDate>
+      
+      <guid>http://localhost:1313/pylons-on-windows/</guid>
+      <description>&lt;p&gt;A friend having issues installing Pylons on Windows XP with Python 2.6 gave me the idea to do this quick write up. So here it is, the 6 step method for running Pylons on Windows XP.
+&lt;ul&gt;
+    &lt;li&gt;Download &lt;a href=&#34;http://python.org&#34;&gt;Python&lt;/a&gt;.&lt;/li&gt;
+    &lt;li&gt;Add Python to your path and launch a command prompt.&lt;/li&gt;
+    &lt;li&gt;Download &lt;a href=&#34;http://peak.telecommunity.com/DevCenter/EasyInstall&#34;&gt;ez_setup.py&lt;/a&gt;, python ez_setup.py&lt;/li&gt;
+    &lt;li&gt;Download &lt;a href=&#34;http://pypi.python.org/pypi/simplejson&#34;&gt;simplejson&lt;/a&gt;, python setup.py &amp;ndash;without-speedups install&lt;/li&gt;
+    &lt;li&gt;easy_install Pylons&lt;/li&gt;
+        &lt;li&gt;easy_install formbuild&lt;/li&gt;
+    &lt;li&gt;Do a quick test; paster create &amp;ndash;template=pylons&lt;/li&gt;
+&lt;/ul&gt;
+And that is all she wrote. Pretty easy. The reason we install simplejson seperate is because the default behavior is to build with speedups and well .. by default, that behavior won&amp;rsquo;t work on a standard Windows XP machine. So we install it seperate to avoid any conflicts.&lt;/p&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>Jython 2.5 and snakefight for deploying Pylons w/ SQLAlchemy &#43; Oracle.</title>
+      <link>http://localhost:1313/jython-snakefight-pylons/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 UTC</pubDate>
+      
+      <guid>http://localhost:1313/jython-snakefight-pylons/</guid>
+      <description>
+
+&lt;p&gt;&lt;strong&gt;UPDATE / 13 March 2009: &lt;/strong&gt;&lt;a href=&#34;http://pypi.python.org/pypi/snakefight&#34;&gt;snakefight 0.3&lt;/a&gt; now has a &amp;ndash;include-jar option, prefer that to using my hack.&lt;/p&gt;
+
+&lt;p&gt;After reading &lt;a href=&#34;http://dunderboss.blogspot.com/2009/03/deploying-pylons-apps-to-java-servlet.html&#34;&gt;P. Jenvey&amp;rsquo;s blog post about Deploying Pylons Apps to Java Servlet Containers&lt;/a&gt; I immediately downloaded the Jython 2.5 beta and installed snakefight to give it a try. One of our services where I work is a Pylons based application. It is deployed using paster and Apache ProxyPass. Our main application is written in Java and is deployed as a war under Jetty. So if I can get my Pylons application built as a war and deployed that way, it would greatly simplify our deployment process.&lt;/p&gt;
+
+&lt;p&gt;[sourcecode language=&amp;ldquo;bash&amp;rdquo;]
+$ sudo /opt/jython25/bin/easy_install snakefight
+$ /opt/jython25/bin/jython setup.py develop
+$ /opt/jython25/bin/jython setup.py bdist_war &amp;ndash;paster-config dev_r2.ini
+&amp;hellip; output of success and stuff &amp;hellip;
+$ cp dist/project-0.6.8dev.war /opt/jetty/webapps
+[/sourcecode]&lt;/p&gt;
+
+&lt;p&gt;Now I visit my local server and hit the project context. I get some database errors, kind of expected them. So for the time being, I&amp;rsquo;ll be running this directly using Jython to speed up the debugging process. A quick googling of my DB issues turns up &lt;a href=&#34;http://pylonshq.com/pasties/77c3184b14d6936d86d13e4e65df92d2&#34;&gt;zxoracle for SQLalchemy&lt;/a&gt; which uses Jython zxJDBC. I install that in to sqlalchemy/databases as zxoracle.py and give it another go. Changing the oracle:// lines in my .ini file to now read zxoracle:// Now it can&amp;rsquo;t find the 3rd party Oracle libraries (ojdbc.jar).&lt;/p&gt;
+
+&lt;p&gt;[sourcecode]
+$ cd ./dist
+$ jar xf project-0.6.8dev.war
+$ cd WEB-INF/lib
+$ ls&lt;/p&gt;
+
+&lt;h1 id=&#34;toc_0&#34;&gt;no ojdbc.jar as expected &amp;hellip;&lt;/h1&gt;
+
+&lt;p&gt;$ cd ~/project
+$ export CLASSPATH=/opt/jython25/jython.jar:/usr/lib/jvm/java/jre/lib/ext/ojdbc.jar
+$ /opt/jython25/bin/jython /opt/jython25/bin/paster serve &amp;ndash;reload dev_r2.ini
+[/sourcecode]&lt;/p&gt;
+
+&lt;p&gt;Now it is looking a little better and it able to find the jar, but still a DB issue, now with SQLalchemy library. Not having a ton of time to investigate, I decide to try rolling back my SQAlachemy version for Jython. Turns out rolling back to 0.5.0 fixed the issue. I&amp;rsquo;ll be investigating why it was breaking with 0.5.2 soon &amp;trade;. So now I rerun it, and get a new error.&lt;/p&gt;
+
+&lt;p&gt;[sourcecode lang=&amp;ldquo;bash&amp;rdquo;]
+AttributeError: &amp;lsquo;ZXOracleDialect&amp;rsquo; object has no attribute &amp;lsquo;optimize_limits&amp;rsquo;
+[/sourcecode]&lt;/p&gt;
+
+&lt;p&gt;I decide I am just going to go in to the &lt;a href=&#34;http://trac.pieceofpy.com/pieceofpy/browser/snakefight-java-libs&#34;&gt;zxoracle.py and add optimize_limits = False to the ZXOracleDialect&lt;/a&gt;. No idea what this breaks or harms, but I do it anyway and rerun the application. Success! Every thing is working now. No liking the idea of having to manually insert the Oracle jar in to the WEB-INF/lib and not really wanting to much around with environment variables, I also implemented a quick and dirty include-java-libs for snakefight, the diff for command.py is below. This allows me to pass in a : separated list of jars to include in the WEB-INF/lib. &lt;strong&gt;EDIT: &lt;/strong&gt;The diff I posted isn&amp;rsquo;t needed since I put it on my hg repo. &lt;a href=&#34;http://trac.pieceofpy.com/pieceofpy/browser/snakefight-java-libs&#34;&gt;You can grab it from here.&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;So now I am back to building my war. Just as before.
+[sourcecode lang=&amp;ldquo;bash&amp;rdquo;]
+$ /opt/jython25/bin/jython setup.py bdist_war &amp;ndash;paste-config dev_r2.ini &amp;ndash;include-java-libs /opt/jython25/extlibs/ojdbc.jar
+running bdist_war
+creating build/bdist.java1.6.0_12
+creating build/bdist.java1.6.0_12/war
+creating build/bdist.java1.6.0_12/war/WEB-INF
+creating build/bdist.java1.6.0_12/war/WEB-INF/lib-python
+running easy_install project
+adding eggs (to WEB-INF/lib-python)
+adding jars (to WEB-INF/lib)
+adding WEB-INF/lib/jython.jar
+adding Paste ini file (to dev_r2.ini)
+adding Paste app loader (to WEB-INF/lib-python/____loadapp.py)
+generating deployment descriptor
+adding deployment descriptor (WEB-INF/web.xml)
+created dist/project-0.6.8dev-py2.5.war
+$ cp dist/project-0.6.8dev-py2.5.war /opt/jetty/webapps
+$ sudo /sbin/service jetty restart
+[/sourcecode]&lt;/p&gt;
+
+&lt;p&gt;And presto! I am in business. My pylons application is deployed under Jetty and all the &lt;a href=&#34;http://seleniumhq.org/&#34;&gt;selenium functional tests&lt;/a&gt; are passing. I am sure there is probably a easier, neater, or cleaner way to do all this, but this was my first iteration through and also my first time ever deploying a WAR to a java servlet container so all in all I am happy with the results. Performance seems about the same as when running the application with paster serve, but Jetty does use a little more memory than before (expected I guess).&lt;/p&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>Pylons and long-live AJAX request.</title>
+      <link>http://localhost:1313/pylons-polling-ajax/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 UTC</pubDate>
+      
+      <guid>http://localhost:1313/pylons-polling-ajax/</guid>
+      <description>&lt;p&gt;So I am playing around in Firefox with XMLHttpRequest. Looking in to a way to facilate a server update to a client without have to refresh the page or use Javascript timers. So the long-live HTTP request seems the way to go.&lt;/p&gt;
+
+&lt;p&gt;This little app will at most have 20-30 connections at once, so I am not worried about the open connection per client. The data it calculates is rather large and intensive to gather, so I paired it with the cache decorator snippet found on ActiveState and used in Expert Python Programming. This example feeds a cached datetime string. The caching lets different client receive the same data during the cache process. There is some lag between the updates since they all set their sleep at different points, there may be away around this though.&lt;/p&gt;
+
+&lt;p&gt;So here is my basic index.html.
+[sourcecode language=&amp;ldquo;html&amp;rdquo;]
+&lt;body&gt;
+&lt;em&gt;This will push data from the server to you every 5 seconds .. enjoy!&lt;/em&gt;
+&lt;ul id=&#34;container&#34;&gt;&lt;/ul&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;script&gt;
+var div = document.getElementById(&amp;lsquo;container&amp;rsquo;);
+function handleContent(event)
+{
+  var xml_packet = event.target.responseXML.documentElement;
+  div.innerHTML += &amp;lsquo;&lt;li&gt;&amp;rsquo; + xml_packet.childNodes[0].data + &amp;lsquo;&lt;/li&gt;&amp;rsquo;;
+}
+(function () {
+    var xrequest = new XMLHttpRequest();
+    xrequest.multipart = true;
+    xrequest.open(&amp;ldquo;GET&amp;rdquo;,&amp;ldquo;/server/index&amp;rdquo;,false);
+    xrequest.onload = handleContent;
+    xrequest.send(null);
+})();&lt;/p&gt;
+
+&lt;p&gt;&lt;/script&gt;
+&lt;/body&gt;
+[/sourcecode]&lt;/p&gt;
+
+&lt;p&gt;Now the controller code itself.
+[sourcecode language=&amp;ldquo;python&amp;rdquo;]
+class ServerController(BaseController):&lt;br /&gt;
+    def index(self):
+        response.headers[&amp;lsquo;Content-type&amp;rsquo;] = &amp;lsquo;multipart/x-mixed-replace;boundary=test&amp;rsquo;
+        return data_stream()&lt;/p&gt;
+
+&lt;p&gt;def data_stream(stream=True):
+    yield datetime_string()&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;while stream:
+    time.sleep(5)
+    yield datetime_string()
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;@memorize(duration=15)
+def datetime_string():&lt;br /&gt;
+    content = &amp;lsquo;&amp;ndash;test\nContent-type: application/xml\n\n&amp;rsquo;
+    content += &amp;lsquo;&amp;lt;?xml version=\&amp;lsquo;1.0\&amp;rsquo; encoding=\&amp;lsquo;ISO-8859-1\&amp;lsquo;?&amp;gt;\n&amp;rsquo;
+    content += &amp;lsquo;&lt;message&gt;&amp;rsquo; + str(datetime.datetime.now()) + &amp;lsquo;&lt;/message&gt;\n&amp;rsquo;
+    content += &amp;lsquo;&amp;ndash;test\n&amp;rsquo;&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;return content
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;[/sourcecode]&lt;/p&gt;
+
+&lt;p&gt;Also the decorator code for good measure.
+[sourcecode language=&amp;ldquo;python&amp;rdquo;]
+cache = {}&lt;/p&gt;
+
+&lt;p&gt;def is_old(entry, duration):
+    return time.time() - entry[&amp;lsquo;time&amp;rsquo;] &amp;gt; duration&lt;/p&gt;
+
+&lt;p&gt;def compute_key(function, args, kw):
+    key = pickle.dumps((function.func_name, args, kw))
+    return hashlib.sha1(key).hexdigest()&lt;/p&gt;
+
+&lt;p&gt;def memorize(duration=10):
+    def _memorize(function):
+        def __memorize(*args, **kw):
+            key = compute_key(function, args, kw)&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;        if (key in cache and not is_old(cache[key], duration)):
+            return cache[key][&#39;value&#39;]
+        result = function(*args, **kw)
+        cache[key] = {&#39;value&#39;: result, &#39;time&#39;:time.time()}
+        return result
+    return __memorize
+return _memorize
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;[/sourcecode]&lt;/p&gt;
+
+&lt;p&gt;Full working demo will be available in the HG repos shortly.&lt;/p&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>SQLalchemy and JSON w/ Pylons - Best Practices</title>
+      <link>http://localhost:1313/sqlalchemy-pylons-best-practices/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 UTC</pubDate>
+      
+      <guid>http://localhost:1313/sqlalchemy-pylons-best-practices/</guid>
+      <description>
+
+&lt;p&gt;I asked the question I Stackoverflow and maybe it was too generic for the site, since it just got trolled with &amp;ldquo;Google keyword&amp;rdquo; by some d-bag. So I deleted it and figured I&amp;rsquo;d throw it up on my blog a see about getting some feedback from the people who read this pile about. The reason I ask this is mainly because I am preparing to do some updated screencasts for Pylons.&lt;/p&gt;
+
+&lt;p&gt;I&amp;rsquo;ve seen multiple ways referenced in official docs and I have done it a few different ways myself. I am using Pylons and I am curious what the best practices are for this common scenario?&lt;/p&gt;
+
+&lt;p&gt;I have used something similar to this for auto-magically making the conversion happen.
+&lt;pre class=&#34;brush: py&#34;&gt;&lt;/p&gt;
+
+&lt;h1 id=&#34;toc_0&#34;&gt;The auto-magic version&lt;/h1&gt;
+
+&lt;h1 id=&#34;toc_1&#34;&gt;I pulled this off a blog, forget the source.&lt;/h1&gt;
+
+&lt;p&gt;def _sa_to_dict(obj):
+    for item in obj.&lt;strong&gt;dict&lt;/strong&gt;.items():
+        if item[0][0] is &amp;lsquo;_&amp;rsquo;:
+            continue
+        if isinstance(item[1], str):
+            yield [item[0], item[1].decode()]
+        else:
+            yield item&lt;/p&gt;
+
+&lt;p&gt;def json(obj):
+    if isinstance(obj, list):
+        return dumps(map(dict, map(_sa_to_dict, obj)))
+    else:
+        return dumps(dict(_sa_to_dict(obj)))&lt;/p&gt;
+
+&lt;h1 id=&#34;toc_2&#34;&gt;here is the controller&lt;/h1&gt;
+
+&lt;p&gt;@jsonify
+def index(self, format=&amp;lsquo;html&amp;rsquo;):
+    templates = Session.query(Template).all()
+    if format == &amp;lsquo;json&amp;rsquo;:
+        return json(templates)
+&lt;/pre&gt;&lt;/p&gt;
+
+&lt;p&gt;I have also done the version where you use the jsonify decorator and build your dictionary manually, something like this, which is ok if I need to define some custom behavior for my JSON, but as the default behavior seems excessive.&lt;/p&gt;
+
+&lt;pre class=&#34;brush: py&#34;&gt;
+@jsonify
+def index(self, format=&#39;html&#39;):
+    if format == &#39;json&#39;:
+        q = Session.query
+        templates = [{&#39;id&#39;: t.id,
+                      &#39;title&#39;: t.title,
+                      &#39;body&#39;: t.body} for t in q(Template)]
+        return templates
+&lt;/pre&gt;
+
+&lt;p&gt;I&amp;rsquo;ve also created an inherited SA class which defines a json method and have used that on all my objects to convert them to JSON. Similar to the the fedora extensions.&lt;/p&gt;
+
+&lt;p&gt;Maybe I missed some obviously library out there or some obvious helper in the Pylons packages, but I feel like this is a very common task being done a dozen different ways between docs, source, and my own personal projects. Curious what others are doing / using.&lt;/p&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>paster shell - do people know about it?</title>
+      <link>http://localhost:1313/pylons-paster-shell/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 UTC</pubDate>
+      
+      <guid>http://localhost:1313/pylons-paster-shell/</guid>
+      <description>&lt;p&gt;Today I was having a chat today about Pylons vs. Django and for the most part it was pretty diplomatic. We got to talking about the Admin interface the Django has. Which you don&amp;rsquo;t have to do any extra boiler plate for, it is just there for you. With Pylons you have to use something like FormAlchemy or use Turbogears to get a similar style admin interface for your models and data.&lt;/p&gt;
+
+&lt;p&gt;Since we were sitting at a computer, I went ahead brought up a quick project and did a little demo of the paster shell. Sure, it involves typing and it isn&amp;rsquo;t as pretty or &amp;ldquo;fast&amp;rdquo; as an admin panel, but he didn&amp;rsquo;t even know it existed. One of the common things he mentioned was, &amp;ldquo;if I want to change the menus that are dynamically defined&amp;rdquo; or &amp;ldquo;if a username needs to be changed&amp;rdquo; .. and the application itself doesn&amp;rsquo;t have a custom admin panel, with Pylons he had to do raw SQL.&lt;/p&gt;
+
+&lt;pre&gt;
+$paster shell pylons_config.ini
+
+All objects from demo.lib.base are available
+Additional Objects:
+   mapper     -  Routes mapper object
+   wsgiapp    -  This project&#39;s WSGI App instance
+   app        -  paste.fixture wrapped around wsgiapp
+
+&amp;gt;&amp;gt;&amp;gt; error_user = meta.Session.query(model.User).filter_by(username=&#39;wwitzel 3&#39;).one()
+&amp;gt;&amp;gt;&amp;gt; # nice thing about this, is you also will get exceptions throw if more than one record exists
+&amp;gt;&amp;gt;&amp;gt; error_user.username
+u&#39;wwitzel 3&#39;
+&amp;gt;&amp;gt;&amp;gt; error_user.username = &#39;wwitzel3&#39;
+&amp;gt;&amp;gt;&amp;gt; meta.Session.commit()
+&amp;gt;&amp;gt;&amp;gt; menu_typo = meta.Session.query(model.Menu).filter_by(id=1).one()
+&amp;gt;&amp;gt;&amp;gt; menu_typo.value
+u&#39;Abuot&#39;
+&amp;gt;&amp;gt;&amp;gt; menu_typo.value = &#39;About&#39;
+&amp;gt;&amp;gt;&amp;gt; meta.Session.commit()
+&lt;/pre&gt;
+
+&lt;p&gt;So that is a very simple example of how one would use the paster shell to update some bad data in the database while ensuring integrity of your custom model and extension code. After I showed this to my friend he wasn&amp;rsquo;t as concerned about the lack of a web interface for administration within Pylons.&lt;/p&gt;
+</description>
+    </item>
+    
+  </channel>
+</rss>

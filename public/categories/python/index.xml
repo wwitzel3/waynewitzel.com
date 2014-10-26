@@ -1,0 +1,829 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+      <title>Python on occasional posts about technology </title>
+      <generator uri="https://gohugo.io">Hugo</generator>
+    <link>http://localhost:1313/categories/python/index.xml</link>
+    <language>en-us</language>
+    
+    
+    <updated>Sun, 14 Jul 2013 12:15:00 UTC</updated>
+    
+    <item>
+      <title>Pyramid Task Queue with pyres and redis</title>
+      <link>http://localhost:1313/pyramid-pyres-redis/</link>
+      <pubDate>Sun, 14 Jul 2013 12:15:00 UTC</pubDate>
+      
+      <guid>http://localhost:1313/pyramid-pyres-redis/</guid>
+      <description>&lt;p&gt;This is a story about Pyramid, pyres, some Python 3.3 porting, and just how easy it is to
+get a task queue working with Pyramid and redis.&lt;/p&gt;
+
+&lt;p&gt;The story starts with John Anderson convincing me to work on notaliens.com. In the process of
+developing the Sites portion of the project we decided we wanted to implement a task queue
+for capturing, storing, and generating the thumbnails of the sites that are submitted
+to notalienss.&lt;/p&gt;
+
+&lt;p&gt;After looking over a few choices, John had some previous experience with pyres at
+SurveyMonkey so we pushed forward with that.&lt;/p&gt;
+
+&lt;p&gt;During the process of implementing the task queue we discovered that pyres wasn&amp;rdquo;t Python 3.3
+compatible. As the flagship community site for the Pyramid project, we felt maintaining
+Python 3.3 support was important.&lt;/p&gt;
+
+&lt;p&gt;So we had a choice, switch to an already Pyhton 3.3 compatible task queue
+system or take on porting pyres to Python 3.3. We talked about some other options like
+using celery or retools, but we decided we liked the API and the simplicity of pyres so much
+that we could take on the porting effort.&lt;/p&gt;
+
+&lt;p&gt;Fortunately for us the pyres project had some great tests. This made the process of porting
+pretty simple. You can actually see the diff for the pull request we submitted to pyres.&lt;/p&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>Allura - Google Summer of Code 2013</title>
+      <link>http://localhost:1313/allura-gsoc-apply-now/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 UTC</pubDate>
+      
+      <guid>http://localhost:1313/allura-gsoc-apply-now/</guid>
+      <description>&lt;p&gt;&lt;a href=&#34;http://google-melange.appspot.com/gsoc/homepage/google/gsoc2013&#34;&gt;Google Summer of Code&lt;/a&gt; is right around the corner. In fact student applications are already open.
+The &lt;a href=&#34;http://www.apache.org/&#34;&gt;Apache Software Foundation&lt;/a&gt; has been accepted as one of the mentoring organizations.
+This is great news for &lt;a href=&#34;http://incubator.apache.org/allura/&#34;&gt;Allura&lt;/a&gt; which is part of the ASF Incubator, because we will be eligble to mentor and accept
+student proposals for working on Allura.&lt;/p&gt;
+
+&lt;p&gt;So if you are intersted in working on a open project hosting platform that is written in Python, I encourage you to register and submit a proposal to the
+Apache Software Foundation for working on the Allura project. You can find the tickets that are part of the Allura GSoC 2013 on the
+&lt;a href=&#34;https://issues.apache.org/jira/issues/?filter=12323652&amp;amp;jql=summary%20~%20Allura%20AND%20labels%20%3D%20gsoc2013&#34;&gt;Apache COMDEV Jira&lt;/a&gt;.&lt;/p&gt;
+
+&lt;p&gt;You can also find useful information about the GSoC on the &lt;a href=&#34;http://community.apache.org/gsoc.html&#34;&gt;ASF GSoC FAQ Page&lt;/a&gt; and on the &lt;a href=&#34;https://sourceforge.net/p/allura/wiki/Google%20Summer%20of%20Code/&#34;&gt;Allura GSoC Wiki page&lt;/a&gt;.&lt;/p&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>Blog a day or something... Proxy Pattern!</title>
+      <link>http://localhost:1313/python-proxy-pattern/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 UTC</pubDate>
+      
+      <guid>http://localhost:1313/python-proxy-pattern/</guid>
+      <description>&lt;p&gt;Been reading around and I guess November is the official blog entry a day writers month or something. I&amp;rsquo;ll make a go again. In October, I tried the one post a day run for my blog. I did well, but fell short in the end. Though I&amp;rsquo;ve already missed the first two days in November, I&amp;rsquo;ll call that the margin of error.&lt;/p&gt;
+
+&lt;p&gt;Oh and I believe the posts should have some meat to them. Not just another &amp;ldquo;Hey look, a post, I win November.&amp;rdquo; Though as a last resort, I am not above that.&lt;/p&gt;
+
+&lt;p&gt;So for lack of anything better to write about, here is an oldie but goodie. A Python implementation of the proxy pattern (&lt;a href=&#34;http://en.wikipedia.org/wiki/Lazy_loading#Virtual_proxy&#34;&gt;virtual proxy&lt;/a&gt;) with a real worldish feel to it.&lt;/p&gt;
+
+&lt;p&gt;First we define our ABC and subclass it for our needs.
+&lt;pre class=&#34;brush: py&#34;&gt;
+class File(object):
+    def load(self):
+        pass&lt;/p&gt;
+
+&lt;p&gt;class RealFile(File):
+    def &lt;strong&gt;init&lt;/strong&gt;(self, name):
+        self.name = name
+        self.load()&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;    def load(self):
+    print &amp;quot;Loading %s...&amp;quot; % (self.name)
+def process1(self):
+    print &amp;quot;[phase1] Processing %s...&amp;quot; % (self.name)
+def process2(self):
+    print &amp;quot;[phase2] Processing %s...&amp;quot; % (self.name)
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;&lt;/pre&gt;&lt;/p&gt;
+
+&lt;p&gt;Now, we can subclass File for our proxy. Now I know what you are saying. You don&amp;rsquo;t need the extra levels of abstraction because Python doesn&amp;rsquo;t have the levels of type sensitivity of other languages. Could you just implement this in the first RealFile subclass? Yes, but that isn&amp;rsquo;t the point of this. The verbosity helps define the example and keeps this implementation language independent (mostly).&lt;/p&gt;
+
+&lt;pre class=&#34;brush: py&#34;&gt;
+class ProxyFile(File):
+    def __init__(self, name):
+        self.name = name
+        self.file = None
+        
+    def process1(self):
+        if not self.file:
+            self.file = RealFile(self.name)
+        self.file.process1()
+
+    def process2(self):
+        if not self.file:
+            self.file = RealFile(self.name)
+        self.file.process2()
+&lt;/pre&gt;
+
+&lt;p&gt;So you can see, this hides away the details of loading the file. Allows the user to call process1 / process2 as the business logic determines and preforms lazy loading. The Proxy pattern is very powerful when combined with other patterns. Like &lt;a href=&#34;http://en.wikipedia.org/wiki/Null_Object_pattern&#34;&gt;Null Object&lt;/a&gt; and Lazy loading.&lt;/p&gt;
+
+&lt;pre class=&#34;brush: py&#34;&gt;
+def main():
+    f1 = ProxyFile(&#34;bigdb01.csv&#34;)
+    f2 = ProxyFile(&#34;bigdb02.csv&#34;)
+    f3 = ProxyFile(&#34;bigdb03.csv&#34;)
+    
+    f1.process1()
+    # some busines logic
+    f1.process2()
+    # more BL
+    f2.process2()
+    # more BL
+    f2.process1()
+    # Hey, we found what we needed, skipped f3
+    #f3.process()
+    
+if __name__ == &#39;__main__&#39;:
+    main()
+&lt;/pre&gt;
+
+&lt;p&gt;You can view full source at: &lt;a href=&#34;http://trac.pieceofpy.com/pieceofpy/browser/patterns/proxy.py&#34;&gt;http://trac.pieceofpy.com/pieceofpy/browser/patterns/proxy.py&lt;/a&gt;&lt;/p&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>Boost Python, Threads, and Releasing the GIL</title>
+      <link>http://localhost:1313/python-boost-gil/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 UTC</pubDate>
+      
+      <guid>http://localhost:1313/python-boost-gil/</guid>
+      <description>&lt;p&gt;
+After Beazley&#39;s talk at PyCon &amp;quot;Understanding the Python GIL&amp;quot; I released I had never done any work that released the GIL, spawned threads, did some work, and then restored the GIL. So I wanted to see if I could so something like that with Boost::Python and Boost::Thread and the type of performance I&#39;d get from it with an empty while loop as the baseline. So I hacked up some quick and dirty C++ code and quick bit of runable Python to test out the resulting module and away I went. Below are the code snippets, links to bitbucket, and the results of the Python runable.
+
+&lt;pre class=&#34;brush: cpp&#34;&gt;
+#include &lt;iostream&gt;
+#include &lt;vector&gt;
+#include &lt;boost/shared_ptr.hpp&gt;
+#include &lt;boost/thread.hpp&gt;
+#include &lt;boost/python.hpp&gt;
+
+class ScopedGILRelease {
+public:
+    inline ScopedGILRelease() { m_thread_state = PyEval_SaveThread(); }
+    inline ~ScopedGILRelease() {
+        PyEval_RestoreThread(m_thread_state);
+        m_thread_state = NULL;
+    }
+private:
+    PyThreadState* m_thread_state;
+};
+
+void loop(long count)
+{
+    while (count != 0) {
+        count -= 1;
+    }
+    return;
+}
+
+void nogil(int threads, long count)
+{
+    if (threads &lt;= 0 || count &lt;= 0)
+        return;
+    
+    ScopedGILRelease release_gil = ScopedGILRelease();
+    long thread_count = (long)ceil(count / threads);
+    
+    std::vector&lt;boost::shared_ptr&lt;boost::thread&gt; &gt; v_threads;
+    for (int i=0; i != threads; i++) {
+        boost::shared_ptr&lt;boost::thread&gt;
+        m_thread = boost::shared_ptr&lt;boost::thread&gt;(
+            new boost::thread(
+                boost::bind(loop,thread_count)
+            )
+        );
+        v_threads.push_back(m_thread);
+    }
+    
+    for (int i=0; i != v_threads.size(); i++)
+        v_threads[i]-&gt;join();
+    
+    return;
+}
+
+BOOST_PYTHON_MODULE(nogil)
+{
+    using namespace boost::python;
+    def(&#34;nogil&#34;, nogil);
+}
+&lt;/pre&gt;
+&lt;/p&gt;
+
+&lt;p&gt;
+Then I used the following Python script to run some quick tests.
+
+&lt;pre class=&#34;brush: py&#34;&gt;
+import time
+import nogil
+
+def timer(func):
+    def wrapper(*arg):
+        t1 = time.time()
+        func(*arg)
+        t2 = time.time()
+        print &#34;%s took %0.3f ms&#34; % (func.func_name, (t2-t1)*1000.0)
+    return wrapper
+
+@timer
+def loopone():
+    count = 5000000
+    while count != 0:
+        count -= 1
+
+@timer
+def looptwo():
+    count = 5000000
+    nogil.nogil(1,count)
+
+@timer
+def loopthree():
+    count = 5000000
+    nogil.nogil(2,count)
+
+@timer
+def loopfour():
+    count = 5000000
+    nogil.nogil(4,count)
+    
+@timer
+def loopfive():
+    count = 5000000
+    nogil.nogil(6,count)
+        
+def main():
+    loopone()
+    looptwo()
+    loopthree()
+    loopfour()
+    loopfive()
+    
+if __name__ == &#39;__main__&#39;:
+    main()
+&lt;/pre&gt;
+&lt;/p&gt;
+
+&lt;p&gt;
+The results I got were quite interesting and very consistent on my MacBook Pro. I ran the script about 1,000 times and got roughly the same results every time.
+
+&lt;pre class=&#34;brush: bash&#34;&gt;
+loopone took 364.159 ms (pure python)
+looptwo took 15.295 ms (c++, no GIL, single thread)
+loopthree took 7.763 ms (c++, no GIL, two threads)
+loopfour took 8.119 ms (c++, no GIL, four threads)
+loopfive took 11.102 ms (c++, no GIL, six threads)
+&lt;/pre&gt;
+&lt;/p&gt;
+
+&lt;p&gt;Anyway, that&amp;rsquo;s all really. Nothing profound here, no super insightful ending. Just hey look and stuff is faster and I might use this. All the code for this is available in my bitbucket repo. &lt;a href=&#34;http://bitbucket.org/wwitzel3/code/src/tip/nogil/&#34;&gt;http://bitbucket.org/wwitzel3/code/src/tip/nogil/&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;You will require Boost Library including Boost Python and Boost Thread as well as Python libraries and includes to build this. For boost, bjam &amp;ndash;with-python &amp;ndash;with-thread variant=release toolset=gcc is all I did on my Mac. Then I added the resulting lib&amp;rsquo;s as Framework dependencies in Xcode along with the Python.framework.&lt;/p&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>City and state lookup from zipcode</title>
+      <link>http://localhost:1313/python-city-state-lookup/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 UTC</pubDate>
+      
+      <guid>http://localhost:1313/python-city-state-lookup/</guid>
+      <description>&lt;p&gt;We wanted to be able to present the user with an input box for their zip and then determine the city state for that zipcode. We don&amp;rsquo;t care about city aliases we just want to get the proper city name. I was given a file from zip-codes.com and told to make it so. This was going to be rather simple and boring. Part of the requirement was to have a tuple returned that contained city, state, short state, and zip code when doing lookups. The other part was easily handling the infrequent updates. After looking at the &lt;a href=&#34;http://www.zip-codes.com/files/sample_database/zip-codes-database-STANDARD-SAMPLE.zip&#34;&gt;sample data&lt;/a&gt; and determining that their main file is CSV but all of their updates are sent out at Tab delimited. Honestly that made me happy because it was great excuse to use csv.Sniffer. So here is the Django model I ended up with.&lt;/p&gt;
+
+&lt;p&gt;
+&lt;pre class=&#34;brush: py&#34;&gt;
+from django.db import models
+from django.core.exceptions import ObjectDoesNotExist
+from csv import Sniffer, DictReader
+
+# Not sold on this name, but couldn&#39;t think of a better one.
+class Location(models.Model):
+    &#34;&#34;&#34;
+    location / zipcode lookup table
+    &#34;&#34;&#34;
+    
+    zipcode = models.CharField(max_length=5, unique=True, db_index=True)
+    city = models.CharField(max_length=150)
+    state = models.CharField(max_length=150)
+    state_abbrv = models.CharField(max_length=2)
+    
+    @classmethod
+    def load(cls, filename):
+        &#34;&#34;&#34;
+        reads filename, attempts to determine if it is comma or tab delimited
+        creates or updates records based on ZipCode and PrimaryRecord key pair
+        the following fields must exist in the file: ZipCode, PrimaryRecord,
+        CityMixedCase, StateFullName, State
+        &#34;&#34;&#34;
+        
+        csv_fd = open(filename, &#39;r&#39;)
+        
+        # grab the header for Sniffer
+        # reset the position back to the start of the file
+        csv_header = csv_fd.readline()
+        csv_fd.seek(0)
+        
+        # determine if we are CSV or Tab delimited
+        dialect = Sniffer().sniff(csv_header)
+        csv_dict = DictReader(csv_fd, dialect=dialect)
+        
+        for row in csv_dict:
+            if row[&#39;PrimaryRecord&#39;] == &#34;P&#34;:
+                zipcode = row[&#39;ZipCode&#39;]
+                ZL, created = cls.objects.get_or_create(zipcode=zipcode)
+                ZL.zipcode = zipcode
+                ZL.city = row[&#39;CityMixedCase&#39;]
+                ZL.state = row[&#39;StateFullName&#39;]
+                ZL.state_abbrv = row[&#39;State&#39;]
+                ZL.save()
+                
+    @classmethod
+    def lookup(cls, zipcode):
+        &#34;&#34;&#34;
+        given a zipcode will lookup, populate, and return a tuple with
+        city, state, zip information else return unavailable and searched zipcode
+        &#34;&#34;&#34;
+        
+        try:
+            zl = cls.objects.get(zipcode=zipcode)
+            return (zl.city, zl.state, zl.state_abbrv, zipcode)
+        except ObjectDoesNotExist:
+            return ((&#39;unavailable&#39;,) * 3) + (zipcode,)
+&lt;/pre&gt;
+&lt;/p&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>Code: Buffer CGI file uploads in Windows</title>
+      <link>http://localhost:1313/buffer-cgi-uploads/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 UTC</pubDate>
+      
+      <guid>http://localhost:1313/buffer-cgi-uploads/</guid>
+      <description>
+
+&lt;p&gt;Note to self, when handling CGI file uploads on a Windows machine, you need the following boiler plate to properly handler binary files.
+[sourcecode language=&amp;lsquo;python&amp;rsquo;]
+try: # Windows needs stdio set for binary mode.
+    import msvcrt
+    msvcrt.setmode (0, os.O_BINARY) # stdin  = 0
+    msvcrt.setmode (1, os.O_BINARY) # stdout = 1
+except ImportError:
+    pass
+[/sourcecode]
+Also, if you&amp;rsquo;re handling very large files and don&amp;rsquo;t want to eat up all your memory saving them using the copyfileobj method, you can use a generator to buffer read and write the file.&lt;/p&gt;
+
+&lt;p&gt;[sourcecode language=&amp;lsquo;python&amp;rsquo;]
+def buffer(f, sz=1024):
+    while True:
+        chunk = f.read(sz)
+        if not chunk: break
+        yield chunk&lt;/p&gt;
+
+&lt;h1 id=&#34;toc_0&#34;&gt;then use it like this &amp;hellip;&lt;/h1&gt;
+
+&lt;p&gt;for chunk in buffer(fp.file)
+[/sourcecode]&lt;/p&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>Code: Saving in memory file to disk</title>
+      <link>http://localhost:1313/memory-to-file/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 UTC</pubDate>
+      
+      <guid>http://localhost:1313/memory-to-file/</guid>
+      <description>
+
+&lt;p&gt;Okay, I discovered this today when looking to increase the speed at which uploaded documents were saved to disk. Now, I can&amp;rsquo;t explain the inner workings of why it is fast(er), all I know is that with the exact same form upload test ran 100 times with a 25MB file over a 100Mbit/s network this method was on average a whole 2.3 seconds faster over traditional methods of write, writelines, etc..&lt;/p&gt;
+
+&lt;p&gt;How does this extend to real-world production usage over external networks, well no idea. Though I plan to find out. So you all will be the first to know as soon as I find some guinea pig site that does enough file uploads to implement this on.
+[sourcecode language=&amp;lsquo;python&amp;rsquo;]&lt;/p&gt;
+
+&lt;h1 id=&#34;toc_0&#34;&gt;Minus some boiler plate for validity and variable setup.&lt;/h1&gt;
+
+&lt;p&gt;import os
+import shutil
+memory_file = request.POST[&amp;lsquo;upload&amp;rsquo;]
+disk_file = open(os.path.join(save_folder, save_name),&amp;lsquo;w&amp;rsquo;)
+shutil.copyfileobj(memory_file.file, disk_file)
+disk_file.close()
+[/sourcecode]&lt;/p&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>Concatenating PDF with Python</title>
+      <link>http://localhost:1313/python-concatenating-pdf/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 UTC</pubDate>
+      
+      <guid>http://localhost:1313/python-concatenating-pdf/</guid>
+      <description>&lt;p&gt;I need to concatenate a set of PDFs, I will take you through my standard issue Python development approach when doing something I&amp;rsquo;ve never done before in Python.&lt;/p&gt;
+
+&lt;p&gt;My first instinct was to google for pyPDF. Success! So, fore go reading any doc and just give the old easy_install a try.&lt;/p&gt;
+
+&lt;pre class=&#34;brush: bash&#34;&gt;
+$ sudo easy_install pypdf
+&lt;/pre&gt;
+
+&lt;p&gt;Another success! Ok, a couple help() calls later and I am ready to go. The end result is surprisingly small and seems to run fast enough even for PDFs with 50+ pages.&lt;/p&gt;
+
+&lt;pre class=&#34;brush: py&#34;&gt;
+from pyPdf import PdfFileWriter, PdfFileReader
+
+def append_pdf(input,output):
+    [output.addPage(input.getPage(page_num)) for page_num in range(input.numPages)]
+
+output = PdfFileWriter()
+append_pdf(PdfFileReader(file(&#34;sample.pdf&#34;,&#34;rb&#34;)),output)
+append_pdf(PdfFileReader(file(&#34;sample.pdf&#34;,&#34;rb&#34;)),output)
+
+output.write(file(&#34;combined.pdf&#34;,&#34;wb&#34;))
+&lt;/pre&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>Deploying Pylons with nginx</title>
+      <link>http://localhost:1313/deploy-pylons-nginx/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 UTC</pubDate>
+      
+      <guid>http://localhost:1313/deploy-pylons-nginx/</guid>
+      <description>&lt;p&gt;In preparation for a production deployment of a new Pylons app, I&amp;rsquo;ve been looking in to different deployment methods. In an effort to to be /. safe and Diggable when the new application launches, we&amp;rsquo;ve decided on 4 server deployment.&lt;/p&gt;
+
+&lt;p&gt;&lt;ul&gt;
+    &lt;li&gt;1 nginx server&lt;/li&gt;
+    &lt;li&gt;2 pylons (paster) servers&lt;/li&gt;
+    &lt;li&gt;1 postgresql server&lt;/li&gt;
+&lt;/ul&gt;
+I built nginx from the source without issues. The default install location of /usr/local/nginx works for me. You&amp;rsquo;ll need to make any init scripts and install them, see your platform doucmentation for how to do this. You&amp;rsquo;ll also want to be sure to add the new log dir to any log stats/consolidating/trimming jobs you run.&lt;/p&gt;
+
+&lt;p&gt;Here is the important parts of the nginx configuration for proxying to the Paster servers. Also be sure you adjust your keep alive and connection timeout settings, if you have just a standard Ajaxy Web 2.0 application, you&amp;rsquo;ll want to kick that down to 5 5 or 5 10. They default is way to high unless you&amp;rsquo;re doing constant streaming of live updates or something to that degree.&lt;/p&gt;
+
+&lt;pre&gt;
+worker_processes  2;
+events {
+    worker_connections  1024;
+}
+http {
+    client_body_timeout   5;
+    client_header_timeout 5;
+    keepalive_timeout     5 5;
+    send_timeout          5;
+    
+    tcp_nodelay on;
+    tcp_nopush  on;
+
+    gzip              on;
+    gzip_buffers      16 8k;
+    gzip_comp_level   1;
+    gzip_http_version 1.0;
+    gzip_min_length   0;
+    gzip_types        text/plain text/html text/css;
+    gzip_vary         on;
+
+    upstream pasters {
+        server 10.3.0.5:5010;
+        server 10.3.0.6:5011;
+    }
+    server {
+        listen       80;
+        server_name  localhost;
+
+        location / {
+            proxy_pass http://pasters;
+            proxy_redirect default;
+        }
+    }
+&lt;/pre&gt;
+
+&lt;p&gt;The paster servers are setup like this, I put them both in the same .ini and setup them up in the tpl. This lets me do an easy_install , setup-app based deployment without having to manually edit the ini to change the port numbers, which is error prone. This also lets you adjust and tune per server, instead of deploying 1 server section and changing it for each. Example would be if one server was way more powerful, you could tune it and then use the weighting in nginx to prefer that server. All without having to edit the ini after deployment.&lt;/p&gt;
+
+&lt;pre&gt;
+[server:main]
+use = egg:Paste#http
+host = 0.0.0.0
+port = 5010
+use_threadpool = True
+threadpool_workers = 10
+
+[server:main2]
+use = egg:Paste#http
+host = 0.0.0.0
+port = 5011
+use_threadpool = True
+threadpool_workers = 10
+&lt;/pre&gt;
+
+&lt;p&gt;Using 10 1000 on Apache bench gave me some good results. 85 requests per second to either of the standalone Paster servers. 185 requests per second when balanced with nginx. For fun, I deployed a third on my database server and was pleased to see 250 requests per second. Then I deployed 3 per server. So a total of 9 paster instances and was able to see 1080 requests per second. I also increased the thread of each from 10 to 25 , this uses more memory, but enables a higher RPS.&lt;/p&gt;
+
+&lt;p&gt;Getting closer to the estimated 2,500 needed to survive a /. and should survive the estimated 1,000 from a high Digg.&lt;/p&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>Dynamic and static typing with unit tests.</title>
+      <link>http://localhost:1313/tests-dynamic-static/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 UTC</pubDate>
+      
+      <guid>http://localhost:1313/tests-dynamic-static/</guid>
+      <description>&lt;p&gt;There is an on going discussion at the office with a team member who refuses to use dynamic languages. Claiming that most of his errors are typographical errors and they are caught by the compiler. So for him, since these errors are not caught until runtime, he throws and entire group of languages out the window. He also claims that to ensure that same level of checking with a dynamic language you would have to create more unit tests than normal to prevent introducing unhandled runtime exceptions.&lt;/p&gt;
+
+&lt;p&gt;So I decided to do a little test over the weekend. I created a very simple Number class in Python and C++. Using the exact same TDD development process, I implemented some very basic operations including division, addition, subtraction, etc&amp;hellip; I ended up with 12 tests. The exact same tests for both the C++ and Python implementation resulting in 100% of the executation path being covered. I decided that the compliation (in case of C++) and passing of the tests determined a success.&lt;/p&gt;
+
+&lt;p&gt;Then went back and inserted common typographical errors. Mistypes, extra = signs, not enough = signs, miseplled_varaibles, etc&amp;hellip; The end result was I was unable to get my unit tests passing while introducing syntax that would induce an unhandled runtime exception in Python. Granted, in C++ the compiler did catch a lot of things for me, but the point here is I didn&amp;rsquo;t have to create any extra tests to ensure that same level of confidence in my Python code.&lt;/p&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>Exercise even a programmer can do.</title>
+      <link>http://localhost:1313/programmers-exercise/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 UTC</pubDate>
+      
+      <guid>http://localhost:1313/programmers-exercise/</guid>
+      <description>&lt;p&gt;So I&amp;rsquo;ve been exercising lately. The last visit to the Dr. was a wake up call. 300 lb .. WHAT?! So, taking an iterative approach to exercise, I&amp;rsquo;ve manged to work up to 6-day a week cardio routine and a 3-day a week strength training routine and have gone from just over 300 lb. to 270 lb. in a couple months. Couple friends asked how I started and what I do, so I figure I&amp;rsquo;d break it down here.&lt;/p&gt;
+
+&lt;p&gt;I started by walking. 3 times a week for a couple weeks. Then after reading a Lifehacker post about a morning routine and matabolism, I added my very fast morning routine and actually eating breakfast to my day. Made it a whole week Monday-Friday. Then I bumped up the walking to Monday through Saturday. Did the morning routine and the walking for another week, then I bumped up the walking to targeted cardio 3 out of the 6 days and did that for another week. Added strength training 1 out of the 6 days and did that for another week. Switched from walking to cardio on all 6 days and + 1 more week. Then strength training 3 days out of the week. And slowly over about 3 months, I built up to this routine.&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;Every morning&lt;/strong&gt;
+&lt;i&gt;I do this right after eating breakfast&lt;/i&gt;
+2 sets, push-ups, 30 sec OR failure
+2 sets, scissor kicks, 1 minute OR failure&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;Monday through Saturday&lt;/strong&gt;
+2 minute warm up
+20 minutes of cardio (140-160 heart rate, check with your Dr.)
+2 minute cool down&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;Strength training&lt;/strong&gt;
+&lt;i&gt;This adds another 20 minutes to my workout, so schedule for that&lt;/i&gt;
+Monday - Push (chest, triceps)
+Wednesday - Pull (bicep, shoulders)
+Friday - Legs (legs and stomach)&lt;/p&gt;
+
+&lt;p&gt;Now, it is just habit. Also, I am sure there is some study somewhere to prove or disprove this, but I find it makes my mind much sharper. I am more alert through out the day and I sleep much better at night. Not to mention clothes fitting better and just feeling better. My personal goal is 250.&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;Python tip&lt;/strong&gt;
+Prefer xrange to range when you need an arbitrary number of iterations as range actually generates a list for you, this will consume memory and be more costly than xrange.&lt;/p&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>Fat models, skinny controllers</title>
+      <link>http://localhost:1313/fat-models-skinny-controllers/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 UTC</pubDate>
+      
+      <guid>http://localhost:1313/fat-models-skinny-controllers/</guid>
+      <description>&lt;p&gt;In the world of MVC and RESTful services, the old addage fat models, skinny controllers is something I&amp;rsquo;m sure you&amp;rsquo;ve constantly seen and read about. So what does it really mean? How do you benefit? Is it the silver bullet for MVC development? What are the draw backs?&lt;/p&gt;
+
+&lt;p&gt;Using the latest versions of Pylons and SQLalchemy (0.9.7rc2 and 0.5.0rc1 respectivly) we can implement this methodology pretty easily. We&amp;rsquo;ll use formencode schemas to handle the basic input validation and then keep our business logic in the controller itself.&lt;/p&gt;
+
+&lt;p&gt;Here is what a controller method using this concept might look like.&lt;/p&gt;
+
+&lt;p&gt;[sourcecode language=&amp;lsquo;python&amp;rsquo;]
+class MemberController(BaseController):&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;def __before__(self):
+    if session.has_key(&#39;memberid&#39;):
+        c.memberid = session[&#39;memberid&#39;]
+
+@validate(schema=model.forms.schema.SubscriptionSchema(), form=&#39;new&#39;)
+def create(self):
+    subscription = model.Subscription(c.memberid, **self.form_result)
+    meta.Session.save(subscription)
+    meta.Session.commit()
+    return redirect_to(controller=&#39;member&#39;, action=&#39;account&#39;)
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;[/sourcecode]&lt;/p&gt;
+
+&lt;p&gt;The schema validation affords us the luxury of being able to just pass our data directly to the model. The &lt;strong&gt;before&lt;/strong&gt; method checks the session for the memberid assigned at login and gives us access to it, further keeping our method nice and clean. The model would implement the business logic, in this case since this is creating a new subscription, it would just sum now() and deltatime(days=days) to determine the expired.&lt;/p&gt;
+
+&lt;p&gt;This model could later be expanded upon, say for example you added an upgrade methods to your controller. Now, the same subscription model could be used with some added logic. The model could now have a static prorate method to expire the existing account and make room for creating the new subscription. I&amp;rsquo;ve pushed the example source to my github, hopefully this will get your brain juices flowing. If I get bored, I&amp;rsquo;ll toss together a complete working example and check it in.&lt;/p&gt;
+
+&lt;p&gt;Source for this post can be found at
+&lt;a href=&#34;http://trac.pieceofpy.com/pieceofpy/browser/fat-models-skinny-controllers&#34;&gt;http://trac.pieceofpy.com/pieceofpy/browser/fat-models-skinny-controllers&lt;/a&gt;&lt;/p&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>Hooking up Whoosh and SQLalchemy (sawhoosh)</title>
+      <link>http://localhost:1313/sqlalchemy-whoosh/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 UTC</pubDate>
+      
+      <guid>http://localhost:1313/sqlalchemy-whoosh/</guid>
+      <description>
+
+&lt;p&gt;I was talking to Tim VanSteenburgh (we both do work for Geek.net) and he had a proof of concept for automatically updating a search index when a change happens to a model and pairing a unified search results page with that to make an easy one-stop search solution for a website. I thought this was a pretty cool idea, so I decided to do a implementation of it on top of the Pyramid framework and share it the readers of my blog. I choose Whoosh only so that I could have an easy way for users to try the project out. Since whoosh is pure python it installs when you run your setup.py develop. But this approach could be applied to any searching system. Tim was using solr.&lt;/p&gt;
+
+&lt;h2 id=&#34;toc_0&#34;&gt;Demo Project&lt;/h2&gt;
+
+&lt;p&gt;The purpose of the post is to summarize briefly the steps taken to achieve the desired results of automatically updating the index information when models change. Please browse the source and clone and run the project, looking at the source as a whole will definitely give you a better start to finish understanding than just reading this blog post.&lt;/p&gt;
+
+&lt;p&gt;GitHub: &lt;a href=&#34;https://github.com/wwitzel3/sawhoosh&#34;&gt;sawhoosh&lt;/a&gt;&lt;/p&gt;
+
+&lt;h2 id=&#34;toc_1&#34;&gt;Whooshing Your Models&lt;/h2&gt;
+
+&lt;p&gt;There are few parts that make up the magic of all this, but each part is really simple. First you have the index schema itself. This is setup to hold the unique ID of an item, as well as a pickled version of the uninstantiated class, and an aggregate of values (decided by you) that you want to be searchable for the item. The schema looks like this:&lt;/p&gt;
+
+&lt;pre class=&#34;brush: py&#34;&gt;
+class SawhooshSchema(SchemaClass):
+    value = TEXT
+    id = ID(stored=True, unique=True)
+    cls = ID(stored=True)
+&lt;/pre&gt;
+
+&lt;p&gt;In the Whoosh world this basically says store ID and CLS so it comes back with the search results, but not value. value will be what we will search over in order to find our results. We need to tell our models what attributes are important to use for indexing, I&amp;rsquo;ve chosen to do this with a whoosh_value property on the model itself.&lt;/p&gt;
+
+&lt;pre class=&#34;brush: py&#34;&gt;
+class Document(Base):
+    __tablename__ = &#39;document&#39;
+    __whoosh_value__ = &#39;id,title,content,author_id&#39;
+    id = Column(CHAR(32), primary_key=True, default=new_uuid)
+    title = Column(String, nullable=False)
+    content = Column(Text, nullable=False)
+    author_id = Column(Integer, ForeignKey(&#39;author.id&#39;), index=True)
+    def __str__(self):
+        return u&#39;Document - Title: {0}&#39;.format(self.title)
+&lt;/pre&gt;
+
+&lt;p&gt;This says make the id, title, content, and author_id for document all searchable values. This happens automatically for us because our Base class has a parent class that handles all of the Whoosh work. This parent class, I&amp;rsquo;ve called it SawhooshBase, handles all the indexing, reindexing, and deindexing of our models. The class itself looks like this:&lt;/p&gt;
+
+&lt;pre class=&#34;brush: py&#34;&gt;
+class SawhooshBase(object):
+    # The fields of the class you want to index (make searchable)
+    __whoosh_value__ = &#39;attribue,attribute,...&#39;
+    def index(self, writer):
+        id = u&#39;{0}&#39;.format(self.id)
+        cls = u&#39;{0}&#39;.format(pickle.dumps(self.__class__))
+        value = u&#39; &#39;.join([getattr(self, attr) for attr in self.__whoosh_value__.split(&#39;,&#39;)])
+        writer.add_document(id=id, cls=cls, value=value)
+    def reindex(self, writer):
+        id = u&#39;{0}&#39;.format(self.id)
+        writer.delete_by_term(&#39;id&#39;, self.id)
+        self.index(writer)
+    def deindex(self, writer):
+        id = u&#39;{0}&#39;.format(self.id)
+        writer.delete_by_term(&#39;id&#39;, self.id)
+        
+Base = declarative_base(cls=SawhooshBase)
+&lt;/pre&gt;
+
+&lt;p&gt;As you can see in the index method, we use the whoosh_value to create an aggregate of searchable strings and supply that to the value we defined in our search schema. We pickle the class and also store the ID. This is what later lets us easily take search results and turn them in to object instances.&lt;/p&gt;
+
+&lt;p&gt;Those methods above are only ever run by our SQLalchemy after_flush session event, though that is not to say you couldn&amp;rsquo;t run them manually. The callback and event hook looks like this:&lt;/p&gt;
+
+&lt;pre class=&#34;brush: py&#34;&gt;
+def update_indexes(session, flush_context):
+    writer = WIX.writer()
+    for i in session.new:
+        i.index(writer)
+    for i in session.dirty:
+        i.reindex(writer)
+    for i in session.deleted:
+        i.deindex(writer)        
+    writer.commit()
+event.listen(DBSession, &#39;after_flush&#39;, update_indexes)
+&lt;/pre&gt;
+
+&lt;p&gt;The WIX object you see being used here is created much the same way you create your DBSession and you can view that in the &lt;a href=&#34;https://github.com/wwitzel3/sawhoosh/blob/master/sawhoosh/search.py&#34;&gt;search.py&lt;/a&gt; file of the project. Everything else is pretty straight forward. Call the respective indexer methods for new, dirty, and deleted items in the session.&lt;/p&gt;
+
+&lt;h2 id=&#34;toc_2&#34;&gt;Using in the View&lt;/h2&gt;
+
+&lt;p&gt;Now we have our models all &lt;strong&gt;&lt;em&gt;whooshified&lt;/em&gt;&lt;/strong&gt; (technical term) and we want to have our users searching and displaying usable results. To start we have a simple search form that when submitted does a GET request to our search method with keywords. Now since the whoosh query parser is already smart enough to pickup things like AND and OR we don&amp;rsquo;t have to do much.&lt;/p&gt;
+
+&lt;p&gt;The view code itself is where we use another helper method called results_to_instance (also in &lt;a href=&#34;https://github.com/wwitzel3/sawhoosh/blob/master/sawhoosh/search.py&#34;&gt;search.py&lt;/a&gt;). This method takes our search results, unpickles the class, fetches the instance from the DB and places the result in to a list. That method looks like this:&lt;/p&gt;
+
+&lt;pre class=&#34;brush: py&#34;&gt;
+def results_to_instances(request, results):
+    instances = []
+    for r in results:
+        cls = pickle.loads(&#39;{0}&#39;.format(r.get(&#39;cls&#39;)))
+        id = r.get(&#39;id&#39;)
+        instance = request.db.query(cls).get(id)
+        instances.append(instance)
+    return instances
+&lt;/pre&gt;
+
+&lt;p&gt;Now this is where you see the benefit of pickling the class type with the search result. We have ready to use instances of multiple types from a single search result. We can pass them in to a template to render the results, but since we have a mix of instance types, we need a unified way to render them out without explicitly checking their type or using a series of if attribute checks. I decided I would use &lt;strong&gt;str&lt;/strong&gt; on the model to be a search results safe friendly way to display the object to the user and that I would define a route_name helper method on the model so that I can use request.route_url(object.route_name()) to generate the clickable links in the results. The combination of this can be viewed below:&lt;/p&gt;
+
+&lt;pre class=&#34;brush: html&#34;&gt;
+%if results:
+&lt;ul id=&#34;search_results&#34;&gt;
+% for r in results:
+    &lt;li&gt;&lt;a href=&#34;${request.route_url(r.route_name(), id=r.id)}&#34;&gt;${r}&lt;/a&gt;&lt;/li&gt;
+%endfor
+&lt;/ul&gt;
+%else:
+&lt;p&gt;No results found&lt;/p&gt;
+%endif
+&lt;/pre&gt;
+
+&lt;p&gt;And the view itself uses some things we haven&amp;rsquo;t talked about yet. QueryParser is just part of Whoosh and it is what turns your keywords in to something useful. request.ix is just a shortcut to our WIX object we created, we&amp;rsquo;ve added it using a custom Request class (same as we&amp;rsquo;ve done with db), you can see that in the &lt;a href=&#34;https://github.com/wwitzel3/sawhoosh/blob/master/sawhoosh/security.py&#34;&gt;security.py&lt;/a&gt; file of the project. From there we render the search results html and return it to our AJAX caller to inject in to the page. You can see this is also where we use the results_to_instances method discussed earlier.&lt;/p&gt;
+
+&lt;pre class=&#34;brush: py&#34;&gt;
+@view_config(route_name=&#39;search&#39;, renderer=&#39;json&#39;, xhr=True)
+def search_ajax(request):
+    query = request.params.get(&#39;keywords&#39;)
+    parser = QueryParser(&#39;value&#39;, request.ix.schema)
+    with request.ix.searcher() as searcher:
+        query = parser.parse(query)
+        results = searcher.search(query)
+        search_results_html=render(&#39;sawhoosh:templates/search/results.mako&#39;,
+                              dict(results=results_to_instances(request, results)),
+                              request=request)
+    return dict(search_results_html=search_results_html)
+&lt;/pre&gt;
+
+&lt;h2 id=&#34;toc_3&#34;&gt;Summary&lt;/h2&gt;
+
+&lt;p&gt;There you have it. A search indexer using SQLalchemy on top of Pyramid. I highly recommend you clone the git repo for this project or review the code using the Git website if you are interested in getting a start to finish feel. The project allows you to add Authors and Documents and Edit and Delete them all while updating the local search index stored in the a directory on the file system.&lt;/p&gt;
+
+&lt;p&gt;GitHub: &lt;a href=&#34;https://github.com/wwitzel3/sawhoosh&#34;&gt;sawhoosh&lt;/a&gt;&lt;/p&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>How-To: Python, Pylons, and Windows</title>
+      <link>http://localhost:1313/pylons-on-windows/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 UTC</pubDate>
+      
+      <guid>http://localhost:1313/pylons-on-windows/</guid>
+      <description>&lt;p&gt;A friend having issues installing Pylons on Windows XP with Python 2.6 gave me the idea to do this quick write up. So here it is, the 6 step method for running Pylons on Windows XP.
+&lt;ul&gt;
+    &lt;li&gt;Download &lt;a href=&#34;http://python.org&#34;&gt;Python&lt;/a&gt;.&lt;/li&gt;
+    &lt;li&gt;Add Python to your path and launch a command prompt.&lt;/li&gt;
+    &lt;li&gt;Download &lt;a href=&#34;http://peak.telecommunity.com/DevCenter/EasyInstall&#34;&gt;ez_setup.py&lt;/a&gt;, python ez_setup.py&lt;/li&gt;
+    &lt;li&gt;Download &lt;a href=&#34;http://pypi.python.org/pypi/simplejson&#34;&gt;simplejson&lt;/a&gt;, python setup.py &amp;ndash;without-speedups install&lt;/li&gt;
+    &lt;li&gt;easy_install Pylons&lt;/li&gt;
+        &lt;li&gt;easy_install formbuild&lt;/li&gt;
+    &lt;li&gt;Do a quick test; paster create &amp;ndash;template=pylons&lt;/li&gt;
+&lt;/ul&gt;
+And that is all she wrote. Pretty easy. The reason we install simplejson seperate is because the default behavior is to build with speedups and well .. by default, that behavior won&amp;rsquo;t work on a standard Windows XP machine. So we install it seperate to avoid any conflicts.&lt;/p&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>Jython 2.5 and snakefight for deploying Pylons w/ SQLAlchemy &#43; Oracle.</title>
+      <link>http://localhost:1313/jython-snakefight-pylons/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 UTC</pubDate>
+      
+      <guid>http://localhost:1313/jython-snakefight-pylons/</guid>
+      <description>
+
+&lt;p&gt;&lt;strong&gt;UPDATE / 13 March 2009: &lt;/strong&gt;&lt;a href=&#34;http://pypi.python.org/pypi/snakefight&#34;&gt;snakefight 0.3&lt;/a&gt; now has a &amp;ndash;include-jar option, prefer that to using my hack.&lt;/p&gt;
+
+&lt;p&gt;After reading &lt;a href=&#34;http://dunderboss.blogspot.com/2009/03/deploying-pylons-apps-to-java-servlet.html&#34;&gt;P. Jenvey&amp;rsquo;s blog post about Deploying Pylons Apps to Java Servlet Containers&lt;/a&gt; I immediately downloaded the Jython 2.5 beta and installed snakefight to give it a try. One of our services where I work is a Pylons based application. It is deployed using paster and Apache ProxyPass. Our main application is written in Java and is deployed as a war under Jetty. So if I can get my Pylons application built as a war and deployed that way, it would greatly simplify our deployment process.&lt;/p&gt;
+
+&lt;p&gt;[sourcecode language=&amp;ldquo;bash&amp;rdquo;]
+$ sudo /opt/jython25/bin/easy_install snakefight
+$ /opt/jython25/bin/jython setup.py develop
+$ /opt/jython25/bin/jython setup.py bdist_war &amp;ndash;paster-config dev_r2.ini
+&amp;hellip; output of success and stuff &amp;hellip;
+$ cp dist/project-0.6.8dev.war /opt/jetty/webapps
+[/sourcecode]&lt;/p&gt;
+
+&lt;p&gt;Now I visit my local server and hit the project context. I get some database errors, kind of expected them. So for the time being, I&amp;rsquo;ll be running this directly using Jython to speed up the debugging process. A quick googling of my DB issues turns up &lt;a href=&#34;http://pylonshq.com/pasties/77c3184b14d6936d86d13e4e65df92d2&#34;&gt;zxoracle for SQLalchemy&lt;/a&gt; which uses Jython zxJDBC. I install that in to sqlalchemy/databases as zxoracle.py and give it another go. Changing the oracle:// lines in my .ini file to now read zxoracle:// Now it can&amp;rsquo;t find the 3rd party Oracle libraries (ojdbc.jar).&lt;/p&gt;
+
+&lt;p&gt;[sourcecode]
+$ cd ./dist
+$ jar xf project-0.6.8dev.war
+$ cd WEB-INF/lib
+$ ls&lt;/p&gt;
+
+&lt;h1 id=&#34;toc_0&#34;&gt;no ojdbc.jar as expected &amp;hellip;&lt;/h1&gt;
+
+&lt;p&gt;$ cd ~/project
+$ export CLASSPATH=/opt/jython25/jython.jar:/usr/lib/jvm/java/jre/lib/ext/ojdbc.jar
+$ /opt/jython25/bin/jython /opt/jython25/bin/paster serve &amp;ndash;reload dev_r2.ini
+[/sourcecode]&lt;/p&gt;
+
+&lt;p&gt;Now it is looking a little better and it able to find the jar, but still a DB issue, now with SQLalchemy library. Not having a ton of time to investigate, I decide to try rolling back my SQAlachemy version for Jython. Turns out rolling back to 0.5.0 fixed the issue. I&amp;rsquo;ll be investigating why it was breaking with 0.5.2 soon &amp;trade;. So now I rerun it, and get a new error.&lt;/p&gt;
+
+&lt;p&gt;[sourcecode lang=&amp;ldquo;bash&amp;rdquo;]
+AttributeError: &amp;lsquo;ZXOracleDialect&amp;rsquo; object has no attribute &amp;lsquo;optimize_limits&amp;rsquo;
+[/sourcecode]&lt;/p&gt;
+
+&lt;p&gt;I decide I am just going to go in to the &lt;a href=&#34;http://trac.pieceofpy.com/pieceofpy/browser/snakefight-java-libs&#34;&gt;zxoracle.py and add optimize_limits = False to the ZXOracleDialect&lt;/a&gt;. No idea what this breaks or harms, but I do it anyway and rerun the application. Success! Every thing is working now. No liking the idea of having to manually insert the Oracle jar in to the WEB-INF/lib and not really wanting to much around with environment variables, I also implemented a quick and dirty include-java-libs for snakefight, the diff for command.py is below. This allows me to pass in a : separated list of jars to include in the WEB-INF/lib. &lt;strong&gt;EDIT: &lt;/strong&gt;The diff I posted isn&amp;rsquo;t needed since I put it on my hg repo. &lt;a href=&#34;http://trac.pieceofpy.com/pieceofpy/browser/snakefight-java-libs&#34;&gt;You can grab it from here.&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;So now I am back to building my war. Just as before.
+[sourcecode lang=&amp;ldquo;bash&amp;rdquo;]
+$ /opt/jython25/bin/jython setup.py bdist_war &amp;ndash;paste-config dev_r2.ini &amp;ndash;include-java-libs /opt/jython25/extlibs/ojdbc.jar
+running bdist_war
+creating build/bdist.java1.6.0_12
+creating build/bdist.java1.6.0_12/war
+creating build/bdist.java1.6.0_12/war/WEB-INF
+creating build/bdist.java1.6.0_12/war/WEB-INF/lib-python
+running easy_install project
+adding eggs (to WEB-INF/lib-python)
+adding jars (to WEB-INF/lib)
+adding WEB-INF/lib/jython.jar
+adding Paste ini file (to dev_r2.ini)
+adding Paste app loader (to WEB-INF/lib-python/____loadapp.py)
+generating deployment descriptor
+adding deployment descriptor (WEB-INF/web.xml)
+created dist/project-0.6.8dev-py2.5.war
+$ cp dist/project-0.6.8dev-py2.5.war /opt/jetty/webapps
+$ sudo /sbin/service jetty restart
+[/sourcecode]&lt;/p&gt;
+
+&lt;p&gt;And presto! I am in business. My pylons application is deployed under Jetty and all the &lt;a href=&#34;http://seleniumhq.org/&#34;&gt;selenium functional tests&lt;/a&gt; are passing. I am sure there is probably a easier, neater, or cleaner way to do all this, but this was my first iteration through and also my first time ever deploying a WAR to a java servlet container so all in all I am happy with the results. Performance seems about the same as when running the application with paster serve, but Jetty does use a little more memory than before (expected I guess).&lt;/p&gt;
+</description>
+    </item>
+    
+  </channel>
+</rss>

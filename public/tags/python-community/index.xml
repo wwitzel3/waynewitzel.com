@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+      <title>Python Community on occasional posts about technology </title>
+      <generator uri="https://gohugo.io">Hugo</generator>
+    <link>http://localhost:1313/tags/python-community/index.xml</link>
+    <language>en-us</language>
+    
+    
+    <updated>Mon, 01 Jan 0001 00:00:00 UTC</updated>
+    
+    <item>
+      <title>Python 3.0 (final) release.</title>
+      <link>http://localhost:1313/python-30-release/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 UTC</pubDate>
+      
+      <guid>http://localhost:1313/python-30-release/</guid>
+      <description>&lt;p&gt;As I am sure most of you have heard &lt;a href=&#34;http://www.python.org/download/releases/3.0/&#34;&gt;Python 3.0 (final)&lt;/a&gt; has been released. For me, this means some nights getting some continuing development projects updated for the language changes and freezing some projects in maintence mode with their own copy of Python 2.6 (or in some cases 2.4).&lt;/p&gt;
+
+&lt;p&gt;Some highlights
+&lt;ul&gt;
+    &lt;li&gt;print is now a function: print(&amp;ldquo;5x5&amp;rdquo;, &amp;ldquo;is&amp;rdquo;, 5*5, sep=&amp;rdquo; &amp;ldquo;)&lt;/li&gt;
+    &lt;li&gt;annotations for methods (I create a lot of libraries, so this is great!)&lt;/li&gt;
+    &lt;li&gt;extended unpacking: x, y , *z = [1,2,3,4,5] now x is 1, y is 2, and z is 3-5&lt;/li&gt;
+    &lt;li&gt;&amp;lt;&amp;gt; removed, use != (personal favorite cause I hate &amp;lt;&amp;gt;)&lt;/li&gt;
+    &lt;li&gt;no longer can you from import * inside functions&lt;/li&gt;
+&lt;/ul&gt;
+See the whole list here: &lt;a href=&#34;http://docs.python.org/3.0/whatsnew/3.0.html&#34;&gt;http://docs.python.org/3.0/whatsnew/3.0.html&lt;/a&gt;&lt;/p&gt;
+</description>
+    </item>
+    
+  </channel>
+</rss>

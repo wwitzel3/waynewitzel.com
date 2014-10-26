@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+      <title>Python Brainstorm on occasional posts about technology </title>
+      <generator uri="https://gohugo.io">Hugo</generator>
+    <link>http://localhost:1313/tags/python-brainstorm/index.xml</link>
+    <language>en-us</language>
+    
+    
+    <updated>Mon, 01 Jan 0001 00:00:00 UTC</updated>
+    
+    <item>
+      <title>Keeping a Kitchen: A programmers approach.</title>
+      <link>http://localhost:1313/programmers-kitchen/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 UTC</pubDate>
+      
+      <guid>http://localhost:1313/programmers-kitchen/</guid>
+      <description>&lt;p&gt;&lt;strong&gt;A recipe site to end all recipe sites?&lt;/strong&gt;
+After going through piles of recipe and food sites I found absolutely nothing that met my needs, be it a pay site or a free site. Nothing did what I was looking for. After speaking to some friends and family, throwing around my ideas, I decided that was I was looking for wasn&amp;rsquo;t all that far fetched, just no one has really taken the time to do it.&lt;/p&gt;
+
+&lt;p&gt;First, lets cover what is how there.
+&lt;ul&gt;
+    &lt;li&gt;Recipe sites (tons)&lt;/li&gt;
+    &lt;li&gt;Diet sites (tons)&lt;/li&gt;
+    &lt;li&gt;Kitchen/pantry inventory sites (a few)&lt;/li&gt;
+&lt;/ul&gt;
+Doing some quick Google searches for those terms and you&amp;rsquo;ll find yourself piles of links. You&amp;rsquo;ll find plenty of sites that do food tracking for diets, plenty that do recipes, some that combine diets with recipes, but none that combine all three.&lt;/p&gt;
+
+&lt;p&gt;What I want from a site
+&lt;ul&gt;
+    &lt;li&gt; Recipe database&lt;/li&gt;
+    &lt;li&gt;Item database (for recipes and shopping lists)&lt;/li&gt;
+    &lt;li&gt;Ability to add new recipes&lt;/li&gt;
+    &lt;li&gt;Ability to edit existing recipes&lt;/li&gt;
+    &lt;li&gt;Kitchen/pantry inventory (barcodes?)&lt;/li&gt;
+    &lt;li&gt;Daily, Weekly, Monthly food planning&lt;/li&gt;
+    &lt;li&gt;Sensible shopping lists (more on this)&lt;/li&gt;
+&lt;/ul&gt;
+That is a fairly short list and I was unable to find all those elements in any site. As for those sites that had some of the elements, most were over complicated and far from intuitive to use.&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;Sensible shopping lists&lt;/strong&gt;
+Ok, simple example. Lets say you add the Chips and Salsa recipe to your list of items you&amp;rsquo;re eating this week. Your pantry inventory doesn&amp;rsquo;t contain chips or salsa. Most sites that incorporate recipes and shopping lists will give you a shopping list like this
+&lt;ul&gt;
+    &lt;li&gt; &lt;sup&gt;1&lt;/sup&gt;&amp;frasl;&lt;sub&gt;2&lt;/sub&gt; cup Salsa&lt;/li&gt;
+    &lt;li&gt;10 tortilla chips&lt;/li&gt;
+&lt;/ul&gt;
+OR it will just remove the quantities
+&lt;ul&gt;
+    &lt;li&gt; Salsa&lt;/li&gt;
+    &lt;li&gt;Tortilla Chips&lt;/li&gt;
+&lt;/ul&gt;
+The second one isn&amp;rsquo;t actually that bad, because that is what you need. The problem with the second list is when you already have Salsa or Tortilla chips. Most sites have no tie in to kitchen inventory. This site, if used religiously for all your recipes and meals would provide an accurate shopping list for all meals planned based on the shopping list you choose to receive.&lt;/p&gt;
+
+&lt;p&gt;This means you could enter in all your recipes, plan your meals for 3-months, and bring out 1 week or 2 week lists. As you mark meals cooked for each day, the lists will dynamically update to provide accurate inventory tracking.&lt;/p&gt;
+</description>
+    </item>
+    
+  </channel>
+</rss>

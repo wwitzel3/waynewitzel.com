@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+      <title>Posts on occasional posts about technology </title>
+      <generator uri="https://gohugo.io">Hugo</generator>
+    <link>http://localhost:1313/post/index.xml</link>
+    <language>en-us</language>
+    
+    
+    <updated>Sat, 25 Oct 2014 16:37:16 EDT</updated>
+    
+    <item>
+      <title>Migrating to Hugo</title>
+      <link>http://localhost:1313/post/migration/</link>
+      <pubDate>Sat, 25 Oct 2014 16:37:16 EDT</pubDate>
+      
+      <guid>http://localhost:1313/post/migration/</guid>
+      <description>&lt;p&gt;Sometimes I think the only reason I actually keep this blog around is that I can continue to
+play with different content systems and migrating between them. That said, I am slowly migrating
+all of the existing content for waynewitzel.com over to &lt;a href=&#34;http://gohugo.io&#34;&gt;Hugo&lt;/a&gt;. Hugo is a
+static site generator written in Go. It is fast, customizable, and very easy to use.&lt;/p&gt;
+</description>
+    </item>
+    
+  </channel>
+</rss>

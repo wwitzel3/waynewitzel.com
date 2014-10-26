@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+      <title>Python Code Rest Crud on occasional posts about technology </title>
+      <generator uri="https://gohugo.io">Hugo</generator>
+    <link>http://localhost:1313/tags/python-code-rest-crud/index.xml</link>
+    <language>en-us</language>
+    
+    
+    <updated>Mon, 01 Jan 0001 00:00:00 UTC</updated>
+    
+    <item>
+      <title>RESTful Pylons</title>
+      <link>http://localhost:1313/restful-pylons/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 UTC</pubDate>
+      
+      <guid>http://localhost:1313/restful-pylons/</guid>
+      <description>&lt;p&gt;In the process of creating a new web service for the purpose of allowing external applications to communicate with my site, I realized I was going against the grain and making things harder for myself than they had to be.&lt;/p&gt;
+
+&lt;p&gt;Pylons and Python make it so easy to just start pounding out code you can be half way through an implementation before you realize it is broke, or reinventing something that already exists, or just plain sucks.&lt;/p&gt;
+
+&lt;p&gt;So, I do a commit to my local repository, Ctrl+A and hit delete. Lets try this over. I take a step back and look at what we need to do.&lt;/p&gt;
+
+&lt;p&gt;We have a Kill object. This is a representation of a Ship a Pilot and another or many other Ship(s) and Pilot(s) who destroyed this ship and where and why the did it. That is the verbose text version of a kill. My remote service wants to perform CRUD operations on this model. I have all this implemented already, the controllers for my views do all of this .. so why not copy them and just give them some tweaks and expose these new methods under a poorly named controller? Great idea! .. Not so much.&lt;/p&gt;
+
+&lt;p&gt;So, the solution, create a new &lt;a href=&#34;http://en.wikipedia.org/wiki/Representational_State_Transfer&#34;&gt;REST&lt;/a&gt; controller in Pylons. Pylons does all the heavy lifting for you with a simple command, the only thing you need to do is update your routing.py to include the new resource. You create the REST controller just like you would a normal, but using restcontroller instead of controller and adding and extra variable for the name of the resource. Usually a plural of your model.&lt;/p&gt;
+
+&lt;p&gt;&lt;code&gt;# paster restcontroller kill kills
+Creating wayne\qkb\controllers\kills.py
+Creating wayne\qkb\tests\functional\test_kills.py
+To create the appropriate RESTful mapping, add a map statement to your
+config/routing.py file near the top like this:
+map.resource(&amp;lsquo;kill&amp;rsquo;, &amp;lsquo;kills&amp;rsquo;)&lt;/code&gt;&lt;/p&gt;
+
+&lt;p&gt;Ok, so what did that give us? Well, basically everthing we need. If you pop open kills.py in your controllers, you&amp;rsquo;ll see it already has sketched out the methods you&amp;rsquo;ll be implementing for your kills resource and also gives you a reminder to update your routing.py&lt;/p&gt;
+
+&lt;p&gt;From here, it is rather simple. Just implement the responses in each of the methods that your external application will need. Don&amp;rsquo;t forget to change the formats from HTML if you aren&amp;rsquo;t going to be sending back to a browser or HTML parser. Example of the index implementation. Which would be called using a GET to /kills under the default routing.
+[sourcecode language=&amp;ldquo;python&amp;rdquo;]
+def index(self, format=&amp;lsquo;xml&amp;rsquo;):
+    &amp;ldquo;&amp;rdquo;&amp;ldquo;GET /kills: All items in the collection.&amp;ldquo;&amp;rdquo;&amp;rdquo;
+    # url_for(&amp;lsquo;kills&amp;rsquo;)
+    kill_q = meta.Session.query(model.Kill)
+    c.kills = kill_q.all()
+    return render(&amp;lsquo;/derived/kills/list.xml&amp;rsquo;)
+[/sourcecode]&lt;/p&gt;
+
+&lt;p&gt;Following this pattern, I implement the rest of my resource methods and end up with a fully functional resource with in minutes. Not only was this faster to live than modifying the methods that were designed for handling posts from the view layer, it also creates a much cleaner exposure of the Kill model to external services. Heres the implementation of create, which is /kills with the POST method.&lt;/p&gt;
+
+&lt;p&gt;[sourcecode language=&amp;ldquo;python&amp;rdquo;]
+def create(self):
+    &amp;ldquo;&amp;rdquo;&amp;ldquo;POST /kills: Create a new item.&amp;ldquo;&amp;rdquo;&amp;rdquo;
+    # url_for(&amp;lsquo;kills&amp;rsquo;)
+    try:
+       params = model.forms.schema.KillSchema.\
+                to_python(request.params)
+       kill = model.Kill(**params)
+       meta.Session.save(kill)
+       meta.Session.commit()
+       c.killid = kill.id
+       return render(&amp;lsquo;/derived/kill/create.xml&amp;rsquo;)
+    except formencode.Invalid, e:
+       c.errors = e.errors_dict() or {}
+       return render(&amp;lsquo;/derived/kill/error.xml&amp;rsquo;)
+[/sourcecode]&lt;/p&gt;
+</description>
+    </item>
+    
+  </channel>
+</rss>

@@ -1,0 +1,195 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+      <title>Code on occasional posts about technology </title>
+      <generator uri="https://gohugo.io">Hugo</generator>
+    <link>http://localhost:1313/categories/code/index.xml</link>
+    <language>en-us</language>
+    
+    
+    <updated>Mon, 01 Jan 0001 00:00:00 UTC</updated>
+    
+    <item>
+      <title>Code: Buffer CGI file uploads in Windows</title>
+      <link>http://localhost:1313/buffer-cgi-uploads/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 UTC</pubDate>
+      
+      <guid>http://localhost:1313/buffer-cgi-uploads/</guid>
+      <description>
+
+&lt;p&gt;Note to self, when handling CGI file uploads on a Windows machine, you need the following boiler plate to properly handler binary files.
+[sourcecode language=&amp;lsquo;python&amp;rsquo;]
+try: # Windows needs stdio set for binary mode.
+    import msvcrt
+    msvcrt.setmode (0, os.O_BINARY) # stdin  = 0
+    msvcrt.setmode (1, os.O_BINARY) # stdout = 1
+except ImportError:
+    pass
+[/sourcecode]
+Also, if you&amp;rsquo;re handling very large files and don&amp;rsquo;t want to eat up all your memory saving them using the copyfileobj method, you can use a generator to buffer read and write the file.&lt;/p&gt;
+
+&lt;p&gt;[sourcecode language=&amp;lsquo;python&amp;rsquo;]
+def buffer(f, sz=1024):
+    while True:
+        chunk = f.read(sz)
+        if not chunk: break
+        yield chunk&lt;/p&gt;
+
+&lt;h1 id=&#34;toc_0&#34;&gt;then use it like this &amp;hellip;&lt;/h1&gt;
+
+&lt;p&gt;for chunk in buffer(fp.file)
+[/sourcecode]&lt;/p&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>Code: Saving in memory file to disk</title>
+      <link>http://localhost:1313/memory-to-file/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 UTC</pubDate>
+      
+      <guid>http://localhost:1313/memory-to-file/</guid>
+      <description>
+
+&lt;p&gt;Okay, I discovered this today when looking to increase the speed at which uploaded documents were saved to disk. Now, I can&amp;rsquo;t explain the inner workings of why it is fast(er), all I know is that with the exact same form upload test ran 100 times with a 25MB file over a 100Mbit/s network this method was on average a whole 2.3 seconds faster over traditional methods of write, writelines, etc..&lt;/p&gt;
+
+&lt;p&gt;How does this extend to real-world production usage over external networks, well no idea. Though I plan to find out. So you all will be the first to know as soon as I find some guinea pig site that does enough file uploads to implement this on.
+[sourcecode language=&amp;lsquo;python&amp;rsquo;]&lt;/p&gt;
+
+&lt;h1 id=&#34;toc_0&#34;&gt;Minus some boiler plate for validity and variable setup.&lt;/h1&gt;
+
+&lt;p&gt;import os
+import shutil
+memory_file = request.POST[&amp;lsquo;upload&amp;rsquo;]
+disk_file = open(os.path.join(save_folder, save_name),&amp;lsquo;w&amp;rsquo;)
+shutil.copyfileobj(memory_file.file, disk_file)
+disk_file.close()
+[/sourcecode]&lt;/p&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>Concatenating PDF with Python</title>
+      <link>http://localhost:1313/python-concatenating-pdf/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 UTC</pubDate>
+      
+      <guid>http://localhost:1313/python-concatenating-pdf/</guid>
+      <description>&lt;p&gt;I need to concatenate a set of PDFs, I will take you through my standard issue Python development approach when doing something I&amp;rsquo;ve never done before in Python.&lt;/p&gt;
+
+&lt;p&gt;My first instinct was to google for pyPDF. Success! So, fore go reading any doc and just give the old easy_install a try.&lt;/p&gt;
+
+&lt;pre class=&#34;brush: bash&#34;&gt;
+$ sudo easy_install pypdf
+&lt;/pre&gt;
+
+&lt;p&gt;Another success! Ok, a couple help() calls later and I am ready to go. The end result is surprisingly small and seems to run fast enough even for PDFs with 50+ pages.&lt;/p&gt;
+
+&lt;pre class=&#34;brush: py&#34;&gt;
+from pyPdf import PdfFileWriter, PdfFileReader
+
+def append_pdf(input,output):
+    [output.addPage(input.getPage(page_num)) for page_num in range(input.numPages)]
+
+output = PdfFileWriter()
+append_pdf(PdfFileReader(file(&#34;sample.pdf&#34;,&#34;rb&#34;)),output)
+append_pdf(PdfFileReader(file(&#34;sample.pdf&#34;,&#34;rb&#34;)),output)
+
+output.write(file(&#34;combined.pdf&#34;,&#34;wb&#34;))
+&lt;/pre&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>Pylons and long-live AJAX request.</title>
+      <link>http://localhost:1313/pylons-polling-ajax/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 UTC</pubDate>
+      
+      <guid>http://localhost:1313/pylons-polling-ajax/</guid>
+      <description>&lt;p&gt;So I am playing around in Firefox with XMLHttpRequest. Looking in to a way to facilate a server update to a client without have to refresh the page or use Javascript timers. So the long-live HTTP request seems the way to go.&lt;/p&gt;
+
+&lt;p&gt;This little app will at most have 20-30 connections at once, so I am not worried about the open connection per client. The data it calculates is rather large and intensive to gather, so I paired it with the cache decorator snippet found on ActiveState and used in Expert Python Programming. This example feeds a cached datetime string. The caching lets different client receive the same data during the cache process. There is some lag between the updates since they all set their sleep at different points, there may be away around this though.&lt;/p&gt;
+
+&lt;p&gt;So here is my basic index.html.
+[sourcecode language=&amp;ldquo;html&amp;rdquo;]
+&lt;body&gt;
+&lt;em&gt;This will push data from the server to you every 5 seconds .. enjoy!&lt;/em&gt;
+&lt;ul id=&#34;container&#34;&gt;&lt;/ul&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;script&gt;
+var div = document.getElementById(&amp;lsquo;container&amp;rsquo;);
+function handleContent(event)
+{
+  var xml_packet = event.target.responseXML.documentElement;
+  div.innerHTML += &amp;lsquo;&lt;li&gt;&amp;rsquo; + xml_packet.childNodes[0].data + &amp;lsquo;&lt;/li&gt;&amp;rsquo;;
+}
+(function () {
+    var xrequest = new XMLHttpRequest();
+    xrequest.multipart = true;
+    xrequest.open(&amp;ldquo;GET&amp;rdquo;,&amp;ldquo;/server/index&amp;rdquo;,false);
+    xrequest.onload = handleContent;
+    xrequest.send(null);
+})();&lt;/p&gt;
+
+&lt;p&gt;&lt;/script&gt;
+&lt;/body&gt;
+[/sourcecode]&lt;/p&gt;
+
+&lt;p&gt;Now the controller code itself.
+[sourcecode language=&amp;ldquo;python&amp;rdquo;]
+class ServerController(BaseController):&lt;br /&gt;
+    def index(self):
+        response.headers[&amp;lsquo;Content-type&amp;rsquo;] = &amp;lsquo;multipart/x-mixed-replace;boundary=test&amp;rsquo;
+        return data_stream()&lt;/p&gt;
+
+&lt;p&gt;def data_stream(stream=True):
+    yield datetime_string()&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;while stream:
+    time.sleep(5)
+    yield datetime_string()
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;@memorize(duration=15)
+def datetime_string():&lt;br /&gt;
+    content = &amp;lsquo;&amp;ndash;test\nContent-type: application/xml\n\n&amp;rsquo;
+    content += &amp;lsquo;&amp;lt;?xml version=\&amp;lsquo;1.0\&amp;rsquo; encoding=\&amp;lsquo;ISO-8859-1\&amp;lsquo;?&amp;gt;\n&amp;rsquo;
+    content += &amp;lsquo;&lt;message&gt;&amp;rsquo; + str(datetime.datetime.now()) + &amp;lsquo;&lt;/message&gt;\n&amp;rsquo;
+    content += &amp;lsquo;&amp;ndash;test\n&amp;rsquo;&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;return content
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;[/sourcecode]&lt;/p&gt;
+
+&lt;p&gt;Also the decorator code for good measure.
+[sourcecode language=&amp;ldquo;python&amp;rdquo;]
+cache = {}&lt;/p&gt;
+
+&lt;p&gt;def is_old(entry, duration):
+    return time.time() - entry[&amp;lsquo;time&amp;rsquo;] &amp;gt; duration&lt;/p&gt;
+
+&lt;p&gt;def compute_key(function, args, kw):
+    key = pickle.dumps((function.func_name, args, kw))
+    return hashlib.sha1(key).hexdigest()&lt;/p&gt;
+
+&lt;p&gt;def memorize(duration=10):
+    def _memorize(function):
+        def __memorize(*args, **kw):
+            key = compute_key(function, args, kw)&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;        if (key in cache and not is_old(cache[key], duration)):
+            return cache[key][&#39;value&#39;]
+        result = function(*args, **kw)
+        cache[key] = {&#39;value&#39;: result, &#39;time&#39;:time.time()}
+        return result
+    return __memorize
+return _memorize
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;[/sourcecode]&lt;/p&gt;
+
+&lt;p&gt;Full working demo will be available in the HG repos shortly.&lt;/p&gt;
+</description>
+    </item>
+    
+  </channel>
+</rss>

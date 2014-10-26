@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+      <title>Sqlalchemy Pylons Json on occasional posts about technology </title>
+      <generator uri="https://gohugo.io">Hugo</generator>
+    <link>http://localhost:1313/tags/sqlalchemy-pylons-json/index.xml</link>
+    <language>en-us</language>
+    
+    
+    <updated>Mon, 01 Jan 0001 00:00:00 UTC</updated>
+    
+    <item>
+      <title>SQLalchemy and JSON w/ Pylons - Best Practices</title>
+      <link>http://localhost:1313/sqlalchemy-pylons-best-practices/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 UTC</pubDate>
+      
+      <guid>http://localhost:1313/sqlalchemy-pylons-best-practices/</guid>
+      <description>
+
+&lt;p&gt;I asked the question I Stackoverflow and maybe it was too generic for the site, since it just got trolled with &amp;ldquo;Google keyword&amp;rdquo; by some d-bag. So I deleted it and figured I&amp;rsquo;d throw it up on my blog a see about getting some feedback from the people who read this pile about. The reason I ask this is mainly because I am preparing to do some updated screencasts for Pylons.&lt;/p&gt;
+
+&lt;p&gt;I&amp;rsquo;ve seen multiple ways referenced in official docs and I have done it a few different ways myself. I am using Pylons and I am curious what the best practices are for this common scenario?&lt;/p&gt;
+
+&lt;p&gt;I have used something similar to this for auto-magically making the conversion happen.
+&lt;pre class=&#34;brush: py&#34;&gt;&lt;/p&gt;
+
+&lt;h1 id=&#34;toc_0&#34;&gt;The auto-magic version&lt;/h1&gt;
+
+&lt;h1 id=&#34;toc_1&#34;&gt;I pulled this off a blog, forget the source.&lt;/h1&gt;
+
+&lt;p&gt;def _sa_to_dict(obj):
+    for item in obj.&lt;strong&gt;dict&lt;/strong&gt;.items():
+        if item[0][0] is &amp;lsquo;_&amp;rsquo;:
+            continue
+        if isinstance(item[1], str):
+            yield [item[0], item[1].decode()]
+        else:
+            yield item&lt;/p&gt;
+
+&lt;p&gt;def json(obj):
+    if isinstance(obj, list):
+        return dumps(map(dict, map(_sa_to_dict, obj)))
+    else:
+        return dumps(dict(_sa_to_dict(obj)))&lt;/p&gt;
+
+&lt;h1 id=&#34;toc_2&#34;&gt;here is the controller&lt;/h1&gt;
+
+&lt;p&gt;@jsonify
+def index(self, format=&amp;lsquo;html&amp;rsquo;):
+    templates = Session.query(Template).all()
+    if format == &amp;lsquo;json&amp;rsquo;:
+        return json(templates)
+&lt;/pre&gt;&lt;/p&gt;
+
+&lt;p&gt;I have also done the version where you use the jsonify decorator and build your dictionary manually, something like this, which is ok if I need to define some custom behavior for my JSON, but as the default behavior seems excessive.&lt;/p&gt;
+
+&lt;pre class=&#34;brush: py&#34;&gt;
+@jsonify
+def index(self, format=&#39;html&#39;):
+    if format == &#39;json&#39;:
+        q = Session.query
+        templates = [{&#39;id&#39;: t.id,
+                      &#39;title&#39;: t.title,
+                      &#39;body&#39;: t.body} for t in q(Template)]
+        return templates
+&lt;/pre&gt;
+
+&lt;p&gt;I&amp;rsquo;ve also created an inherited SA class which defines a json method and have used that on all my objects to convert them to JSON. Similar to the the fedora extensions.&lt;/p&gt;
+
+&lt;p&gt;Maybe I missed some obviously library out there or some obvious helper in the Pylons packages, but I feel like this is a very common task being done a dozen different ways between docs, source, and my own personal projects. Curious what others are doing / using.&lt;/p&gt;
+</description>
+    </item>
+    
+  </channel>
+</rss>
