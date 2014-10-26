@@ -1,7 +1,7 @@
 ---
 categories: ["python", "pyramid"]
 date: 2011/08/05 12:00:00
-tags: python, whoosh, pyramid
+tags: ["python", "whoosh", "pyramid"]
 title: Hooking up Whoosh and SQLalchemy (sawhoosh)
 ---
 

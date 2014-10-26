@@ -1,9 +1,9 @@
 ---
-categories: ["deploy", "sourcecontrol", "personal"]
+categories: ["deploy", "scm", "personal"]
 date: 2009/03/12 14:48:21
 guid: http://pieceofpy.com/?p=238
 permalink: http://pieceofpy.com/2009/03/12/i-didnt-want-those-changes-anyway/
-tags: source control, hg, oops
+tags: ["scm", "hg", "mistakes"]
 title: I didn't want those changes anyway.
 ---
 I use hg (<a href="http://www.selenic.com/mercurial/wiki/">Mercurial</a>) for version control. Since switching to hg I have adopted the following process. I also do this for my Git projects at work.

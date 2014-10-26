@@ -1,7 +1,7 @@
 ---
 categories: ["python"]
 date: 2011/04/27 14:00:00
-tags: python, snippets
+tags: ["python", "snippets"]
 title: Quick SQLalchemy Shell and Blog Update
 ---
 

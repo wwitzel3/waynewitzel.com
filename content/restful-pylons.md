@@ -3,7 +3,7 @@ categories: ["python", "rest"]
 date: 2008/09/25 17:06:23
 guid: http://pieceofpy.com:81/?p=8
 permalink: http://pieceofpy.com/2008/09/25/restful-pylons/
-tags: python, code, rest, crud
+tags: ["python", "code", "rest"]
 title: RESTful Pylons
 ---
 In the process of creating a new web service for the purpose of allowing external applications to communicate with my site, I realized I was going against the grain and making things harder for myself than they had to be.

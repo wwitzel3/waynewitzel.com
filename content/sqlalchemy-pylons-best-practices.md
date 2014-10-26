@@ -1,9 +1,9 @@
 ---
-categories: ["pylons", "sqlalchemy"]
+categories: ["python", "pylons", "sqlalchemy"]
 date: 2009/08/17 16:32:26
 guid: http://pieceofpy.com/?p=316
 permalink: http://pieceofpy.com/2009/08/17/sqlalchemy-and-json-w-pylons-best-practices/
-tags: sqlalchemy pylons json
+tags: ["sqlalchemy", "pylons", "json"]
 title: SQLalchemy and JSON w/ Pylons - Best Practices
 ---
 I asked the question I Stackoverflow and maybe it was too generic for the site, since it just got trolled with "Google keyword" by some d-bag. So I deleted it and figured I'd throw it up on my blog a see about getting some feedback from the people who read this pile about. The reason I ask this is mainly because I am preparing to do some updated screencasts for Pylons.

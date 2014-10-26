@@ -3,7 +3,7 @@ categories: ["community"]
 date: 2008/09/19 12:32:19
 guid: http://pieceofpy.com:81/?p=21
 permalink: http://pieceofpy.com/2008/09/19/renewing-my-roots/
-tags: community, organizations
+tags: ["community"]
 title: Renewing my roots.
 ---
 I recently renewed my ACCU and ACM memberships after letting them go for a couple years. I feel like I've done myself a disservice by letting these lapse.

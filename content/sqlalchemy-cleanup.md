@@ -2,7 +2,7 @@
 categories: ["python", "sqlalchemy"]
 date: 2011/10/13 14:40:00
 permalink: http://pieceofpy.com/2011/10/13/sqlalchemy-cleanup-challenge
-tags: python, sqlalchemy
+tags: ["python", "sqlalchemy"]
 title: SQLalchemy Cleanup Challenge
 ---
 Yesterday I found myself writing some very interesting SQLalchemy. The problem is I have a date column in

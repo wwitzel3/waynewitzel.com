@@ -2,7 +2,7 @@
 categories: ["python", "sqlalchemy"]
 date: 2011/10/12 20:25:00
 permalink: http://pieceofpy.com/2011/10/12/sqlalchemy-custom-types-integers-datetime
-tags: python, sqlalchemy
+tags: ["python", "sqlalchemy"]
 title: Using SQLAlchemy Custom Types to Convert Integers to DateTime
 ---
 

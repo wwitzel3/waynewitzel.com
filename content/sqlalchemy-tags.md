@@ -3,7 +3,7 @@ categories: ["python", "sqlalchemy"]
 date: 2008/10/09 15:10:39
 guid: http://pieceofpy.com/?p=164
 permalink: http://pieceofpy.com/2008/10/09/tags-with-sqlalchemy/
-tags: python, sqlalchemy
+tags: ["python", "sqlalchemy"]
 title: Tags with SQLalchemy
 ---
 You see lots of examples on the net for SQLalchemy. Implementing a blog, implementing a wiki, even other articles on implementing tags. Some are good, some are pretty poor, and some are just plain out of date. After some researching on best practices for implementing a Tag system with SQLalchemy I've come up with the solution you are about to read.
