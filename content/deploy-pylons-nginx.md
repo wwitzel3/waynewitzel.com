@@ -3,7 +3,7 @@ categories: ["python", "pylons", "deploy"]
 date: 2008/10/06 13:43:06
 guid: http://pieceofpy.com/?p=147
 permalink: http://pieceofpy.com/2008/10/06/deploying-pylons-with-nginx/
-tags: paster pylons nginx deploy
+tags: ["paster", "python", "pylons", "nginx"]
 title: Deploying Pylons with nginx
 ---
 In preparation for a production deployment of a new Pylons app, I've been looking in to different deployment methods. In an effort to to be /. safe and Diggable when the new application launches, we've decided on 4 server deployment.

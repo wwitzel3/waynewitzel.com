@@ -3,7 +3,7 @@ categories: ["tdd"]
 date: 2008/08/16 21:34:38
 guid: http://pieceofpy.com/?p=90
 permalink: http://pieceofpy.com/2008/08/16/what-is-test-driven-development/
-tags: tdd
+tags: ["tags"]
 title: What is test driven development?
 ---
 Was having a conversation at the office today about TDD. Talking about TDD with some of my co-workers who still develop in a more traditional manner motivated me to write an introduction to TDD for them. I know, I know, there are plenty on the web, but this little write up serves two purposes. One, help my co-workers who aren''t familiar with some of the TDD ways learn how and why we (the TDD collective) develop the way we do. Two, the more you talk about write about a topic, the better you get at that topic.

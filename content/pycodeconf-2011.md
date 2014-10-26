@@ -1,7 +1,7 @@
 ---
 categories: ["python", "community"]
 date: 2011/07/28 01:00:00
-tags: python, conferences
+tags: ["python", "community"]
 title: PyCodeConf 2011
 ---
 <center>

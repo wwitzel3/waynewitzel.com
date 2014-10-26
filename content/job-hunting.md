@@ -3,7 +3,7 @@ categories: ["personal"]
 date: 2010/01/20 05:13:55
 guid: http://pieceofpy.com/?p=322
 permalink: http://pieceofpy.com/2010/01/20/what-i-look-for-in-a-job/
-tags: ''
+tags: ["personal"]
 title: What I Look For In A Job
 ---
 So I'm currently looking for new work and I've defined my list of items that are high priority to me. I figured I'd list them here and then break each down in to a little detail. Mainly because I'm up late at a stopping point in some code and haven't updated my blog in forever.

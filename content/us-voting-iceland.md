@@ -3,7 +3,7 @@ categories: ["python", "personal"]
 date: 2008/11/04 20:20:13
 guid: http://pieceofpy.com/?p=206
 permalink: http://pieceofpy.com/2008/11/04/voting-and-the-land-of-ice-and-snow/
-tags: python, snippet, cold, iceland, election
+tags: ["python", "snippet", "iceland"]
 title: Voting and the land of ice and snow.
 ---
 Today is election day in the states. Lots of free coffee and donut offers floating around for those few people wearing their I voted sticker.

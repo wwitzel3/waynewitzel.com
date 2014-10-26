@@ -3,7 +3,7 @@ categories: ["pylons", "sqlalchemy"]
 date: 2010/01/21 07:22:42
 guid: http://pieceofpy.com/?p=329
 permalink: http://pieceofpy.com/2010/01/21/paster-shell-do-people-know-about-it/
-tags: ''
+tags: ["pylons", "sqlalchemy"]
 title: paster shell - do people know about it?
 ---
 Today I was having a chat today about Pylons vs. Django and for the most part it was pretty diplomatic. We got to talking about the Admin interface the Django has. Which you don't have to do any extra boiler plate for, it is just there for you. With Pylons you have to use something like FormAlchemy or use Turbogears to get a similar style admin interface for your models and data.

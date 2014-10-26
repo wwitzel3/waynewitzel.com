@@ -1,7 +1,7 @@
 ---
 categories: ["python"]
 date: 2011/10/05 11:00:00
-tags: python, pyramid, geeknet, sourceforge
+tags: ["python", "pyramid", "work", "sourceforge"]
 title: Working for Geeknet
 ---
 

@@ -3,7 +3,7 @@ categories: ["python", "design", "pylons"]
 date: 2008/10/05 10:00:15
 guid: http://pieceofpy.com/?p=126
 permalink: http://pieceofpy.com/2008/10/05/fat-models-skinny-controllers/
-tags: python, design, pylons
+tags: ["python", "design", "pylons"]
 title: Fat models, skinny controllers
 ---
 In the world of MVC and RESTful services, the old addage fat models, skinny controllers is something I'm sure you've constantly seen and read about. So what does it really mean? How do you benefit? Is it the silver bullet for MVC development? What are the draw backs?

@@ -3,7 +3,7 @@ categories: ["community"]
 date: 2008/09/27 22:19:12
 guid: http://pieceofpy.com:81/?p=36
 permalink: http://pieceofpy.com/2008/09/27/oopsla-2008-around-the-corner/
-tags: community, organizations
+tags: ["community"]
 title: OOPSLA 2008 Around the corner.
 ---
 <a href="http://www.oopsla.org/oopsla2008/">OOPSLA 2008</a>

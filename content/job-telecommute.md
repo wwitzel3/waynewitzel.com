@@ -1,6 +1,6 @@
 ---
 categories: ["python"]
-tags: python, work
+tags: ["python", "work"]
 date: 2010/12/28 14:00:00
 title: Looking for Work
 ---

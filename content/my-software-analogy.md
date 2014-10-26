@@ -3,12 +3,12 @@ categories: ["design", "personal"]
 date: 2009/04/29 14:19:40
 guid: http://pieceofpy.com/?p=291
 permalink: http://pieceofpy.com/2009/04/29/my-software-analogy/
-tags: ''
+tags: ["design", "personal"]
 title: My Software Analogy
 ---
 <img class="aligncenter size-full wp-image-303" title="unrelated-picture" src="http://pieceofpy.com/wp-content/uploads/2009/04/unrelated-picture.jpg" alt="unrelated-picture" width="450" height="360" />
 
-Sometimes putting into words the practices you use can expose obvious flaws where you needimprovementsand provide a starting point for introducing new practices in to your development. Analogies are often used to express sometimes foreign, sometimes complex ideas by bringing them in to a realm that is familiar.
+Sometimes putting into words the practices you use can expose obvious flaws where you need improvements and provide a starting point for introducing new practices in to your development. Analogies are often used to express sometimes foreign, sometimes complex ideas by bringing them in to a realm that is familiar.
 
 <strong>Idea</strong>
 <span style="font-weight: normal;">My development is fueled with an idea. The idea sometimes bad, sometimes good, and rarely great, but nonetheless this is where I start. The idea usually stems from a problem. I want to be able to do Foo or I'd really like if Bar was able to do this.</span>

@@ -2,7 +2,7 @@
 categories: ["python", "pyramid"]
 date: 2012/07/17 07:25:00
 permalink: http://pieceofpy.com/2012/07/17/pyramid-json-serialize-custom-objects
-tags: python, pyramid
+tags: ["python", "pyramid"]
 title: Pyramid - JSON Serialize Custom Objects
 ---
 

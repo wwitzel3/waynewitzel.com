@@ -3,7 +3,7 @@ categories: ["python", "code"]
 date: 2008/07/16 18:27:55
 guid: http://pieceofpy.com/?p=67
 permalink: http://pieceofpy.com/2008/07/16/code-saving-in-memory-file-to-disk/
-tags: python, code
+tags: ["python", "code"]
 title: 'Code: Saving in memory file to disk'
 ---
 Okay, I discovered this today when looking to increase the speed at which uploaded documents were saved to disk. Now, I can't explain the inner workings of why it is fast(er), all I know is that with the exact same form upload test ran 100 times with a 25MB file over a 100Mbit/s network this method was on average a whole 2.3 seconds faster over traditional methods of write, writelines, etc..

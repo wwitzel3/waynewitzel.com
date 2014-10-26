@@ -1,5 +1,6 @@
 ---
 categories: ["python", "pylons", "deploy"]
+tags: ["python", "pylons", "deploy"]
 date: 2008/10/07 14:00:36
 guid: http://pieceofpy.com/?p=160
 permalink: http://pieceofpy.com/2008/10/07/how-to-python-pylons-and-windows/

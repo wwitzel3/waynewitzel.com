@@ -3,7 +3,7 @@ categories: ["python", "tdd", "pylons", "sqlalchemy", "personal", "jython"]
 date: 2009/03/13 17:42:34
 guid: http://pieceofpy.com/?p=254
 permalink: http://pieceofpy.com/2009/03/13/jython-25-and-snakefight-for-deploying-pylons-w-sqlalchemy-oracle/
-tags: ''
+tags: ["python", "tdd", "pylons", "jython"]
 title: Jython 2.5 and snakefight for deploying Pylons w/ SQLAlchemy + Oracle.
 ---
 <strong>UPDATE / 13 March 2009: </strong><a href="http://pypi.python.org/pypi/snakefight">snakefight 0.3</a> now has a --include-jar option, prefer that to using my hack.

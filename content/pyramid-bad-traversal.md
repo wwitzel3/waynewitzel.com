@@ -1,7 +1,7 @@
 ---
 categories: ["python", "pyramid", "rest"]
 date: 2011/08/01 12:00:00
-tags: python, pyramid
+tags: ["python", "pyramid"]
 title: Pyramid and Traversal with a RESTful interface
 ---
 UPDATE (2011-08-05)

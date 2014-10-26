@@ -3,7 +3,7 @@ categories: ["python", "code", "pylons"]
 date: 2009/02/04 19:11:07
 guid: http://pieceofpy.com/?p=226
 permalink: http://pieceofpy.com/2009/02/04/pylons-and-long-live-ajax-request/
-tags: pylons, ajax, generators, decorators
+tags: ["pylons", "ajax", "code", "python"]
 title: Pylons and long-live AJAX request.
 ---
 So I am playing around in Firefox with XMLHttpRequest. Looking in to a way to facilate a server update to a client without have to refresh the page or use Javascript timers. So the long-live HTTP request seems the way to go.

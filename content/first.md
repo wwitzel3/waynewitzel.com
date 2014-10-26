@@ -3,7 +3,7 @@ categories: ["community"]
 date: 2008/07/01 00:01:13
 guid: http://pieceofpy.com/?p=71
 permalink: http://pieceofpy.com/2008/07/01/first/
-tags: first, blog
+tags: ["first", "blog"]
 title: First!
 ---
 The traditional first post.

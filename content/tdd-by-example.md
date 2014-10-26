@@ -3,7 +3,7 @@ categories: ["books", "tdd"]
 date: 2008/08/11 18:52:50
 guid: http://pieceofpy.com/?p=86
 permalink: http://pieceofpy.com/2008/08/11/book-test-driven-development-by-example-refresher/
-tags: book, tdd
+tags: ["book", "tdd"]
 title: 'Book: Test Driven Development by Example (Refresher)'
 ---
 I found an old book on the shelf the other day. One I hadn't worked through in some time. "Test Driven Development By Example" by Kent Beck. It was one of the first books I had ever picked up and read about test driven development and really kicked off my shift in towards TDD and other agile practices.

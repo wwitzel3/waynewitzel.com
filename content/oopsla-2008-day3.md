@@ -3,7 +3,7 @@ categories: ["community"]
 date: 2008/10/22 07:08:14
 guid: http://pieceofpy.com/?p=193
 permalink: http://pieceofpy.com/2008/10/22/oopsla-2008-day-3/
-tags: community, oopsla
+tags: ["community", "oopsla"]
 title: OOPSLA 2008 - Day 3
 ---
 After a few drinks at the hotel bar, we head to bed to get ready for Day 3 of OOPSLA.

@@ -3,7 +3,7 @@ categories: ["community"]
 date: 2010/05/18 11:31:29
 guid: http://pieceofpy.com/?p=370
 permalink: http://pieceofpy.com/2010/05/18/moving-my-blog-2/
-tags: blog
+tags: ["community", "blog"]
 title: Moving My Blog
 ---
 I'm moving my blog to <a href="http://waynewitzel.com">http://waynewitzel.com</a>

@@ -2,7 +2,7 @@
 categories: ["python", "ming"]
 date: 2012/01/10 09:00:00
 permalink: http://pieceofpy.com/2012/01/10/working-with-pyramid-and-ming
-tags: python, pyramid, ming
+tags: ["python", "pyramid", "ming"]
 title: Working with Pyramid and Ming
 ---
 

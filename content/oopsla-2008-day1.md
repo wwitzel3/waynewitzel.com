@@ -3,7 +3,7 @@ categories: ["community"]
 date: 2008/10/20 18:04:47
 guid: http://pieceofpy.com/?p=186
 permalink: http://pieceofpy.com/2008/10/20/oopsla-2008-day-1/
-tags: community, oopsla
+tags: ["community", "oopsla"]
 title: OOPSLA 2008 - Day 1
 ---
 After the seven hour drive to Nashville, we settled in to our hotel and hit the bar. Getting the brain ready for todays activities. I'll be updating at the end of each Tutorial or Keynote through out the day, but will only publish the entries at the end of day, so bare with me if the entrys seem like many posts in one.

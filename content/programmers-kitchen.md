@@ -3,7 +3,7 @@ categories: ["python", "brainstorm"]
 date: 2008/09/17 11:48:30
 guid: http://pieceofpy.com:81/?p=25
 permalink: http://pieceofpy.com/2008/09/17/keeping-a-kitchen-a-programmers-approach/
-tags: python, brainstorm
+tags: ["python", "brainstorm"]
 title: 'Keeping a Kitchen: A programmers approach.'
 ---
 <strong>A recipe site to end all recipe sites?</strong>

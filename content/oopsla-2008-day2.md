@@ -3,7 +3,7 @@ categories: ["community"]
 date: 2008/10/21 04:55:43
 guid: http://pieceofpy.com/?p=190
 permalink: http://pieceofpy.com/2008/10/21/oopsla-2008-day-2/
-tags: community, oopsla
+tags: ["community", "oopsla"]
 title: OOPSLA 2008 - Day 2
 ---
 After a goodnight sleep, I mange to NOT be late for this mornings tutorial sessions. Today I have planned to attend <em>Advanced Software Architecture</em> and <em>Pattern-Oriented Software Architecture: A Pattern Language for Distributed Computing.<strong> </strong></em>

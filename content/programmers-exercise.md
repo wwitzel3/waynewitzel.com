@@ -3,7 +3,7 @@ categories: ["python", "personal"]
 date: 2008/11/05 16:51:32
 guid: http://pieceofpy.com/?p=210
 permalink: http://pieceofpy.com/2008/11/05/exercise-even-a-programmer-can-do/
-tags: python, personal
+tags: ["python", "personal"]
 title: Exercise even a programmer can do.
 ---
 So I've been exercising lately. The last visit to the Dr. was a wake up call. 300 lb .. WHAT?! So, taking an iterative approach to exercise, I've manged to work up to 6-day a week cardio routine and a 3-day a week strength training routine and have gone from just over 300 lb. to 270 lb. in a couple months. Couple friends asked how I started and what I do, so I figure I'd break it down here.
