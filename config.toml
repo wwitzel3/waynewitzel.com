@@ -3,6 +3,7 @@ title = "random technology ramblings"
 languageCode = "en-us"
 disqusShortname = "waynewitzel" # Optional, enable Disqus integration
 MetaDataFormat = "toml"
+theme = "hyde-x"
 
 [author]
     name = "Wayne Witzel III"
