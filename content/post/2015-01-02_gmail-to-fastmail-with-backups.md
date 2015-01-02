@@ -2,8 +2,7 @@
 Categories = ["email", "linux"]
 Description = ""
 Tags = ["email", "linux"]
-date = "2014-10-25T23:58:09-04:00"
-menu = "main"
+date = "2015-01-02T13:30:00-04:00"
 title = "Gmail to fastmail. Email backups"
 
 +++

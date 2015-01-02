@@ -1,15 +1,17 @@
 baseurl = "http://waynewitzel.com"
 languageCode = "en-us"
-title = "occasional posts about technology"
-theme = "redlounge"
+title = "random technology ramblings"
 disqusShortname = "waynewitzel"
-socialsharing = true
+socialSharing = true
 
 [params]
-	sidebartitle = "Wayne Witzel"
-	sidebartagline = "occasional posts about technology"
+    brandname = "Wayne Witzel III"
 
 [[menu.social]]
 	pre = "<i class='fa fa-twitter'></i>"
     url = "http://www.twitter.com/wwitzel3"
     identifier = "twitter"
+
+[permalinks]
+    post = "/:year/:month/:day/:title/"
+    top = "/:filename"
