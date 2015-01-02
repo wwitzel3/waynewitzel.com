@@ -1,4 +1,4 @@
-baseurl = "http://www.waynewitzel.com/"
+baseurl = "http://waynewitzel.com/"
 title = "random technology ramblings"
 languageCode = "en-us"
 disqusShortname = "waynewitzel" # Optional, enable Disqus integration
