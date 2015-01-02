@@ -1,17 +1,49 @@
-baseurl = "http://waynewitzel.com"
-languageCode = "en-us"
+baseurl = "http://www.waynewitzel.com/"
 title = "random technology ramblings"
-disqusShortname = "waynewitzel"
-socialSharing = true
+languageCode = "en-us"
+disqusShortname = "waynewitzel" # Optional, enable Disqus integration
+MetaDataFormat = "toml"
 
-[params]
-    brandname = "Wayne Witzel III"
-
-[[menu.social]]
-	pre = "<i class='fa fa-twitter'></i>"
-    url = "http://www.twitter.com/wwitzel3"
-    identifier = "twitter"
+[author]
+    name = "Wayne Witzel III"
 
 [permalinks]
+    # Optional. Change the permalink format for the 'post' content type.
+    # The format shown here is the same one Jekyll/Octopress uses.
     post = "/:year/:month/:day/:title/"
-    top = "/:filename"
+    page = "/:filename/"
+
+#
+# All parameters below here are optional and can be mixed and matched.
+#
+[params]
+    # Used when a given page doesn't set its own.
+    defaultDescription = "Post about programming, technology, and life."
+    defaultKeywords = "golang, go, python, programming, pyramid"
+
+    # Changes sidebar background and link/accent colours.
+    # See the original Hyde theme for more colour options.
+    # This also works: "theme-base-08 layout-reverse", or just "layout-reverse".
+	theme = "theme-base-08"
+
+    # Select a syntax highight.
+    # Check the static/css/highlight directory for options.
+    highlight = "sunburst"
+
+    # Displays under the author name in the sidebar, keep it short.
+	tagline = "random technology ramblings"
+    brandname = "Wayne Witzel III"
+
+    # Metadata used to drive integrations.
+	googleAuthorship = "Your Google+ profile ID"
+    googleAnalytics = "Your Google Analytics tracking code"
+    gravatarHash = "419e6de7173d7e5ad39d51b7ffef3261"
+
+    # Sidebar social links, avoid enabling too many of these if possible.
+    # These should be full URLs.
+    github = "https://github.com/wwitzel3"
+    linkedin = "https://www.linkedin.com/in/wwitzel3"
+    googleplus = ""
+    facebook = ""
+    twitter = "https://twitter.com/wwitzel3"
+

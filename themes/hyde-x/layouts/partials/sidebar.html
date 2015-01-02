@@ -7,7 +7,8 @@
     </div>
 
     <ul class="sidebar-nav">
-      <li class="sidebar-nav-item"><a href="{{ .Site.BaseUrl }}/">Blog</a></li>
+      <li class="sidebar-nav-item"><a href="{{ .Site.BaseUrl }}/">Posts</a></li>
+      <li class="sidebar-nav-item"><a href="/about">About</a></li>
       {{ range .Site.Menus.main }}
       <li class="sidebar-nav-item"><a href="{{ .Url }}">{{ .Name }}</a></li>
       {{end}}
