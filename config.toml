@@ -1,50 +1,33 @@
-baseurl = "http://waynewitzel.com/"
-title = "random technology ramblings"
+# Site settings
+baseurl = "https://waynewitzel.com/"
 languageCode = "en-us"
-disqusShortname = "waynewitzel" # Optional, enable Disqus integration
-MetaDataFormat = "toml"
-theme = "hyde-x"
+disqusShortname = "waynewitzel"
+title = "waynewitzel.com"
+theme = "ghostwriter"
+# Enter your tracking code to enable Google Analytics
+googleAnalytics = ""
 
 [author]
     name = "Wayne Witzel III"
+    profile = "/page/about/"
+
+[params]
+    intro = true
+    headline = "random ramblings"
+	description = "trying to computer and life"
+    twitter  = "https://www.twitter.com/wwitzel3"
+    linkedin = "https://www.linkedin.com/in/wwitzel3"
+    github   = "https://www.github.com/wwitzel3"
 
 [permalinks]
-    # Optional. Change the permalink format for the 'post' content type.
-    # The format shown here is the same one Jekyll/Octopress uses.
-    post = "/:year/:month/:day/:title/"
-    page = "/:filename/"
+    post = "/:year/:month/:day/:slug/"
 
-#
-# All parameters below here are optional and can be mixed and matched.
-#
-[params]
-    # Used when a given page doesn't set its own.
-    defaultDescription = "Post about programming, technology, and life."
-    defaultKeywords = "golang, go, python, programming, pyramid"
+[[menu.main]]
+    name = "Blog"
+    url = "/"
+    weight = 1
 
-    # Changes sidebar background and link/accent colours.
-    # See the original Hyde theme for more colour options.
-    # This also works: "theme-base-08 layout-reverse", or just "layout-reverse".
-	theme = "theme-base-08"
-
-    # Select a syntax highight.
-    # Check the static/css/highlight directory for options.
-    highlight = "sunburst"
-
-    # Displays under the author name in the sidebar, keep it short.
-	tagline = "random technology ramblings"
-    brandname = "Wayne Witzel III"
-
-    # Metadata used to drive integrations.
-	googleAuthorship = "Your Google+ profile ID"
-    googleAnalytics = "Your Google Analytics tracking code"
-    gravatarHash = "419e6de7173d7e5ad39d51b7ffef3261"
-
-    # Sidebar social links, avoid enabling too many of these if possible.
-    # These should be full URLs.
-    github = "https://github.com/wwitzel3"
-    linkedin = "https://www.linkedin.com/in/wwitzel3"
-    googleplus = ""
-    facebook = ""
-    twitter = "https://twitter.com/wwitzel3"
-
+[[menu.main]]
+    name = "About"
+    url = "/page/about/"
+    weight = 4
